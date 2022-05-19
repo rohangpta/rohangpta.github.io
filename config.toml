@@ -1,0 +1,81 @@
+baseURL = "http://www.example.com"
+title = "Rohan Gupta"
+theme = "hugo-coder"
+languageCode = "en"
+defaultContentLanguage = "en"
+paginate = 20
+pygmentsStyle = "bw"
+pygmentsCodeFences = true
+pygmentsCodeFencesGuessSyntax = true
+enableEmoji = true
+
+[params]
+HeaderUsername = 'grohan'
+HeaderHostName = 'root'
+author = "Rohan Gupta"
+description = "Rohan Gupta's personal website"
+keywords = "blog,developer,personal"
+info = []
+avatarURL = "images/rohan.jpeg"
+dateFormat = "January 2, 2006"
+since = 2022
+
+colorScheme = "light"
+hideColorSchemeToggle = true
+maxSeeAlsoItems = 5
+customCSS = ["css/custom.css"]
+customSCSS = []
+customJS = []
+
+[taxonomies]
+category = "categories"
+series = "series"
+tag = "tags"
+author = "authors"
+
+[[params.social]]
+name = "Github"
+icon = "fa fa-2x fa-github"
+weight = 4
+url = "https://github.com/rohangpta"
+
+[[params.social]]
+name = "Twitter"
+icon = "fa fa-2x fa-twitter"
+weight = 1
+url = "https://twitter.com/rohangupta_"
+
+[[params.social]]
+name = "LinkedIn"
+icon = "fa fa-2x fa-linkedin"
+weight = 2
+url = "https://www.linkedin.com/in/rohan-gupta2"
+
+
+[[params.social]]
+name = "email"
+icon = "fa fa-2x fa-envelope"
+weight = 3
+url = "mailto:rohangupta883@gmail.com"
+
+[languages.en]
+languageName = ":uk:"
+
+
+[[languages.en.menu.main]]
+name = "About"
+weight = 3
+url = "about/"
+
+[[languages.en.menu.main]]
+name = "Resume"
+weight = 2
+url = "/res.pdf"
+
+[[languages.en.menu.main]]
+name = "Blog"
+weight = 1
+url = "blog/"
+
+
+
