@@ -1,4 +1,4 @@
-baseURL = "https://rohangpta.github.io/"
+baseURL = "https://grohan.co"
 title = "Rohan Gupta"
 theme = "hugo-coder"
 languageCode = "en"
@@ -70,7 +70,7 @@ url = "about/"
 [[languages.en.menu.main]]
 name = "Resume"
 weight = 2
-url = "/res.pdf"
+url = "/resume.pdf"
 
 [[languages.en.menu.main]]
 name = "Blog"
