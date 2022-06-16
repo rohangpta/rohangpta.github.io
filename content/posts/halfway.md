@@ -85,7 +85,7 @@ But it wasn't the most practical or interesting (to most people). Indeed, it's
 pretty difficult to sit down at dinner with someone and explain why a game
 that's older than I am and not very well known was so captivating to me. So,
 well, if someone asked me my hobbies were or what I *did*, I'd look them in the
-eye, lie through my teeth, and say that I was in    to Computer Science.  But, at
+eye, lie through my teeth, and say that I was into Computer Science.  But, at
 the time (in highschool) that wasn't really true.
 
 
