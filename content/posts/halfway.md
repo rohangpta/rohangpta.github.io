@@ -15,7 +15,7 @@ significant takeaways from school, so far.
 
 # School still sucks, but less
 
-I used to absolutely despite highschool. Part of it was because I was a lazy
+I used to absolutely despise highschool. Part of it was because I was a lazy
 slob who wanted to play RuneScape every waking hour but mostly because I didn't
 like what I was meant to do in school in order to do well. For example, the
 Computer Science curriculum tested us on some pretty jank stuff. We're talking
@@ -52,6 +52,7 @@ convenient. Since Fall 2021, I've been going to almost no classes, because it is
 simply more convenient to learn material at home, at my own pace. There's
 probably some joke out there about 1.5x lectures being the new norm, but at this
 point it's reality. I have been *living* on 1.5x and lecture notes.
+
 
 While the convenience is certainly nice, it's unfulfilling. I had hoped college
 would be more of the interactive, community-oriented experience I had in my
