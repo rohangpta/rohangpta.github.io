@@ -117,7 +117,7 @@ work out and I get in. In a week's time, I realize that I've been lying to
 myself.
 
 Everyone at the club seemed so genuinely passionate about computers, it was nuts
--- they actually cared how things worked. The folks I worked with actually knew
+-- they actually cared about how things worked. The folks I worked with actually knew
 what `HTTP` was, and that was the least of the things they knew about. Strange
 words like `DevOps, Docker, Kubernetes` would float around in Slack, and I'd
 have no idea what they meant. Debugging wasn't just Googling and copypasting on
