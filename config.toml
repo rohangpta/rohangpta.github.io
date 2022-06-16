@@ -76,7 +76,4 @@ url = "/resume.pdf"
 [[languages.en.menu.main]]
 name = "Blog"
 weight = 1
-url = "blog/"
-
-
-
+url = "posts/"
