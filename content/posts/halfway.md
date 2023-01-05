@@ -30,9 +30,9 @@ satisfied after my first year of school, but (to my unfortunate realization) it
 just happened to be that intro classes at Penn are run especially well. Not only
 do they teach you real CS fundamentals, but they also have fun, knowledgeable
 folks on staff and run a great curriculum that kept me engaged with the
-material.  (aside: I was pleasantly surprised to learn early freshman year that
+material. (aside: I was pleasantly surprised to learn early freshman year that
 CIS 1xx staff are pretty tight-knit. They even do BYOs -- I know, not what you'd
-think when I mention CS course staff) 
+think when I mention CS course staff)
 
 As I progressed to some of the upper division classes, I was still learning
 interesting things, but it felt like I was increasingly falling into the habit
