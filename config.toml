@@ -17,7 +17,7 @@ author = "Rohan Gupta"
 description = "Rohan Gupta's personal website"
 keywords = "blog,developer,personal"
 info = []
-avatarURL = "images/rohan.jpeg"
+avatarURL = "images/rohan.jpg"
 dateFormat = "January 2, 2006"
 since = 2022
 
