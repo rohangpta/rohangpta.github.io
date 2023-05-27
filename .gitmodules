@@ -1,3 +1,6 @@
 [submodule "themes/hugo-coder"]
 	path = themes/hugo-coder
 	url = https://github.com/rohangpta/hugo-coder
+[submodule "lines"]
+	path = lines
+	url = https://github.com/ronv/lines

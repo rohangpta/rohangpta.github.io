@@ -1,25 +1,38 @@
-baseURL = "https://grohan.co"
-title = "Rohan Gupta"
-theme = "lines"
-languageCode = "en"
-defaultContentLanguage = "en"
-paginate = 20
-pygmentsStyle = "bw"
-pygmentsCodeFences = true
-pygmentsCodeFencesGuessSyntax = true
-enableEmoji = true
-googleAnalytics = "G-QPHTPNYLXE"
+baseURL = "https://lines-hugo-theme.netlify.app/"
+languageCode = "en-us"
+title = "Lines - Minimalist Hugo theme"
+disableKinds = ["section", "categories"]
+disqusShortname = ""
+pygmentsCodeFences = false
+pygmentsUseClasses = false
+paginate = 999
+minify = true
+
 
 [taxonomies]
   tag = "tags"
 
+[privacy]
+  [privacy.disqus]
+    disable = true
+  [privacy.googleAnalytics]
+    disable = true
+  [privacy.instagram]
+    disable = true
+  [privacy.twitter]
+    disable = true
+  [privacy.vimeo]
+    disable = true
+  [privacy.youtube]
+    disable = true
+
 [Author]
-  name = "Rohan Gupta"
+  name = ""
 
 [params]
-  description = "Rohan Gupta's personal website"
+  description = "hello"
   author = "Rohan Gupta"
-  copyright = "Rohan Gupta"
+  copyright = "2323"
   logo = "images/rohan.jpg"
 
 [frontmatter]
@@ -27,7 +40,7 @@ googleAnalytics = "G-QPHTPNYLXE"
   author = ""
   github = ""
   facebook = ""
-  og_image = "images/rohan.jpg"
+  og_image = ""
   sitename = ""
   twitter = ""
 
@@ -54,19 +67,19 @@ googleAnalytics = "G-QPHTPNYLXE"
 
 [menu]
   [[menu.main]]
-    identifier = "posts"
-    name       = "Writing"
-    url        = "/posts"
+    identifier = "index"
+    name       = "Index"
+    url        = "/"
     weight     = -111
 
   [[menu.main]]
     identifier = "about"
     name       = "About"
-    url        = "/about"
+    url        = "/about/"
     weight     = -20
 
   [[menu.main]]
-    identifier = "projects"
-    name       = "Projects"
-    url        = "/projects"
+    identifier = "rss"
+    name       = "RSS"
+    url        = "/atom.xml"
     weight     = -10

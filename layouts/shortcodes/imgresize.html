@@ -1,0 +1,10 @@
+{{ $original := .Page.Resources.GetMatch (.Get 0) }}
+{{ $options := .Get 1 }}
+{{ .Scratch.Set "image" ($original.Fit $options) }}
+{{ $image := .Scratch.Get "image" }}
+{{ $title := .Get 2 }}
+{{ $class := .Get 3 }}
+{{ $url := .Get 0 }}
+
+
+ <img src="{{ $image.RelPermalink }}" alt="{{ .Get 2 }}"  width="{{ $image.Width }}" vspace="20" hspace="20" align="left" height="{{ $image.Height }}">
