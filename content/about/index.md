@@ -5,7 +5,7 @@ draft: false
 
 <!--- markdown auto fill mode --->
 
-{{< imgresize "img/rohan.jpg" "250x250" "Rohan Gupta" >}}
+{{< imgresize "img/rohan.jpg" "250x250" "Nico Müller" >}}
 
 Hi! I'm Rohan Gupta and I'm currently a student at the University of
 Pennsylvania studying [Networked and Social Systems
