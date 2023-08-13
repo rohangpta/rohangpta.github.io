@@ -1,6 +1,6 @@
 ---
-title: "The Vimmer's Endless Odyssey"
-description: "Vim trix"
+title: "Factorials & Fun with Vim"
+description: "Vim trix and more"
 date: 2023-08-10
 tags:
   - programming
