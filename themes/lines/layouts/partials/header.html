@@ -5,7 +5,7 @@
     <li>
       {{ $active := or ($current.IsMenuCurrent "main" .) ($current.HasMenuCurrent "main" .) }}
       {{ $active = or $active (eq .Name $current.Title) }}
-      {{ $active = or $active (and (eq .Name "Index") (eq $current.Section "posts")) }}
+      {{ $active = or $active (and (eq .Name "Writing") (eq $current.Section "posts")) }}
       {{ $active = or $active (and (eq .Name "Projects") (eq $current.Section "projects")) }}
       <a href="{{ .URL }}" {{ if $active }}aria-current="page"{{ end }}>{{ .Name }}</a>
     </li>

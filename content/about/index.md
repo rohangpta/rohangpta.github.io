@@ -7,20 +7,19 @@ draft: false
 
 {{< imgresize "img/rohan.jpg" "250x250" "Nico Müller" >}}
 
-Hi! I'm Rohan Gupta and I'm currently a student at the University of
+Hi! I'm Rohan Gupta and I'm a student at the University of
 Pennsylvania studying [Networked and Social Systems
-Engineering](https://www.nets.upenn.edu/), which is an irrelevant and
-irreverent version of Computer
+Engineering](https://www.nets.upenn.edu/), which is a slightly irreverent version of Computer
 Science here at Penn. Here's to hoping its future is [bright](https://xkcd.com/1413/).
 
-I'm mostly a software and technology person. I like reading about tech on Twitter, jumping down
+I'm mostly a software and technology person. I like reading about tech online, jumping down
 [debugging rabbitholes](http://pennlabs.org/blog/false-promises/), House music,
-and the occasional walk or two.
+excessively sweetened coffee, and the occasional walk or two.
 
 I worked at [Stripe](https://stripe.com) on caching for their ML infra layer
 as well as [Neuroflow](https://www.neuroflow.com/) on their suite of data
 science products. I enjoyed the infrastructure and performance related work I
-was exposed to and will be hopefully doing more of that at [Five
+was exposed to and will hopefully be doing more of that at [Five
 Rings](https://fiverings.com/) and [Citadel
 Securities](https://www.citadelsecurities.com/) in 2023.
 
