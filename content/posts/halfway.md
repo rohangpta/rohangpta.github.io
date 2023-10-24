@@ -121,7 +121,7 @@ what `HTTP` was, and that was the least of the things they knew about. Strange
 words like `DevOps, Docker, Kubernetes` would float around in Slack, and I'd
 have no idea what they meant. Debugging wasn't just Googling and copypasting on
 loop, but actually trying things meaningfully. I felt pretty out of place -- a
-midget in a sea of giants -- but I liked it!
+small fish in a big pond -- but I liked it!
 
 Not only was I learning a lot, but the enthusiasm for programming was rubbing
 off on me. Experiencing this alongside the intro CS classes I talked about
