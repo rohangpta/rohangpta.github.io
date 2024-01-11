@@ -70,3 +70,6 @@ googleAnalytics = "G-QPHTPNYLXE"
     name       = "Projects"
     url        = "/projects"
     weight     = -10
+
+[markup.goldmark.renderer]
+  unsafe = true # Allow HTML in md files
