@@ -1,4 +1,4 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Rohan Gupta</title><description>Rohan Gupta's personal website</description><link>https://grohan.co</link><language>en</language><copyright>Copyright 2023, Ronalds Vilcins</copyright><lastBuildDate>Thu, 10 Aug 2023 00:00:00 +0000</lastBuildDate><generator>Hugo - gohugo.io</generator><docs>http://cyber.harvard.edu/rss/rss.html</docs><atom:link href="https://ronaldsvilcins.com/atom.xml" rel="self" type="application/atom+xml"/><item><title>Factorials &amp; Fun with Vim</title><link>https://grohan.co/2023/08/10/vim/</link><description>&lt;p>I recently hit a somewhat important milestone in my life: one year as a Vim
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Rohan Gupta</title><description>Rohan Gupta's personal website</description><link>https://grohan.co</link><language>en</language><copyright>Copyright 2024, Ronalds Vilcins</copyright><lastBuildDate>Thu, 10 Aug 2023 00:00:00 +0000</lastBuildDate><generator>Hugo - gohugo.io</generator><docs>http://cyber.harvard.edu/rss/rss.html</docs><atom:link href="https://ronaldsvilcins.com/atom.xml" rel="self" type="application/atom+xml"/><item><title>Factorials &amp; Fun with Vim</title><link>https://grohan.co/2023/08/10/vim/</link><description>&lt;p>I recently hit a somewhat important milestone in my life: one year as a Vim
 user. Despite its steep learning curve, I used to think that mastering Vim
 was mostly about habit formation. I swore by the
 cheatsheets and believed I would be golden. After all, a
@@ -135,7 +135,7 @@ exams &amp;ndash; I&amp;rsquo;m taking most of this upper level stuff for fun an
 myself. But with the added overhead of whatever the course staff decides is
 going to make up my grade. Let me do this stuff on my own, or run classes better
 and make people want to show up!&lt;/p>
-&lt;!-- raw HTML omitted -->
+&lt;!--- markdown auto fill mode --->
 &lt;h1 id="i-actually-like-what-i-_do_-now">I actually like what I &lt;em>do&lt;/em> now &lt;a href="#i-actually-like-what-i-_do_-now" class="hash">#&lt;/a>&lt;/h1>
 &lt;p>I don&amp;rsquo;t like the question: what are your hobbies? A hobby sounds far too casual
 for me. I&amp;rsquo;m the type of person who finds one thing and then &lt;em>does&lt;/em> it
