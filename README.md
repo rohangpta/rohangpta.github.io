@@ -8,9 +8,12 @@ My personal website
 
 ## Syncing
 
+For kicks and posterity:
+
 `resume.pdf` is periodically synced between my local filesystem and remote repository using `rsync` and `launchd`.
 
-Use the shell script in `ressync.sh` to run these syncs. `cronjob` is deprecated for MacOS, so use `launchd`. If the system is asleep during the scheduled interval, `launchd` also has the added benefit of running a script on next wake. This is particularly useful since I run this on my personal laptop.
+Use the shell script in `ressync.sh` to run these syncs. `cronjob` is deprecated
+for MacOS, so I use `launchd`. If the system is asleep during the scheduled interval, `launchd` also has the added benefit of running a script on next wake. This is particularly useful since I run this on my personal laptop.
 
 Setting up launchd was an unfortunate experience. For posterity, here are the steps I went through:
 
@@ -35,4 +38,5 @@ If the process has code 0, then everything is good. Otherwise, try the following
 
 When you make changes, run
 
-`launchctl unload -w $f launchctl load -w $f`
+`launchctl unload -w $f`
+`launchctl load -w $f`

@@ -11,24 +11,27 @@ draft: false
     </div>
   <div style="flex: 1;">
 
-Hi! I'm Rohan Gupta and I'm a student at the University of
-Pennsylvania studying [Networked and Social Systems
-Engineering](https://www.nets.upenn.edu/), which is a slightly modified version of Computer
-Science at Penn. Here's to hoping its future is [bright](https://xkcd.com/1413/).
+Hi! I'm Rohan Gupta and I'm a recent graduate from the University of
+Pennsylvania, where I studied in the [NETS
+program](https://www.nets.upenn.edu/) (a derivative of Computer Science).
 
-I'm mostly a software and technology person. I like reading about tech online, jumping down
-[debugging rabbitholes](http://pennlabs.org/blog/false-promises/), House music,
-any form of caffeine, and the occasional walk or two.
-  </div>
+I'm currently working as a software engineer at Citadel
+Securities in New York. My role focuses on automation of
+various parts of the software development process. I previously worked at Five
+Rings and Stripe.
+
+ </div>
 </div>
 
-I've worked on
-- caching for ML infra at [Stripe](https://stripe.com).
-- low-level performance optimisation at [Five Rings](https://fiverings.com/).
-- shared technology/infrastructure at [Citadel
-Securities](https://www.citadelsecurities.com/) (currently).
+I like reading about a lot of things online, with a recent focus on
+- Technology infrastructure and developer tools.
+- LLMs as interfaces for human creativity {code, reasoning, design}.
+- Startups, VC, markets and related economics.
 
-I'm a fan of indexing interesting pieces of information online:
+More generally, I enjoy systems thinking, house and techno, New York's vibrant
+cultural scene, walks, and caffeine.
+
+I'm a fan of indexing interesting and entertaining pieces of information online:
 [Pinboard](https://pinboard.in/u:grohan/) and [YouTube](https://www.youtube.com/playlist?list=PLazCpc92HNpzdZsK-4_AKbn5GoAfjbycq).
 
 You can reach me by email at
@@ -37,5 +40,5 @@ You can reach me by email at
 You can also find me on:
 
 - [Github](https://github.com/rohangpta)
-- [Twitter (I don't post)](https://twitter.com/rohangupta_)
+- [Twitter](https://twitter.com/rohangupta_)
 - [LinkedIn](https://www.linkedin.com/in/rohan-gupta2/)
