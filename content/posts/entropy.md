@@ -21,7 +21,7 @@ The Second Law of Thermodynamics states
 
 There's something about inevitability that I think is arcane and
 fascinating. Especially when you can see it unfold in front of you - my
-favourite visualisation is below (thanks Gemini)
+favourite visualisation is below (thanks Gemini).
 
 <center><img src =/images/diffusion.png width="550" height="400"/></center>
 
@@ -74,7 +74,7 @@ His observation?
 
 Scott Aaronson quantifies this idea with a lucid example around cream dissolving
 into coffee [6]. He likens complexity to the "interestingness" of a system, formally represented by
-Kolmogorov complexity, and empirically calculated by gzip compression of a state
+Kolmogorov complexity, and empirically calculated by `gzip` compression of a state
 snapshot image (where state is an X-ray image of the coffee-cup). 
 
 <center><img src =/images/coffee_complexity.png width="413" height="300"/></center>
@@ -83,8 +83,8 @@ The picture above represents snapshots of the coffee cup at the three phases of 
 before decreasing as the mixture becomes saturated and homogeneous. 
 
 It is simple to see why the first and
-last image can be more easily compressed (i.e are less complex) whereas one in the
-middle image cannot.
+last image can be more easily compressed (i.e are less complex) compared to the
+image in the middle.
 
 
 # Where Does Software Fit Into This?
@@ -149,23 +149,23 @@ in the open source parts of a software supply chain increased by 650% between
 increasingly public vulnerabilities like in `log4j`, `xz`, `OpenSSH` etc.
 
 What the entropy formula doesn't quite capture is how this "tail-risk" can very
-often manifest as massively high-impact Black Swan events. 
+often manifest as massively high-impact Black Swan events [14]. 
 
 Massive cybercrimes affecting data
 protection and financial security. Software outage affecting the
 global economy. We've all seen them play out.
 
 
-
 # Conclusion
 
 <center><img src =/images/complexity_entropy.png width="550" height="400"/></center>
 
-If complexity is a differential snapshot of entropy in time, cumulative tech debt
+Since complexity is a differential snapshot of entropy in time, cumulative tech debt
 is precisely the integral over all the complexity built up in software today.
 
 
-Further, given we are at the peak of complexity, we are at the peak of tech debt. **It must go down**.
+Further, given we are at the peak of complexity, we are at the peak of tech
+debt. **It will inevitably go down**.
 
 Economically, McKinsey estimates that tech debt accounts for 40% of IT balance
 sheets and up to 50% of developer time [13]. It shows up as a vicious cycle that
@@ -175,10 +175,12 @@ complexity begets complexity).
 <center><img src =/images/complexity_cycle.svgz width="550" height="400"/></center>
 
 A report on software quality in 2022 attaches a $1.5 trillion price tag
-to technical debt [8] in the form of poor quality and overly complex software.  However, if you interchange loosely with "technological opportunity cost", the reality is of-course far
-higher.
+to technical debt in the form of poor quality and overly complex software [8].
+However, if you interchange loosely with "technological opportunity cost", the
+real business value is of-course far
+higher:
 
-The total technological debt includes entirely "untapped" digital transformation in industries + the canononical "poorly tapped" form of tech debt.
+> The total technological debt includes entirely "untapped" digital transformation in industries + the canononical "poorly tapped" form of tech debt.
 
 A lot of words to say: there's a whole lot left to do here.
 
@@ -263,3 +265,5 @@ Reach out to me if these ideas sound interesting to you, and let's iterate toget
 [12] https://arxiv.org/abs/2309.10668
 
 [13] https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/breaking-technical-debts-vicious-cycle-to-modernize-your-business
+
+[14] https://en.wikipedia.org/wiki/Black_swan_theory
