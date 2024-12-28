@@ -21,6 +21,7 @@ googleAnalytics = "G-QPHTPNYLXE"
   author = "Rohan Gupta"
   copyright = "Rohan Gupta"
   logo = "images/rohan.jpg"
+  math = true
 
 [frontmatter]
   date  = [":filename", ":default"]
@@ -47,6 +48,10 @@ googleAnalytics = "G-QPHTPNYLXE"
   mediatype = "application/json"
   baseName = "feed"
 
+[[module.mounts]]
+  source = 'static'
+  target = 'static'
+
 [sitemap]
   changefreq = "monthly"
   filename = "sitemap.xml"
@@ -71,5 +76,14 @@ googleAnalytics = "G-QPHTPNYLXE"
     url        = "/projects"
     weight     = -10
 
-[markup.goldmark.renderer]
-  unsafe = true # Allow HTML in md files
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.extensions]
+      [markup.goldmark.extensions.passthrough]
+        enable = true
+        [markup.goldmark.extensions.passthrough.delimiters]
+          block = [['\[', '\]'], ['$$', '$$']]
+          inline = [['\(', '\)']]
+
+    [markup.goldmark.renderer]
+      unsafe = true # Allow HTML in md files
