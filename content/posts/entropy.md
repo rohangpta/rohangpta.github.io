@@ -19,8 +19,8 @@ The Second Law of Thermodynamics states
 
 > A system's entropy will either increase or remain the same over time, unless outside energy is added
 
-There's something about inevitability that I think is arcane and
-fascinating. Especially when you can see it unfold in front of you - my
+There's something about inevitability that I think is fascinating, especially
+when you can see it unfold in front of you -- my
 favourite visualisation is below (thanks Gemini).
 
 <center><img src =/images/diffusion.png width="550" height="400"/></center>
@@ -39,10 +39,21 @@ entropy follows an S-curve [4], with its three stages likened to those of ink di
 
 This is strikingly similar to the business lifecycle curve above! Indeed, prior
 art agrees that **business and technology lifecycles are overlayed entropy curves**
-[5]. This formulation is especially important in context of my broader argument.
+[5]. 
 
 
-### Interlude: statistical entropy and complexity.
+Entropy in business is largely a representation of diffusion of a
+particular product, driven by the forces of supply and demand. While entropy is
+often likened to "disorder", I like to use "disruption" - permeation of new (ink)
+into old (water). It is neither good nor bad, simply inevitable.
+
+
+## Properties of Entropy
+
+### Statistical Entropy
+
+Since we are talking about software and not atoms, let's turn to information theory to
+understand the information contained in software programs.
 
 In information theory, Shannon's entropy is, for a random
 variable  \\( X \\) distributed according to \\( p: (x \in \mathcal{X})
@@ -61,21 +72,29 @@ more entropy than one with 4 sides.
   Gaussians and exponentials are maximum entropy distributions (under
   certain statistical conditions [3]). Both exhibit fat tail properties empirically.
   
-Theodore Modis presents an excellent information-theoretic analysis of the relation between complexity
-and entropy. In fact, he predicted a 20-year complexity trend in 2002 [5] and followed up
-in 2022 with a conclusion validating his claim [4] (*a Lindy trend* [10]).
+### Complexity
 
-His observation?
+Complexity is entropy's first cousin. Formally we'll use
+Kolmogorov complexity:
+
+> \\(K(o)\\) for an object \\(o\\) is the length of the shortest program that produces the
+> object as output. 
+
+In other words, it measures how "compressible" something is. 
+
+Now - how does entropy relate to complexity? Modis posits the following relation [4][15]:
+  
 
 > Complexity is the time derivative of entropy. Given that entropy is an
-> S-curve, complexity is normal.
+> S-curve, complexity is normally distributed.
 >
-> Complexity increases until a peak and decreases after.
+> With time, complexity increases until a peak and decreases after.
 
-Scott Aaronson quantifies this idea with a lucid example around cream dissolving
-into coffee [6]. He likens complexity to the "interestingness" of a system, formally represented by
-Kolmogorov complexity, and empirically calculated by `gzip` compression of a state
-snapshot image (where state is an X-ray image of the coffee-cup). 
+To see this: let's consider Scott Aaronson's lucid example around cream dissolving
+into coffee [6].
+
+His research empirically calculated a complexity score using the `gzip` compression
+file size of pictures of cream melting in the coffee.
 
 <center><img src =/images/coffee_complexity.png width="413" height="300"/></center>
 
@@ -102,7 +121,7 @@ Why?
 - Software is still custom-made / productised. SaaS "exploded" but hasn't permeated all
   industries. Digital modernisation efforts continue to be in higher
   demand than available supply, indicating superlinear business growth or relative
-  convexity.
+  convexity -- *close to the central inflection point*.
 
 - Software complexity is close to peaking. This one is bolstered by the
   cloud driving successful commoditisation of infrastructure. We now have
@@ -116,21 +135,21 @@ Why?
 
 # Tech Debt as Complexity
 
+Technological modernisation is bottlenecked by iteration speed to a desired solution -- and
+tech debt is the maintenance and complexity related resistance to change.
+
 The simplest description of tech debt that I've been able to come up with has
-two major manifestations.
+two major forms.
 
 ### Complexity via obscurity
 
-Poorly designed software abstractions (obscurity) generates more complexity - "garbage in, garbage
+Poorly designed software abstractions (obscurity) generate more complexity - "garbage in, garbage
 out".
 
-Technological modernisation is about iteration speed to a desired solution - and
-debt is precisely the maintenance-related roadblocks in the way of doing so /
-resistance to change.
 
 The core issue with "obscure" abstractions is that they are uncompressed representations of state. That is, they encode more than they should.
 Their interfaces are inherently complex, where they should instead be
-simple and hide deep complexity [6] (example - [11])
+simple and hide deep complexity [6] [11].
 
 This results in programs that can have far more states than they should
 (Property 1). Changing them means dealing with far more of these state transitions than you should!
@@ -161,11 +180,14 @@ global economy. We've all seen them play out.
 <center><img src =/images/complexity_entropy.png width="550" height="400"/></center>
 
 Since complexity is a differential snapshot of entropy in time, cumulative tech debt
-is precisely the integral over all the complexity built up in software today.
-
+is precisely the integral over all the complexity built up in software over history.
 
 Further, given we are at the peak of complexity, we are at the peak of tech
-debt. **It will inevitably go down**.
+debt's growth. **It will inevitably slow down**.
+
+Intuitiviely, in the business “experimental -> custom -> product -> commodity” lifecycle,
+software is at the custom/product intersection. In order to get from product to
+commodity, it needs to be simpler and cheaper.
 
 Economically, McKinsey estimates that tech debt accounts for 40% of IT balance
 sheets and up to 50% of developer time [13]. It shows up as a vicious cycle that
@@ -185,7 +207,43 @@ higher:
 A lot of words to say: there's a whole lot left to do here.
 
 
-# Bonus: The Solution
+# Footnotes and References
+
+[1] https://x.com/elonmusk/status/1090689205586472960
+
+[2] https://en.wikipedia.org/wiki/Entropy_as_an_arrow_of_time
+
+[3] https://pillowlab.princeton.edu/teaching/statneuro2018/slides/notes08_infotheory.pdf
+
+[4] https://arxiv.org/abs/2410.10844
+
+[5] http://www.growth-dynamics.com/articles/Forecasting_Complexity.pdf
+
+[6] https://arxiv.org/abs/1405.6903
+
+[7] https://books.google.com/books/about/A_Philosophy_of_Software_Design.html?id=hkfEzgEACAAJ&source=kp_book_description
+
+
+[8] https://www.it-cisq.org/wp-content/uploads/sites/6/2022/11/CPSQ-Report-Nov-22-2.pdf
+
+[9] https://www.sonatype.com/blog/the-scale-of-open-source-growth-challenges-and-key-insights
+
+[10] https://en.wikipedia.org/wiki/Lindy_effect
+
+[11] https://en.wikipedia.org/wiki/Everything_is_a_file
+
+[12] https://arxiv.org/abs/2309.10668
+
+[13] https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/breaking-technical-debts-vicious-cycle-to-modernize-your-business
+
+[14] https://en.wikipedia.org/wiki/Black_swan_theory
+
+[15] Theodore Modis presents an excellent information-theoretic analysis of the relation between complexity
+and entropy: his claim held true over a 20 year prediction (2002-2022) [4] (*a Lindy trend* [10]).
+
+
+# Appendix: Three Hard Problems
+
 
 I've spent a lot of words talking about a problem and tying it to other
 problems. What does taming complexity look like? How do we roll the ball down
@@ -233,37 +291,9 @@ driven feedback. i.e unit test cases encapsulating abstractions "solve" this wel
 I won't elaborate too much on "solutions" since I have various
 hypotheses-in-testing that need iteration (as opposed to more ideation).
 
-Reach out to me if these ideas sound interesting to you, and let's iterate together!
+If you made it this far, clearly some of this was interesting to you. Let's chat! [Email](mailto:rohangupta883@gmail.com) [X](https://x.com/rohangupta_)
 
 
-# Footnotes and references
 
 
-[1] https://x.com/elonmusk/status/1090689205586472960
 
-[2] https://en.wikipedia.org/wiki/Entropy_as_an_arrow_of_time
-
-[3] https://pillowlab.princeton.edu/teaching/statneuro2018/slides/notes08_infotheory.pdf
-
-[4] https://arxiv.org/abs/2410.10844
-
-[5] http://www.growth-dynamics.com/articles/Forecasting_Complexity.pdf
-
-[6] https://arxiv.org/abs/1405.6903
-
-[7] https://books.google.com/books/about/A_Philosophy_of_Software_Design.html?id=hkfEzgEACAAJ&source=kp_book_description
-
-
-[8] https://www.it-cisq.org/wp-content/uploads/sites/6/2022/11/CPSQ-Report-Nov-22-2.pdf
-
-[9] https://www.sonatype.com/blog/the-scale-of-open-source-growth-challenges-and-key-insights
-
-[10] https://en.wikipedia.org/wiki/Lindy_effect
-
-[11] https://en.wikipedia.org/wiki/Everything_is_a_file
-
-[12] https://arxiv.org/abs/2309.10668
-
-[13] https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/breaking-technical-debts-vicious-cycle-to-modernize-your-business
-
-[14] https://en.wikipedia.org/wiki/Black_swan_theory
