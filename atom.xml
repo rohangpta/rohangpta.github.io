@@ -8,7 +8,7 @@ physical world, sharply following the arrow of time [2].&lt;/p>
 &lt;/blockquote>
 &lt;p>There&amp;rsquo;s something about inevitability that I think is arcane and
 fascinating. Especially when you can see it unfold in front of you - my
-favourite visualisation is below (thanks Gemini)&lt;/p>
+favourite visualisation is below (thanks Gemini).&lt;/p>
 &lt;center>&lt;img src =/images/diffusion.png width="550" height="400"/>&lt;/center>
 &lt;p>This picture displays the three stages of entropy:&lt;/p>
 &lt;ul>
@@ -51,14 +51,14 @@ S-curve, complexity is normal.&lt;/p>
 &lt;/blockquote>
 &lt;p>Scott Aaronson quantifies this idea with a lucid example around cream dissolving
 into coffee [6]. He likens complexity to the &amp;ldquo;interestingness&amp;rdquo; of a system, formally represented by
-Kolmogorov complexity, and empirically calculated by gzip compression of a state
+Kolmogorov complexity, and empirically calculated by &lt;code>gzip&lt;/code> compression of a state
 snapshot image (where state is an X-ray image of the coffee-cup).&lt;/p>
 &lt;center>&lt;img src =/images/coffee_complexity.png width="413" height="300"/>&lt;/center>
 &lt;p>The picture above represents snapshots of the coffee cup at the three phases of entropy. As the cream and coffee begin to mix, complexity increases until a maximum
 before decreasing as the mixture becomes saturated and homogeneous.&lt;/p>
 &lt;p>It is simple to see why the first and
-last image can be more easily compressed (i.e are less complex) whereas one in the
-middle image cannot.&lt;/p>
+last image can be more easily compressed (i.e are less complex) compared to the
+image in the middle.&lt;/p>
 &lt;h1 id="where-does-software-fit-into-this">Where Does Software Fit Into This? &lt;a href="#where-does-software-fit-into-this" class="hash">#&lt;/a>&lt;/h1>
 &lt;p>Let&amp;rsquo;s start by quantifying where software is today in its business lifecycle /
 entropy curve.&lt;/p>
@@ -106,24 +106,29 @@ in the open source parts of a software supply chain increased by 650% between
 2020 and 2021 [8]. At the same time, OSS adoption grows 70% YoY [9], bringing with it
 increasingly public vulnerabilities like in &lt;code>log4j&lt;/code>, &lt;code>xz&lt;/code>, &lt;code>OpenSSH&lt;/code> etc.&lt;/p>
 &lt;p>What the entropy formula doesn&amp;rsquo;t quite capture is how this &amp;ldquo;tail-risk&amp;rdquo; can very
-often manifest as massively high-impact Black Swan events.&lt;/p>
+often manifest as massively high-impact Black Swan events [14].&lt;/p>
 &lt;p>Massive cybercrimes affecting data
 protection and financial security. Software outage affecting the
 global economy. We&amp;rsquo;ve all seen them play out.&lt;/p>
 &lt;h1 id="conclusion">Conclusion &lt;a href="#conclusion" class="hash">#&lt;/a>&lt;/h1>
 &lt;center>&lt;img src =/images/complexity_entropy.png width="550" height="400"/>&lt;/center>
-&lt;p>If complexity is a differential snapshot of entropy in time, cumulative tech debt
+&lt;p>Since complexity is a differential snapshot of entropy in time, cumulative tech debt
 is precisely the integral over all the complexity built up in software today.&lt;/p>
-&lt;p>Further, given we are at the peak of complexity, we are at the peak of tech debt. &lt;strong>It must go down&lt;/strong>.&lt;/p>
+&lt;p>Further, given we are at the peak of complexity, we are at the peak of tech
+debt. &lt;strong>It will inevitably go down&lt;/strong>.&lt;/p>
 &lt;p>Economically, McKinsey estimates that tech debt accounts for 40% of IT balance
 sheets and up to 50% of developer time [13]. It shows up as a vicious cycle that
 organisations increasingly have a harder time escaping from (remember:
 complexity begets complexity).&lt;/p>
 &lt;center>&lt;img src =/images/complexity_cycle.svgz width="550" height="400"/>&lt;/center>
 &lt;p>A report on software quality in 2022 attaches a $1.5 trillion price tag
-to technical debt [8] in the form of poor quality and overly complex software. However, if you interchange loosely with &amp;ldquo;technological opportunity cost&amp;rdquo;, the reality is of-course far
-higher.&lt;/p>
+to technical debt in the form of poor quality and overly complex software [8].
+However, if you interchange loosely with &amp;ldquo;technological opportunity cost&amp;rdquo;, the
+real business value is of-course far
+higher:&lt;/p>
+&lt;blockquote>
 &lt;p>The total technological debt includes entirely &amp;ldquo;untapped&amp;rdquo; digital transformation in industries + the canononical &amp;ldquo;poorly tapped&amp;rdquo; form of tech debt.&lt;/p>
+&lt;/blockquote>
 &lt;p>A lot of words to say: there&amp;rsquo;s a whole lot left to do here.&lt;/p>
 &lt;h1 id="bonus-the-solution">Bonus: The Solution &lt;a href="#bonus-the-solution" class="hash">#&lt;/a>&lt;/h1>
 &lt;p>I&amp;rsquo;ve spent a lot of words talking about a problem and tying it to other
@@ -174,7 +179,8 @@ hypotheses-in-testing that need iteration (as opposed to more ideation).&lt;/p>
 &lt;p>[10] &lt;a href="https://en.wikipedia.org/wiki/Lindy_effect">https://en.wikipedia.org/wiki/Lindy_effect&lt;/a>&lt;/p>
 &lt;p>[11] &lt;a href="https://en.wikipedia.org/wiki/Everything_is_a_file">https://en.wikipedia.org/wiki/Everything_is_a_file&lt;/a>&lt;/p>
 &lt;p>[12] &lt;a href="https://arxiv.org/abs/2309.10668">https://arxiv.org/abs/2309.10668&lt;/a>&lt;/p>
-&lt;p>[13] &lt;a href="https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/breaking-technical-debts-vicious-cycle-to-modernize-your-business">https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/breaking-technical-debts-vicious-cycle-to-modernize-your-business&lt;/a>&lt;/p></description><author>ronalds.vilcins@gmail.com (Ronalds Vilcins)</author><guid>https://grohan.co/2024/12/27/entropy/</guid><pubDate>Fri, 27 Dec 2024 00:00:00 +0000</pubDate></item><item><title>Factorials &amp; Fun with Vim</title><link>https://grohan.co/2023/08/10/vim/</link><description>&lt;p>I recently hit a somewhat important milestone in my life: one year as a Vim
+&lt;p>[13] &lt;a href="https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/breaking-technical-debts-vicious-cycle-to-modernize-your-business">https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/breaking-technical-debts-vicious-cycle-to-modernize-your-business&lt;/a>&lt;/p>
+&lt;p>[14] &lt;a href="https://en.wikipedia.org/wiki/Black_swan_theory">https://en.wikipedia.org/wiki/Black_swan_theory&lt;/a>&lt;/p></description><author>ronalds.vilcins@gmail.com (Ronalds Vilcins)</author><guid>https://grohan.co/2024/12/27/entropy/</guid><pubDate>Fri, 27 Dec 2024 00:00:00 +0000</pubDate></item><item><title>Factorials &amp; Fun with Vim</title><link>https://grohan.co/2023/08/10/vim/</link><description>&lt;p>I recently hit a somewhat important milestone in my life: one year as a Vim
 user. Despite its steep learning curve, I used to think that mastering Vim
 was mostly about habit formation. I swore by the
 cheatsheets and believed I would be golden. After all, a
