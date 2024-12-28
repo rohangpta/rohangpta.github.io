@@ -136,7 +136,8 @@ Why?
 # Tech Debt as Complexity
 
 Technological modernisation is bottlenecked by iteration speed to a desired solution -- and
-tech debt is the maintenance and complexity related resistance to change.
+tech debt is the maintenance and complexity related resistance to change that
+causes this bottleneck.
 
 The simplest description of tech debt that I've been able to come up with has
 two major forms.
@@ -187,7 +188,7 @@ debt's growth. **It will inevitably slow down**.
 
 Intuitiviely, in the business “experimental -> custom -> product -> commodity” lifecycle,
 software is at the custom/product intersection. In order to get from product to
-commodity, it needs to be simpler and cheaper.
+commodity and therefore fully permeate society, it needs to be simpler and cheaper.
 
 Economically, McKinsey estimates that tech debt accounts for 40% of IT balance
 sheets and up to 50% of developer time [13]. It shows up as a vicious cycle that
@@ -196,7 +197,7 @@ complexity begets complexity).
 
 <center><img src =/images/complexity_cycle.svgz width="550" height="400"/></center>
 
-A report on software quality in 2022 attaches a $1.5 trillion price tag
+A report on software quality in 2022 attaches a $2.4 trillion price tag
 to technical debt in the form of poor quality and overly complex software [8].
 However, if you interchange loosely with "technological opportunity cost", the
 real business value is of-course far
