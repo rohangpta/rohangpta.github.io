@@ -96,7 +96,8 @@ program compression tools [12] and will do exactly this.&lt;/p>
 &lt;/ul>
 &lt;h1 id="tech-debt-as-complexity">Tech Debt as Complexity &lt;a href="#tech-debt-as-complexity" class="hash">#&lt;/a>&lt;/h1>
 &lt;p>Technological modernisation is bottlenecked by iteration speed to a desired solution &amp;ndash; and
-tech debt is the maintenance and complexity related resistance to change.&lt;/p>
+tech debt is the maintenance and complexity related resistance to change that
+causes this bottleneck.&lt;/p>
 &lt;p>The simplest description of tech debt that I&amp;rsquo;ve been able to come up with has
 two major forms.&lt;/p>
 &lt;h3 id="complexity-via-obscurity">Complexity via obscurity &lt;a href="#complexity-via-obscurity" class="hash">#&lt;/a>&lt;/h3>
@@ -129,13 +130,13 @@ is precisely the integral over all the complexity built up in software over hist
 debt&amp;rsquo;s growth. &lt;strong>It will inevitably slow down&lt;/strong>.&lt;/p>
 &lt;p>Intuitiviely, in the business “experimental -&amp;gt; custom -&amp;gt; product -&amp;gt; commodity” lifecycle,
 software is at the custom/product intersection. In order to get from product to
-commodity, it needs to be simpler and cheaper.&lt;/p>
+commodity and therefore fully permeate society, it needs to be simpler and cheaper.&lt;/p>
 &lt;p>Economically, McKinsey estimates that tech debt accounts for 40% of IT balance
 sheets and up to 50% of developer time [13]. It shows up as a vicious cycle that
 organisations increasingly have a harder time escaping from (remember:
 complexity begets complexity).&lt;/p>
 &lt;center>&lt;img src =/images/complexity_cycle.svgz width="550" height="400"/>&lt;/center>
-&lt;p>A report on software quality in 2022 attaches a $1.5 trillion price tag
+&lt;p>A report on software quality in 2022 attaches a $2.4 trillion price tag
 to technical debt in the form of poor quality and overly complex software [8].
 However, if you interchange loosely with &amp;ldquo;technological opportunity cost&amp;rdquo;, the
 real business value is of-course far
