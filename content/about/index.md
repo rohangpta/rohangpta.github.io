@@ -42,3 +42,4 @@ You can also find me on:
 - [Github](https://github.com/rohangpta)
 - [Twitter](https://twitter.com/rohangupta_)
 - [LinkedIn](https://www.linkedin.com/in/rohan-gupta2/)
+- [Atom](https://grohan.co/atom.xml)
