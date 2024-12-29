@@ -38,7 +38,7 @@ googleAnalytics = "G-QPHTPNYLXE"
 
 [outputs]
   home = ["HTML", "RSS", "JSON"]
-  section = ["HTML"]
+  section = ["HTML", "RSS"]
 
 [outputFormats.RSS]
   mediatype = "application/rss"
