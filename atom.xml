@@ -132,13 +132,13 @@ protection and financial security. Software outage affecting the
 global economy. We&amp;rsquo;ve all seen them play out.&lt;/p>
 &lt;h1 id="conclusion">Conclusion &lt;a href="#conclusion" class="hash">#&lt;/a>&lt;/h1>
 &lt;center>&lt;img src =/images/complexity_entropy.png width="550" height="400"/>&lt;/center>
-&lt;p>To recap, entropy in software tracks the expansion of software with time. Complexity
-reflects the derivative of entropy. Due to the S-curve shape of entropy
+&lt;p>To recap, entropy in software tracks the expansion of software with time and complexity
+is the derivative of entropy. Due to the S-curve shape of entropy
 and thus &amp;ldquo;normal&amp;rdquo; shape of its derivative, &amp;ldquo;complexity begets
 complexity&amp;rdquo; until a certain point in time, after which complexity reduces.&lt;/p>
 &lt;p>I argue that due to market conditions: namely the state of SaaS as a product /
 custom-made offering and the commoditisation of infrastructure (cloud) that we are at the middle of the S-curve. i.e we are at the &lt;strong>peak
-of software complexity / tech debt growth&lt;/strong>. Intuitiviely, in the business “experimental -&amp;gt; custom -&amp;gt; product -&amp;gt; commodity” lifecycle,
+of software complexity / tech debt growth&lt;/strong>. Intuitively, in the business “experimental -&amp;gt; custom -&amp;gt; product -&amp;gt; commodity” lifecycle,
 software is at the custom/product intersection, which is somewhere in the middle.&lt;/p>
 &lt;p>While the &lt;em>total amount&lt;/em> of code in the world will keep growing, in order to sustain healthy
 growth, demand for &amp;ldquo;software regulators&amp;rdquo; will rise to address growing
