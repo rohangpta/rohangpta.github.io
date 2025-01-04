@@ -189,14 +189,14 @@ global economy. We've all seen them play out.
 
 <center><img src =/images/complexity_entropy.png width="550" height="400"/></center>
 
-To recap, entropy in software tracks the expansion of software with time. Complexity
-reflects the derivative of entropy. Due to the S-curve shape of entropy
+To recap, entropy in software tracks the expansion of software with time and complexity
+is the derivative of entropy. Due to the S-curve shape of entropy
 and thus "normal" shape of its derivative, "complexity begets
 complexity" until a certain point in time, after which complexity reduces.
 
 I argue that due to market conditions: namely the state of SaaS as a product /
 custom-made offering and the commoditisation of infrastructure (cloud) that we are at the middle of the S-curve. i.e we are at the **peak
-of software complexity / tech debt growth**. Intuitiviely, in the business “experimental -> custom -> product -> commodity” lifecycle,
+of software complexity / tech debt growth**. Intuitively, in the business “experimental -> custom -> product -> commodity” lifecycle,
 software is at the custom/product intersection, which is somewhere in the middle.
 
 While the *total amount* of code in the world will keep growing, in order to sustain healthy
