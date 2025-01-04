@@ -1,4 +1,4 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Rohan Gupta</title><description>Rohan Gupta's personal website</description><link>https://grohan.co</link><language>en</language><copyright>Copyright 2024, Ronalds Vilcins</copyright><lastBuildDate>Fri, 27 Dec 2024 00:00:00 +0000</lastBuildDate><generator>Hugo - gohugo.io</generator><docs>http://cyber.harvard.edu/rss/rss.html</docs><atom:link href="https://ronaldsvilcins.com/atom.xml" rel="self" type="application/atom+xml"/><item><title>Technical Debt is Entropy In Software</title><link>https://grohan.co/2024/12/27/entropy/</link><description>&lt;h1 id="entropy">Entropy &lt;a href="#entropy" class="hash">#&lt;/a>&lt;/h1>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Rohan Gupta</title><description>Rohan Gupta's personal website</description><link>https://grohan.co</link><language>en</language><copyright>Copyright 2025, Ronalds Vilcins</copyright><lastBuildDate>Fri, 27 Dec 2024 00:00:00 +0000</lastBuildDate><generator>Hugo - gohugo.io</generator><docs>http://cyber.harvard.edu/rss/rss.html</docs><atom:link href="https://ronaldsvilcins.com/atom.xml" rel="self" type="application/atom+xml"/><item><title>Technical Debt is Entropy In Software</title><link>https://grohan.co/2024/12/27/entropy/</link><description>&lt;h1 id="entropy">Entropy &lt;a href="#entropy" class="hash">#&lt;/a>&lt;/h1>
 &lt;p>Entropy is the ultimate boss battle [1]. As the reason why ice melts, why tires
 burst, and why ink diffuses &amp;ndash; thermodynamic entropy is a fact of the
 physical world, sharply following the arrow of time [2].&lt;/p>
@@ -42,9 +42,10 @@ generally proportional to the total entropy in a system. A dice with 6 sides has
 more entropy than one with 4 sides.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>&lt;strong>Property 2.&lt;/strong> Higher entropy is correlated with a higher likelihood of tail events.
+&lt;p>&lt;strong>Property 2.&lt;/strong> Higher entropy is correlated with a higher presence of tail events.
 Gaussians and exponentials are maximum entropy distributions (under
-certain statistical conditions [3]). Both exhibit fat tail properties empirically.&lt;/p>
+certain statistical conditions [3]). Both exhibit fat tail properties
+empirically [16].&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;h3 id="complexity">Complexity &lt;a href="#complexity" class="hash">#&lt;/a>&lt;/h3>
@@ -58,7 +59,7 @@ object as output.&lt;/p>
 &lt;p>Now - how does entropy relate to complexity? Modis posits the following relation [4][15]:&lt;/p>
 &lt;blockquote>
 &lt;p>Complexity is the time derivative of entropy. Given that entropy is an
-S-curve, complexity is normally distributed.&lt;/p>
+S-curve, complexity is roughly normally distributed.&lt;/p>
 &lt;p>With time, complexity increases until a peak and decreases after.&lt;/p>
 &lt;/blockquote>
 &lt;p>To see this: let&amp;rsquo;s consider Scott Aaronson&amp;rsquo;s lucid example around cream dissolving
@@ -82,11 +83,11 @@ entropy curve.&lt;/p>
 &lt;p>Software is still custom-made / productised. SaaS &amp;ldquo;exploded&amp;rdquo; but hasn&amp;rsquo;t permeated all
 industries. Digital modernisation efforts continue to be in higher
 demand than available supply, indicating superlinear business growth or relative
-convexity &amp;ndash; &lt;em>close to the central inflection point&lt;/em>.&lt;/p>
+convexity &amp;ndash; &lt;em>we are close to the central inflection point&lt;/em>.&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>Software complexity is close to peaking. This one is bolstered by the
-cloud driving successful commoditisation of infrastructure. We now have
+&lt;p>Software complexity is close to peaking. For starters, the
+cloud has driven the successful commoditisation of infrastructure. We now have
 the ability to &lt;em>run software&lt;/em> cheaply and easily.&lt;/p>
 &lt;p>What&amp;rsquo;s left is to reduce the complexity of
 the specification of software (language and layers of
@@ -95,42 +96,56 @@ program compression tools [12] and will do exactly this.&lt;/p>
 &lt;/li>
 &lt;/ul>
 &lt;h1 id="tech-debt-as-complexity">Tech Debt as Complexity &lt;a href="#tech-debt-as-complexity" class="hash">#&lt;/a>&lt;/h1>
-&lt;p>Technological modernisation is bottlenecked by iteration speed to a desired solution &amp;ndash; and
-tech debt is the maintenance and complexity related resistance to change that
+&lt;p>For a particular business, technological modernisation is largely bottlenecked by iteration speed to a desired solution.
+I view tech debt as the maintenance and complexity related resistance to change that
 causes this bottleneck.&lt;/p>
-&lt;p>The simplest description of tech debt that I&amp;rsquo;ve been able to come up with has
-two major forms.&lt;/p>
+&lt;p>To be clear, every problem that software solves has some theoretical baseline level of
+&amp;ldquo;complexity&amp;rdquo; needed to meet its specification. Technical debt is simply the add-on
+difference in complexity between the ideal and real world solutions.&lt;/p>
+&lt;p>So what causes complexity? The sources of complexity that I&amp;rsquo;ve found to
+be the most concise yet accurate are below [7]:&lt;/p>
 &lt;h3 id="complexity-via-obscurity">Complexity via obscurity &lt;a href="#complexity-via-obscurity" class="hash">#&lt;/a>&lt;/h3>
 &lt;p>Poorly designed software abstractions (obscurity) generate more complexity - &amp;ldquo;garbage in, garbage
 out&amp;rdquo;.&lt;/p>
-&lt;p>The core issue with &amp;ldquo;obscure&amp;rdquo; abstractions is that they are uncompressed representations of state. That is, they encode more than they should.
+&lt;p>The core issue with &amp;ldquo;obscure&amp;rdquo; abstractions is that they are uncompressed representations of state.
 Their interfaces are inherently complex, where they should instead be
-simple and hide deep complexity [6] [11].&lt;/p>
-&lt;p>This results in programs that can have far more states than they should
-(Property 1). Changing them means dealing with far more of these state transitions than you should!&lt;/p>
+simple and hide deep complexity [11].&lt;/p>
+&lt;p>Often times, obscurity appears due to constraints imposed on systems (&amp;ldquo;make this
+code accept XYZ data format&amp;rdquo;). Local
+optimisations lead to global API changes that introduce obscurity and state bloat
+[17]. Refactors / complexity regulation measures don&amp;rsquo;t fit into deadlines and this bloat
+almost always compounds (Property 1).&lt;/p>
 &lt;h3 id="complexity-via-dense-dependency-graphs">Complexity via dense dependency graphs &lt;a href="#complexity-via-dense-dependency-graphs" class="hash">#&lt;/a>&lt;/h3>
 &lt;p>Software that depends on A LOT of other software is more prone to bugs,
-vulnerabilities, maintenance overhead, and change friction. This kind of
+vulnerabilities and maintenance overhead. This kind of
 technical debt introduces some obscurity but also &amp;ldquo;tail-risk&amp;rdquo; around software (Property
 2).&lt;/p>
 &lt;p>The number of failures due to weaknesses
 in the open source parts of a software supply chain increased by 650% between
-2020 and 2021 [8]. At the same time, OSS adoption grows 70% YoY [9], bringing with it
+2020 and 2021 [8]. At the same time, OSS adoption has been growing 70% YoY [9], bringing with it
 increasingly public vulnerabilities like in &lt;code>log4j&lt;/code>, &lt;code>xz&lt;/code>, &lt;code>OpenSSH&lt;/code> etc.&lt;/p>
-&lt;p>What the entropy formula doesn&amp;rsquo;t quite capture is how this &amp;ldquo;tail-risk&amp;rdquo; can very
-often manifest as massively high-impact Black Swan events [14].&lt;/p>
-&lt;p>Massive cybercrimes affecting data
+&lt;p>Dependencies can also reflect a level of &amp;ldquo;obscurity&amp;rdquo; in software that may not
+justify their added risk. Leftpad is a great example here! [18]&lt;/p>
+&lt;p>What isn&amp;rsquo;t captured by mere probabilities is how this &amp;ldquo;tail-risk&amp;rdquo; can
+manifest as devastatingly high-impact Black Swan events [14]: massive cybercrimes affecting data
 protection and financial security. Software outage affecting the
 global economy. We&amp;rsquo;ve all seen them play out.&lt;/p>
 &lt;h1 id="conclusion">Conclusion &lt;a href="#conclusion" class="hash">#&lt;/a>&lt;/h1>
 &lt;center>&lt;img src =/images/complexity_entropy.png width="550" height="400"/>&lt;/center>
-&lt;p>Since complexity is a differential snapshot of entropy in time, cumulative tech debt
-is precisely the integral over all the complexity built up in software over history.&lt;/p>
-&lt;p>Further, given we are at the peak of complexity, we are at the peak of tech
-debt&amp;rsquo;s growth. &lt;strong>It will inevitably slow down&lt;/strong>.&lt;/p>
-&lt;p>Intuitiviely, in the business “experimental -&amp;gt; custom -&amp;gt; product -&amp;gt; commodity” lifecycle,
-software is at the custom/product intersection. In order to get from product to
-commodity and therefore fully permeate society, it needs to be simpler and cheaper.&lt;/p>
+&lt;p>To recap, entropy in software tracks the expansion of software with time. Complexity
+reflects the derivative of entropy. Due to the S-curve shape of entropy
+and thus &amp;ldquo;normal&amp;rdquo; shape of its derivative, &amp;ldquo;complexity begets
+complexity&amp;rdquo; until a certain point in time, after which complexity reduces.&lt;/p>
+&lt;p>I argue that due to market conditions: namely the state of SaaS as a product /
+custom-made offering and the commoditisation of infrastructure (cloud) that we are at the middle of the S-curve. i.e we are at the &lt;strong>peak
+of software complexity / tech debt growth&lt;/strong>. Intuitiviely, in the business “experimental -&amp;gt; custom -&amp;gt; product -&amp;gt; commodity” lifecycle,
+software is at the custom/product intersection, which is somewhere in the middle.&lt;/p>
+&lt;p>While the &lt;em>total amount&lt;/em> of code in the world will keep growing, in order to sustain healthy
+growth, demand for &amp;ldquo;software regulators&amp;rdquo; will rise to address growing
+maintenance and lifecycle management costs. In order to get from product to
+commodity and therefore fully permeate society, operating software needs to be
+far simpler and
+cheaper.&lt;/p>
 &lt;p>Economically, McKinsey estimates that tech debt accounts for 40% of IT balance
 sheets and up to 50% of developer time [13]. It shows up as a vicious cycle that
 organisations increasingly have a harder time escaping from (remember:
@@ -142,7 +157,9 @@ However, if you interchange loosely with &amp;ldquo;technological opportunity co
 real business value is of-course far
 higher:&lt;/p>
 &lt;blockquote>
-&lt;p>The total technological debt includes entirely &amp;ldquo;untapped&amp;rdquo; digital transformation in industries + the canononical &amp;ldquo;poorly tapped&amp;rdquo; form of tech debt.&lt;/p>
+&lt;p>The total technological debt includes entirely &amp;ldquo;untapped&amp;rdquo; digital
+transformation in industries (??T) + the canononical &amp;ldquo;poorly tapped&amp;rdquo; form of
+tech debt (2.4T).&lt;/p>
 &lt;/blockquote>
 &lt;p>A lot of words to say: there&amp;rsquo;s a whole lot left to do here.&lt;/p>
 &lt;h1 id="footnotes-and-references">Footnotes and References &lt;a href="#footnotes-and-references" class="hash">#&lt;/a>&lt;/h1>
@@ -162,9 +179,11 @@ higher:&lt;/p>
 &lt;p>[14] &lt;a href="https://en.wikipedia.org/wiki/Black_swan_theory">https://en.wikipedia.org/wiki/Black_swan_theory&lt;/a>&lt;/p>
 &lt;p>[15] Theodore Modis presents an excellent information-theoretic analysis of the relation between complexity
 and entropy: his claim held true over a 20 year prediction (2002-2022) [4] (&lt;em>a Lindy trend&lt;/em> [10]).&lt;/p>
+&lt;p>[16] &lt;a href="https://arxiv.org/pdf/1412.7647">https://arxiv.org/pdf/1412.7647&lt;/a>&lt;/p>
+&lt;p>[17] &lt;a href="https://www.hillelwayne.com/post/complexity-constraints/">https://www.hillelwayne.com/post/complexity-constraints/&lt;/a>&lt;/p>
+&lt;p>[18] &lt;a href="https://en.wikipedia.org/wiki/Npm_left-pad_incident">https://en.wikipedia.org/wiki/Npm_left-pad_incident&lt;/a>&lt;/p>
 &lt;h1 id="appendix-three-hard-problems">Appendix: Three Hard Problems &lt;a href="#appendix-three-hard-problems" class="hash">#&lt;/a>&lt;/h1>
-&lt;p>I&amp;rsquo;ve spent a lot of words talking about a problem and tying it to other
-problems. What does taming complexity look like? How do we roll the ball down
+&lt;p>I&amp;rsquo;ve spent a lot of words talking about a problem and tying it to theory and predictions. What does taming complexity look like? How do we roll the ball down
 the peak of the hill?&lt;/p>
 &lt;p>At the risk of being tongue-in-cheek,
 I&amp;rsquo;ll start by saying I think the solution
