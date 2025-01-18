@@ -2,9 +2,9 @@
 
 set -ex
 
-local=/Users/rohangupta/Documents/Rohan_Gupta_Resume.pdf
-remote=/Users/rohangupta/Desktop/Developer/rohan-site/static/resume.pdf
-repo=/Users/rohangupta/Desktop/Developer/rohan-site/
+local='/Users/rohangupta/Documents/Professional/Rohan_Gupta_Resume.pdf'
+remote=/Users/rohangupta/Desktop/Developer/rohangpta.github.io/static/resume.pdf
+repo=/Users/rohangupta/Desktop/Developer/rohangpta.github.io/
 logfile=/Users/rohangupta/Desktop/.ressync.txt
 now=$(TZ=America/New_York date)
 
