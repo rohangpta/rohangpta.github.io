@@ -1,4 +1,266 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Rohan Gupta</title><description>Rohan Gupta's personal website</description><link>https://grohan.co</link><language>en</language><copyright>Copyright 2025, Ronalds Vilcins</copyright><lastBuildDate>Fri, 27 Dec 2024 00:00:00 +0000</lastBuildDate><generator>Hugo - gohugo.io</generator><docs>http://cyber.harvard.edu/rss/rss.html</docs><atom:link href="https://ronaldsvilcins.com/atom.xml" rel="self" type="application/atom+xml"/><item><title>Technical Debt is Entropy In Software</title><link>https://grohan.co/2024/12/27/entropy/</link><description>&lt;h1 id="entropy">Entropy &lt;a href="#entropy" class="hash">#&lt;/a>&lt;/h1>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Rohan Gupta</title><description>Rohan Gupta's personal website</description><link>https://grohan.co</link><language>en</language><copyright>Copyright 2025, Ronalds Vilcins</copyright><lastBuildDate>Tue, 25 Nov 2025 00:00:00 +0000</lastBuildDate><generator>Hugo - gohugo.io</generator><docs>http://cyber.harvard.edu/rss/rss.html</docs><atom:link href="https://ronaldsvilcins.com/atom.xml" rel="self" type="application/atom+xml"/><item><title>Compressed Filesystems á la Language Models</title><link>https://grohan.co/2025/11/25/llmfuse/</link><description>&lt;p>Every systems engineer at some point in their journey yearns to write
+a filesystem. This sounds daunting at first - and writing a battle-tested filesystem &lt;em>is&lt;/em> hard - but the minimal surface area for a &amp;ldquo;working&amp;rdquo; FS is surprisingly small, simple, and in-distribution for coding agents.&lt;/p>
+&lt;p>In fact, one of my smoke tests for new coding models is seeing how good of
+a filesystem they can one-shot! At some point, I had quite a few filesystems lying around - and coding models were getting pretty good - which made me wonder if the models were intelligent enough to actually model the filesystem engine itself?&lt;/p>
+&lt;p>A filesystem is the perfect black-box API to model with wacky backends (see &lt;a href="http://tom7.org/papers/murphy2022harder.pdf">&amp;ldquo;Harder drives&amp;rdquo;&lt;/a>), and besides the joy of training an LLM for fun - there were a few deeper truths about language models that I wanted to explore.&lt;/p>
+&lt;h1 id="training-a-filesystem">Training a filesystem &lt;a href="#training-a-filesystem" class="hash">#&lt;/a>&lt;/h1>
+&lt;p>So I set upon training a filesystem. Building on top of one of my throwaway
+FUSEs, a few rounds with Claude repurposed it to loopback against the host
+with added logging, two things I needed to generate reference fine-tuning data:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-py" data-lang="py">&lt;span style="display:flex;">&lt;span>&lt;span style="font-weight:bold">class&lt;/span> &lt;span style="font-weight:bold">LoggingLoopbackFS&lt;/span>(LoggingMixIn, Operations):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="font-style:italic">&amp;#34;&amp;#34;&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="font-style:italic"> A loopback FUSE filesystem that logs all operations for training data.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="font-style:italic">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="font-style:italic"> This implementation delegates all filesystem operations to a real directory
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="font-style:italic"> on the host filesystem, ensuring perfect semantic correctness while logging
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="font-style:italic"> every operation for LLM training data.
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="font-style:italic"> &amp;#34;&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>I then wrote a filesystem interaction simulator, which sampled various
+operations against a sandboxed &lt;code>LoggingLoopbackFS&lt;/code> to generate diverse FUSE
+prompt/completion pairs. Concretely, I captured only the minimal set of &lt;a href="https://github.com/rohangpta/llmfuse/blob/main/train/generate_data.py#L246">operations needed&lt;/a> for
+R/W-ish capability (no open, xattrs, fsync etc).&lt;/p>
+&lt;p>Alongside the FUSE operation, I captured the full filesystem state at every
+turn. I experimented with various formats, including an ASCII-art
+representation, but ultimately settled on XML since it enforces prompt
+boundaries clearly and had canonical parsers available.&lt;/p>
+&lt;p>With prompts including the FUSE operation + XML filesystem tree, the model learned two forms of completions:&lt;/p>
+&lt;ul>
+&lt;li>Reads (&amp;lt;R&amp;gt;) requested the content / metadata as per the operation
+(&lt;code>getattr&lt;/code> / &lt;code>readdir&lt;/code> / &lt;code>read&lt;/code>)&lt;/li>
+&lt;li>Writes (&amp;lt;W&amp;gt;) requested the model to output the full filesystem tree state,
+after modification (&lt;code>unlink&lt;/code> / &lt;code>chmod&lt;/code> / &lt;code>truncate&lt;/code> / &lt;code>write&lt;/code>)&lt;/li>
+&lt;/ul>
+&lt;p>Example prompt (read):&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>&amp;lt;R&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>read(&amp;#39;/usr14/log767.rs&amp;#39;, size=4096, offset=0, fh=4)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;filesystem&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;directory path=&amp;#34;/&amp;#34; name=&amp;#34;/&amp;#34; mode=&amp;#34;755&amp;#34; owner=&amp;#34;root&amp;#34; group=&amp;#34;root&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mtime=&amp;#34;2025-01-01T00:00:00&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;directory path=&amp;#34;usr14&amp;#34; name=&amp;#34;usr14&amp;#34; mode=&amp;#34;755&amp;#34; owner=&amp;#34;root&amp;#34; group=&amp;#34;root&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mtime=&amp;#34;2025-01-01T00:00:00&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;file path=&amp;#34;usr14/log767.rs&amp;#34; name=&amp;#34;log767.rs&amp;#34; mode=&amp;#34;644&amp;#34; owner=&amp;#34;root&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>group=&amp;#34;root&amp;#34; mtime=&amp;#34;2025-01-01T00:00:01&amp;#34; size=&amp;#34;276&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;body&amp;gt;fn main() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> match process(7) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Ok(result) =&amp;amp;gt; println!(&amp;#34;Result: {}&amp;#34;, result),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Err(e) =&amp;amp;gt; eprintln!(&amp;#34;Error: {}&amp;#34;, e),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;/body&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;/file&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;file path=&amp;#34;usr14/temp912.sh&amp;#34; name=&amp;#34;temp912.sh&amp;#34; mode=&amp;#34;644&amp;#34; owner=&amp;#34;root&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>group=&amp;#34;root&amp;#34; mtime=&amp;#34;2025-01-01T00:00:01&amp;#34; size=&amp;#34;268&amp;#34;&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;body&amp;gt;#!/bin/bash
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> echo &amp;#34;temp912&amp;#34; || exit 1
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;/body&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;/file&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;/directory&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &amp;lt;/directory&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;/filesystem&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Completion:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-rs" data-lang="rs">&lt;span style="display:flex;">&lt;span>&lt;span style="font-weight:bold">fn&lt;/span> main() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="font-weight:bold">match&lt;/span> process(7) {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Ok(result) =&amp;gt; println!(&lt;span style="font-style:italic">&amp;#34;Result: &lt;/span>&lt;span style="font-weight:bold;font-style:italic">{}&lt;/span>&lt;span style="font-style:italic">&amp;#34;&lt;/span>, result),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Err(e) =&amp;gt; eprintln!(&lt;span style="font-style:italic">&amp;#34;Error: &lt;/span>&lt;span style="font-weight:bold;font-style:italic">{}&lt;/span>&lt;span style="font-style:italic">&amp;#34;&lt;/span>, e),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="fine-tuning">Fine-tuning &lt;a href="#fine-tuning" class="hash">#&lt;/a>&lt;/h3>
+&lt;p>Once I had clean, representative, and diverse filesystem simulation data, actually running SFT was pretty straightforward on Modal. Over a few iteration cycles spread across nibbles of spare time, I ended up with ~98% accuracy on a hold-out eval after 8 epochs of SFT on a N=15000 dataset with Qwen3-4b.&lt;/p>
+&lt;p>Most of my time here was spent cleaning generated data and ensuring we represented every FUSE operation sufficiently + generated enough &amp;ldquo;complex&amp;rdquo; trees to learn on.&lt;/p>
+&lt;p>At this point, I wrote &amp;hellip; possibly the smallest filesystem I&amp;rsquo;ve seen&amp;hellip; to give my model a spin in
+the real world. Every FUSE operation was a passthrough to the LLM, for example:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-py" data-lang="py">&lt;span style="display:flex;">&lt;span>&lt;span style="font-weight:bold">class&lt;/span> &lt;span style="font-weight:bold">LLMFuse&lt;/span>(LoggingMixin, Operations):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ...
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="font-weight:bold">def&lt;/span> chmod(self, path, mode):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="font-style:italic">&amp;#34;&amp;#34;&amp;#34;Change file permissions.&amp;#34;&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> response = self._query_llm_for_operation(&lt;span style="font-style:italic">&amp;#39;chmod&amp;#39;&lt;/span>, path, mode=oct(mode))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="font-weight:bold">if&lt;/span> &lt;span style="font-weight:bold">not&lt;/span> self._handle_llm_response(response):
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="font-weight:bold">raise&lt;/span> FuseOSError(ENOENT)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="font-weight:bold">return&lt;/span> 0
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ...
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Nice! I now had a mountable FUSE that was entirely &amp;ldquo;implemented&amp;rdquo; by a language
+model. As you can see below, I was able to &lt;code>ls&lt;/code> around it, &lt;code>echo&lt;/code> into files, and &lt;code>cat&lt;/code> them back out.&lt;/p>
+&lt;center>
+&lt;img src =/images/llmfuse_example.png width="800" height="250"/>
+Poking around a Docker container with a mounted LLMFuse.
+&lt;/center>
+&lt;h1 id="compressing-the-filesystem">Compressing the filesystem &lt;a href="#compressing-the-filesystem" class="hash">#&lt;/a>&lt;/h1>
+&lt;p>Perhaps the largest glaring inefficiency in this set up is the sheer verbosity
+of the XML-based representation. I was using many bytes to represent attributes
+and tree structure that could be encoded far more efficiently (~O(bits)) in a standard
+C struct.&lt;/p>
+&lt;p>However, as I was fine-tuning on the XML filesystem tree representation, I was
+baking in this very structure into the weights and probability distributions of my Qwen fork! If only there was a way to leverage this to compress state&amp;hellip;&lt;/p>
+&lt;h2 id="two-sides-of-the-same-coin">Two sides of the same coin &lt;a href="#two-sides-of-the-same-coin" class="hash">#&lt;/a>&lt;/h2>
+&lt;p>As it turns out, compression and AI are intimately related. Using LLMs to lossily
+compress text is one of the most common applications, so it&amp;rsquo;s not entirely
+unintuitive. However, one researcher (Marcus Hutter) claimed back in 2006 that they are &lt;em>equivalent&lt;/em> (and in fact &lt;a href="http://prize.hutter1.net/hfaq.htm#about">bet $500K on this claim!&lt;/a>).&lt;/p>
+&lt;p>Presciently, Hutter appears to be absolutely right. His &lt;code>enwik8&lt;/code> and &lt;code>enwik9&lt;/code>&amp;rsquo;s benchmark datasets are, today, best compressed by a &lt;a href="https://bellard.org/ts_zip/">169M parameter LLM&lt;/a> (trained by none other than Fabrice Bellard in 2023).&lt;/p>
+&lt;p>That&amp;rsquo;s a bit perplexing on the first glance. Surely LLM compression isn&amp;rsquo;t reversible? What kind of voodoo magic was going on here?&lt;/p>
+&lt;h3 id="arithmetic-coding">Arithmetic coding &lt;a href="#arithmetic-coding" class="hash">#&lt;/a>&lt;/h3>
+&lt;p>The algorithm that enables reversible compression using LLMs is called &amp;ldquo;arithmetic coding&amp;rdquo; and it builds upon a &lt;a href="https://people.math.harvard.edu/~ctm/home/text/others/shannon/entropy/entropy.pdf">1948 result by Claude Shannon&lt;/a>.&lt;/p>
+&lt;p>Researchers at DeepMind (including Hutter himself) have &lt;a href="https://arxiv.org/pdf/2309.10668">explained the math in
+detail&lt;/a>, so I&amp;rsquo;ll direct the most inquisitive of you readers there, but for a simplified understanding of what&amp;rsquo;s going on, forget everything you might know about working with LLMs today. There&amp;rsquo;s no prompting involved!&lt;/p>
+&lt;center>
+&lt;img src =/images/ac.png width="800" height="300"/>
+&lt;/center>
+&lt;p>Let&amp;rsquo;s assume the following is true for some predictive model \(M\)&lt;/p>
+&lt;ul>
+&lt;li>Lorem has first-word probability = 0.57.&lt;/li>
+&lt;li>Ipsum has second-word conditional probability = 0.67 (joint 0.38).&lt;/li>
+&lt;li>Dolor has a third word conditional probability = 0.5 (joint 0.19).&lt;/li>
+&lt;/ul>
+&lt;p>&amp;hellip;&lt;/p>
+&lt;p>so on and so forth until you reach the end of the string you want to compress and you end up with some &amp;ldquo;final interval width&amp;rdquo; \(P(m)\) on the real interval \([0,1]\) which represents your string.&lt;/p>
+&lt;p>Let&amp;rsquo;s suppose in our example this turns out to be 0.012. We can represent this decimal in roughly \(- \log_{2}{P(m)} = 6.4\) bits, which is our final compression size.&lt;/p>
+&lt;p>There&amp;rsquo;s a few elegant things about this algorithm:&lt;/p>
+&lt;ul>
+&lt;li>&lt;em>Any&lt;/em> number within this interval is uniquely determined by tracing the arithmetic coding algorithm through the specific probabilistic model&amp;rsquo;s weights. &amp;ldquo;Decoding&amp;rdquo; is simply a retracing operation (see the line through the probability distributions above)&lt;/li>
+&lt;li>The inverse log relationship between predictive power \(P(m)\) and compression
+pushes the burden of the &amp;ldquo;hard compression problem&amp;rdquo; to deep learning machinery which can encode high-dimensional text patterns within model weights, yielding far better compression ratios than deterministic algorithms.&lt;/li>
+&lt;/ul>
+&lt;p>Sounds cool! But &lt;strong>how good really&lt;/strong> is this compression? On comparing
+arithmetic coding backed by &lt;code>Qwen3-4B&lt;/code> against &lt;code>gzip&lt;/code> for &lt;a href="https://www.lipsum.com/">&lt;code>lipsum.txt&lt;/code>&lt;/a>,
+we already see pretty dramatic results:&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Method&lt;/th>
+&lt;th>Size (bytes)&lt;/th>
+&lt;th>Compression Impact&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Original (plain)&lt;/td>
+&lt;td>446&lt;/td>
+&lt;td>—&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>gzip&lt;/code>&lt;/td>
+&lt;td>298&lt;/td>
+&lt;td>~33% smaller&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;code>llmencode&lt;/code>&lt;/td>
+&lt;td>13&lt;/td>
+&lt;td>~97% smaller&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>(note: &lt;a href="https://github.com/rohangpta/llmfuse/blob/main/llmencode/llmencode.py">&lt;code>llmencode&lt;/code>&lt;/a> is my implementation of arithmetic coding)&lt;/p>
+&lt;p>22x better compression than &lt;code>gzip&lt;/code> is pretty ridiculous! A caveat here is that &lt;code>lipsum.txt&lt;/code> is heavily represented in training data, but 5-20x efficiency gains broadly hold for all text data that (looks like) it&amp;rsquo;s been on the internet.&lt;/p>
+&lt;h2 id="self-compression">Self-compression &lt;a href="#self-compression" class="hash">#&lt;/a>&lt;/h2>
+&lt;p>Now, back to our filesystem. The XML overhead we were worried about now can be
+&amp;ldquo;compressed away&amp;rdquo; by the fine-tuned model. Using the same toy filesystem from
+the Docker container demo above:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="font-weight:bold">&amp;lt;filesystem&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="font-weight:bold">&amp;lt;directory&lt;/span> path=&lt;span style="font-style:italic">&amp;#34;/&amp;#34;&lt;/span> name=&lt;span style="font-style:italic">&amp;#34;/&amp;#34;&lt;/span> mode=&lt;span style="font-style:italic">&amp;#34;755&amp;#34;&lt;/span> owner=&lt;span style="font-style:italic">&amp;#34;root&amp;#34;&lt;/span> group=&lt;span style="font-style:italic">&amp;#34;root&amp;#34;&lt;/span> mtime=&lt;span style="font-style:italic">&amp;#34;2025-01-01T00:00:00&amp;#34;&lt;/span>&lt;span style="font-weight:bold">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="font-weight:bold">&amp;lt;directory&lt;/span> path=&lt;span style="font-style:italic">&amp;#34;testdir&amp;#34;&lt;/span> name=&lt;span style="font-style:italic">&amp;#34;testdir&amp;#34;&lt;/span> mode=&lt;span style="font-style:italic">&amp;#34;755&amp;#34;&lt;/span> owner=&lt;span style="font-style:italic">&amp;#34;root&amp;#34;&lt;/span> group=&lt;span style="font-style:italic">&amp;#34;root&amp;#34;&lt;/span> mtime=&lt;span style="font-style:italic">&amp;#34;2025-01-01T00:00:00&amp;#34;&lt;/span> &lt;span style="font-weight:bold">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="font-weight:bold">&amp;lt;file&lt;/span> path=&lt;span style="font-style:italic">&amp;#34;testfile.txt&amp;#34;&lt;/span> name=&lt;span style="font-style:italic">&amp;#34;testfile.txt&amp;#34;&lt;/span> mode=&lt;span style="font-style:italic">&amp;#34;644&amp;#34;&lt;/span> owner=&lt;span style="font-style:italic">&amp;#34;root&amp;#34;&lt;/span> group=&lt;span style="font-style:italic">&amp;#34;root&amp;#34;&lt;/span> mtime=&lt;span style="font-style:italic">&amp;#34;2025-01-01T00:00:01&amp;#34;&lt;/span> size=&lt;span style="font-style:italic">&amp;#34;14&amp;#34;&lt;/span>&lt;span style="font-weight:bold">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="font-weight:bold">&amp;lt;body&amp;gt;&lt;/span>hello llmfuse
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="font-weight:bold">&amp;lt;/body&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="font-weight:bold">&amp;lt;/file&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="font-weight:bold">&amp;lt;/directory&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="font-weight:bold">&amp;lt;/filesystem&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Model&lt;/th>
+&lt;th>Original (bytes)&lt;/th>
+&lt;th>Compressed (bytes)&lt;/th>
+&lt;th>Ratio&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Base Qwen3-4B&lt;/td>
+&lt;td>394&lt;/td>
+&lt;td>38&lt;/td>
+&lt;td>10.4x&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Fine-tuned Qwen3-4B&lt;/td>
+&lt;td>394&lt;/td>
+&lt;td>21&lt;/td>
+&lt;td>18.8x&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>The fine-tuned model achieves &lt;strong>44.7% better compression&lt;/strong> on XML filesystem
+trees - the very format it was trained to predict. This is the &amp;ldquo;self-compression&amp;rdquo;
+effect: by baking the XML structure into the model weights during fine-tuning,
+the arithmetic coder can represent that structure in fewer bits.&lt;/p>
+&lt;p>Self-compression in filesystems isn&amp;rsquo;t a novel concept. For example, there exists the
+&lt;a href="https://docs.kernel.org/filesystems/squashfs.html">&lt;code>squashfs&lt;/code>&lt;/a> tool (created in 2002) to create R/O compressed filesystems. Squashfs compresses
+files, inodes, and directories together, not unlike what we&amp;rsquo;re doing here!&lt;/p>
+&lt;p>Under the hood, &lt;code>squashfs&lt;/code> just wraps &lt;code>gzip&lt;/code>/&lt;code>zstd&lt;/code>/your favourite compression
+algorithm. So for plain-text data, &lt;code>squashfs&lt;/code> compression stats pale in the face of &lt;code>llmfuse&lt;/code>:&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Method&lt;/th>
+&lt;th>Compressed Size&lt;/th>
+&lt;th>Notes&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>squashfs (gzip)&lt;/td>
+&lt;td>171 bytes&lt;/td>
+&lt;td>gzip-compressed file contents, inodes, directory tables&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>llmfuse (fine-tuned)&lt;/td>
+&lt;td>21 bytes&lt;/td>
+&lt;td>Arithmetic coded XML state&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>For the same filesystem tree (one directory, one 14-byte text file), llmfuse
+achieves &lt;strong>~8x better compression&lt;/strong> than squashfs (see methodology in appendix).&lt;/p>
+&lt;p>The difference comes down to &lt;code>llmencode&lt;/code> being far better than &lt;code>gzip&lt;/code> on
+text data + XML structure - especially when the model has been fine-tuned on exactly
+that structure.&lt;/p>
+&lt;h1 id="conclusion">Conclusion &lt;a href="#conclusion" class="hash">#&lt;/a>&lt;/h1>
+&lt;p>What started off as a little experiment mostly to get my hands dirty with
+training and inference evolved into a full blown &lt;a href="https://xkcd.com/356/">nerd
+snipe&lt;/a> and intellectual adventure. Thanks for making it
+this far!&lt;/p>
+&lt;p>I entirely recognize that this is a &amp;ldquo;toy&amp;rdquo;
+experiment under a very specific setup; with that said, the numbers above are pretty eye-popping, and the question I&amp;rsquo;ve been trying to answer as I write this up is: does this have any real-world potential?&lt;/p>
+&lt;p>Of course, in the short term, there&amp;rsquo;s a whole host of caveats: you need an
+LLM, likely a GPU, all your data is in the context window (which we know scales
+poorly), and this only works on text data.&lt;/p>
+&lt;p>Still, it&amp;rsquo;s intriguing to wonder whether the very engines that will likely
+dominate all &amp;ldquo;text generation&amp;rdquo; going forward can be used to compress their own
+data? Perhaps in a distant future, where running LLMs at the edge makes sense, or for specific kinds of workflows where data is read very infrequently.&lt;/p>
+&lt;p>Overall, I&amp;rsquo;m grateful to Peyton at &lt;a href="https://modal.com">Modal&lt;/a> for the compute credits. Running
+a somewhat unconventional experiment like this wouldn&amp;rsquo;t have been possible
+without full control over the training and inference code, and extremely
+tedious without the simplicity of running ML infra on Modal! It&amp;rsquo;s truly awesome
+to be able to just &lt;code>modal deploy&lt;/code> and get my own private inference endpoints,
+or just &lt;code>modal run&lt;/code> to prototype some code on the cloud.&lt;/p>
+&lt;h1 id="appendix">Appendix &lt;a href="#appendix" class="hash">#&lt;/a>&lt;/h1>
+&lt;h2 id="source-code">Source Code &lt;a href="#source-code" class="hash">#&lt;/a>&lt;/h2>
+&lt;p>All of the source code for this experiment, particularly &lt;code>llmfuse&lt;/code> and
+&lt;code>llmencode&lt;/code> are &lt;a href="https://github.com/rohangpta/llmfuse">open-sourced&lt;/a> under MIT.&lt;/p>
+&lt;p>&lt;code>llmencode&lt;/code> is abstracted into a CLI utility that you can run locally.
+Inference on 4B models is slow, but entirely possible on consumer hardware.
+I prototyped most of this code by running on a 2021 MacBook Pro, before
+productionizing on Modal.&lt;/p>
+&lt;p>A fun experiment / party trick to identify how &amp;ldquo;common&amp;rdquo; a certain
+string is in training data is to look at its &lt;code>llmencode&lt;/code> compression ratio!&lt;/p>
+&lt;h2 id="squashfs-comparison-methodology">SquashFS comparison methodology &lt;a href="#squashfs-comparison-methodology" class="hash">#&lt;/a>&lt;/h2>
+&lt;p>The raw &lt;code>.sqsh&lt;/code> file is 4096 bytes due to block alignment padding. To find the
+actual compressed size, I used &lt;code>xxd&lt;/code> to inspect the binary and found the last
+non-zero byte at offset 266 (267 bytes total). Subtracting the fixed 96-byte
+superblock header gives us 171 bytes of actual gzip-compressed content -
+everything needed to reconstruct the filesystem.&lt;/p>
+&lt;h2 id="compression-as-a-metric">Compression as a metric &lt;a href="#compression-as-a-metric" class="hash">#&lt;/a>&lt;/h2>
+&lt;p>It&amp;rsquo;s equally interesting to think about compression as a metric. An angle I&amp;rsquo;d
+considered is doing some kind of RL on the arithmetic coded compression number itself.&lt;/p>
+&lt;p>Is that simply equivalent to the pre-training objective (due to the prediction-compression duality)? Or does the &amp;ldquo;sequence-level&amp;rdquo; objective add something more&amp;hellip; interesting to the mix. Please reach out if you have thoughts!&lt;/p></description><author>ronalds.vilcins@gmail.com (Ronalds Vilcins)</author><guid>https://grohan.co/2025/11/25/llmfuse/</guid><pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate></item><item><title>Technical Debt is Entropy In Software</title><link>https://grohan.co/2024/12/27/entropy/</link><description>&lt;h1 id="entropy">Entropy &lt;a href="#entropy" class="hash">#&lt;/a>&lt;/h1>
 &lt;p>Entropy is the ultimate boss battle [1]. As the reason why ice melts, why tires
 burst, and why ink diffuses &amp;ndash; thermodynamic entropy is a fact of the
 physical world, sharply following the arrow of time [2].&lt;/p>
