@@ -1,331 +1,370 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Rohan Gupta</title><description>Rohan Gupta's personal website</description><link>https://grohan.co</link><language>en</language><copyright>Copyright 2024, Ronalds Vilcins</copyright><lastBuildDate>Fri, 27 Dec 2024 00:00:00 +0000</lastBuildDate><generator>Hugo - gohugo.io</generator><docs>http://cyber.harvard.edu/rss/rss.html</docs><atom:link href="https://ronaldsvilcins.com/atom.xml" rel="self" type="application/atom+xml"/><item><title>Technical Debt is Entropy In Software</title><link>https://grohan.co/2024/12/27/entropy/</link><description>&lt;h1 id="entropy">Entropy &lt;a href="#entropy" class="hash">#&lt;/a>&lt;/h1>
-&lt;p>Entropy is the ultimate boss battle [1]. As the reason why ice melts, why tires
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    
+    <title>Rohan Gupta</title>
+    <description>Rohan Gupta&#39;s personal website</description>
+    <link>https://grohan.co</link>
+    
+    <language>en</language>
+    <copyright>Copyright 2025, Ronalds Vilcins</copyright>
+    <lastBuildDate>Fri, 21 Feb 2025 00:00:00 +0000</lastBuildDate>
+    <generator>Hugo - gohugo.io</generator>
+    <docs>http://cyber.harvard.edu/rss/rss.html</docs>
+    <atom:link href="https://ronaldsvilcins.com/atom.xml" rel="self" type="application/atom+xml"/>
+    
+    <item>
+      <title>Agentic Search and Self-Verification</title>
+      <link>https://grohan.co/2025/02/21/agentic-search-and-self-verification/</link>
+      <description>&lt;h1 id=&#34;agentic-search-and-self-verification&#34;&gt;Agentic Search and Self-Verification &lt;a href=&#34;#agentic-search-and-self-verification&#34; class=&#34;hash&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;In the rapidly evolving landscape of artificial intelligence, two concepts have emerged as critical pillars in the development of more capable and reliable AI systems: agentic search and self-verification. These interconnected principles represent a significant shift in how we approach AI development, moving from purely reactive systems to more proactive, self-aware agents.&lt;/p&gt;
+&lt;p&gt;Agentic search refers to an AI system&amp;rsquo;s ability to independently explore and navigate problem spaces, making decisions about what information to seek and how to process it. Self-verification, on the other hand, encompasses the system&amp;rsquo;s capacity to evaluate its own outputs, understanding, and decision-making processes. Together, these capabilities form the foundation of what we might call &amp;ldquo;responsible AI&amp;rdquo; - systems that not only perform tasks but do so with an awareness of their own limitations and the ability to verify their work.&lt;/p&gt;
+</description>
+      <author>ronalds.vilcins@gmail.com (Ronalds Vilcins)</author>
+      <guid>https://grohan.co/2025/02/21/agentic-search-and-self-verification/</guid>
+      <pubDate>Fri, 21 Feb 2025 00:00:00 +0000</pubDate>
+    </item>
+    
+    <item>
+      <title>Technical Debt is Entropy In Software</title>
+      <link>https://grohan.co/2024/12/27/entropy/</link>
+      <description>&lt;h1 id=&#34;entropy&#34;&gt;Entropy &lt;a href=&#34;#entropy&#34; class=&#34;hash&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;Entropy is the ultimate boss battle [1]. As the reason why ice melts, why tires
 burst, and why ink diffuses &amp;ndash; thermodynamic entropy is a fact of the
-physical world, sharply following the arrow of time [2].&lt;/p>
-&lt;p>The Second Law of Thermodynamics states&lt;/p>
-&lt;blockquote>
-&lt;p>A system&amp;rsquo;s entropy will either increase or remain the same over time, unless outside energy is added&lt;/p>
-&lt;/blockquote>
-&lt;p>There&amp;rsquo;s something about inevitability that I think is arcane and
-fascinating. Especially when you can see it unfold in front of you - my
-favourite visualisation is below (thanks Gemini)&lt;/p>
-&lt;center>&lt;img src =/images/diffusion.png width="550" height="400"/>&lt;/center>
-&lt;p>This picture displays the three stages of entropy:&lt;/p>
-&lt;ul>
-&lt;li>&lt;strong>Infancy&lt;/strong>: when the ink enters the water&lt;/li>
-&lt;li>&lt;strong>Expansion&lt;/strong>: when the ink diffuses through water&lt;/li>
-&lt;li>&lt;strong>Maturity&lt;/strong>: when the ink and water have fully merged&lt;/li>
-&lt;/ul>
-&lt;p>So, how does entropy grow? Academics and practicioners alike believe that
-entropy follows an S-curve [4], with its three stages likened to those of ink diffusing in water.&lt;/p>
-&lt;center>&lt;img src =/images/scurve.png width="550" height="400"/> &lt;/center>
-&lt;p>This is strikingly similar to the business lifecycle curve above! Indeed, prior
-art agrees that &lt;strong>business and technology lifecycles are overlayed entropy curves&lt;/strong>
-[5]. This formulation is especially important in context of my broader argument.&lt;/p>
-&lt;h3 id="interlude-statistical-entropy-and-complexity">Interlude: statistical entropy and complexity. &lt;a href="#interlude-statistical-entropy-and-complexity" class="hash">#&lt;/a>&lt;/h3>
-&lt;p>In information theory, Shannon&amp;rsquo;s entropy is, for a random
-variable \( X \) distributed according to \( p: (x \in \mathcal{X})
-\rightarrow [0, 1] \):&lt;/p>
-&lt;p>$$ H(X) = - \sum_{x \in \mathcal{X}} p(x)\log(p(x)) $$&lt;/p>
-&lt;p>While this may look obscure at first, the formulation begets two properties:&lt;/p>
-&lt;ol>
-&lt;li>
-&lt;p>&lt;strong>Property 1.&lt;/strong> The number of possible states that a system can have is
+physical world, sharply following the arrow of time [2].&lt;/p&gt;
+&lt;p&gt;The Second Law of Thermodynamics states&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A system&amp;rsquo;s entropy will either increase or remain the same over time, unless outside energy is added&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;There&amp;rsquo;s something about inevitability that I think is fascinating, especially
+when you can see it unfold in front of you &amp;ndash; my
+favourite visualisation is below (thanks Gemini).&lt;/p&gt;
+&lt;center&gt;&lt;img src =/images/diffusion.png width=&#34;550&#34; height=&#34;400&#34;/&gt;&lt;/center&gt;
+&lt;p&gt;This picture displays the three stages of entropy:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Infancy&lt;/strong&gt;: when the ink enters the water&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Expansion&lt;/strong&gt;: when the ink diffuses through water&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Maturity&lt;/strong&gt;: when the ink and water have fully merged&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;So, how does entropy grow? Academics and practicioners alike believe that
+entropy follows an S-curve [4], with its three stages likened to those of ink diffusing in water.&lt;/p&gt;
+&lt;center&gt;&lt;img src =/images/scurve.png width=&#34;550&#34; height=&#34;400&#34;/&gt; &lt;/center&gt;
+&lt;p&gt;This is strikingly similar to the business lifecycle curve above! Indeed, prior
+art agrees that &lt;strong&gt;business and technology lifecycles are overlayed entropy curves&lt;/strong&gt;
+[5].&lt;/p&gt;
+&lt;p&gt;Entropy in business is largely a representation of diffusion of a
+particular product, driven by the forces of supply and demand. While entropy is
+often likened to &amp;ldquo;disorder&amp;rdquo;, I like to use &amp;ldquo;disruption&amp;rdquo; - permeation of new (ink)
+into old (water). It is neither good nor bad, simply inevitable.&lt;/p&gt;
+&lt;h2 id=&#34;properties-of-entropy&#34;&gt;Properties of Entropy &lt;a href=&#34;#properties-of-entropy&#34; class=&#34;hash&#34;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;h3 id=&#34;statistical-entropy&#34;&gt;Statistical Entropy &lt;a href=&#34;#statistical-entropy&#34; class=&#34;hash&#34;&gt;#&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Since we are talking about software and not atoms, let&amp;rsquo;s turn to information theory to
+understand the information contained in software programs.&lt;/p&gt;
+&lt;p&gt;In information theory, Shannon&amp;rsquo;s entropy is, for a random
+variable  \( X \) distributed according to \( p: (x \in \mathcal{X})
+\rightarrow [0, 1] \):&lt;/p&gt;
+&lt;p&gt;$$ H(X) = - \sum_{x \in \mathcal{X}} p(x)\log(p(x)) $$&lt;/p&gt;
+&lt;p&gt;While this may look obscure at first, the formulation begets two properties:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Property 1.&lt;/strong&gt; The number of possible states that a system can have is
 generally proportional to the total entropy in a system. A dice with 6 sides has
-more entropy than one with 4 sides.&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;strong>Property 2.&lt;/strong> Higher entropy is correlated with a higher likelihood of tail events.
+more entropy than one with 4 sides.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Property 2.&lt;/strong&gt; Higher entropy is correlated with a higher presence of tail events.
 Gaussians and exponentials are maximum entropy distributions (under
-certain statistical conditions [3]). Both exhibit fat tail properties empirically.&lt;/p>
-&lt;/li>
-&lt;/ol>
-&lt;p>Theodore Modis presents an excellent information-theoretic analysis of the relation between complexity
-and entropy. In fact, he predicted a 20-year complexity trend in 2002 [5] and followed up
-in 2022 with a conclusion validating his claim [4] (&lt;em>a Lindy trend&lt;/em> [10]).&lt;/p>
-&lt;p>His observation?&lt;/p>
-&lt;blockquote>
-&lt;p>Complexity is the time derivative of entropy. Given that entropy is an
-S-curve, complexity is normal.&lt;/p>
-&lt;p>Complexity increases until a peak and decreases after.&lt;/p>
-&lt;/blockquote>
-&lt;p>Scott Aaronson quantifies this idea with a lucid example around cream dissolving
-into coffee [6]. He likens complexity to the &amp;ldquo;interestingness&amp;rdquo; of a system, formally represented by
-Kolmogorov complexity, and empirically calculated by gzip compression of a state
-snapshot image (where state is an X-ray image of the coffee-cup).&lt;/p>
-&lt;center>&lt;img src =/images/coffee_complexity.png width="413" height="300"/>&lt;/center>
-&lt;p>The picture above represents snapshots of the coffee cup at the three phases of entropy. As the cream and coffee begin to mix, complexity increases until a maximum
-before decreasing as the mixture becomes saturated and homogeneous.&lt;/p>
-&lt;p>It is simple to see why the first and
-last image can be more easily compressed (i.e are less complex) whereas one in the
-middle image cannot.&lt;/p>
-&lt;h1 id="where-does-software-fit-into-this">Where Does Software Fit Into This? &lt;a href="#where-does-software-fit-into-this" class="hash">#&lt;/a>&lt;/h1>
-&lt;p>Let&amp;rsquo;s start by quantifying where software is today in its business lifecycle /
-entropy curve.&lt;/p>
-&lt;center>&lt;img src =/images/software_today.png width="550" height="400"/>&lt;/center>
-&lt;p>As in the graph above, I think we are around (X,Y) today.&lt;/p>
-&lt;p>Why?&lt;/p>
-&lt;ul>
-&lt;li>
-&lt;p>Software is still custom-made / productised. SaaS &amp;ldquo;exploded&amp;rdquo; but hasn&amp;rsquo;t permeated all
+certain statistical conditions [3]). Both exhibit fat tail properties
+empirically [16].&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;complexity&#34;&gt;Complexity &lt;a href=&#34;#complexity&#34; class=&#34;hash&#34;&gt;#&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Complexity is entropy&amp;rsquo;s first cousin. Formally we&amp;rsquo;ll use
+Kolmogorov complexity:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;\(K(o)\) for an object \(o\) is the length of the shortest program that produces the
+object as output.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;In other words, it measures how &amp;ldquo;compressible&amp;rdquo; something is.&lt;/p&gt;
+&lt;p&gt;Now - how does entropy relate to complexity? Modis posits the following relation [4][15]:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Complexity is the time derivative of entropy. Given that entropy is an
+S-curve, complexity is roughly normally distributed.&lt;/p&gt;
+&lt;p&gt;With time, complexity increases until a peak and decreases after.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;To see this: let&amp;rsquo;s consider Scott Aaronson&amp;rsquo;s lucid example around cream dissolving
+into coffee [6].&lt;/p&gt;
+&lt;p&gt;His research empirically calculated a complexity score using the &lt;code&gt;gzip&lt;/code&gt; compression
+file size of pictures of cream melting in the coffee.&lt;/p&gt;
+&lt;center&gt;&lt;img src =/images/coffee_complexity.png width=&#34;413&#34; height=&#34;300&#34;/&gt;&lt;/center&gt;
+&lt;p&gt;The picture above represents snapshots of the coffee cup at the three phases of entropy. As the cream and coffee begin to mix, complexity increases until a maximum
+before decreasing as the mixture becomes saturated and homogeneous.&lt;/p&gt;
+&lt;p&gt;It is simple to see why the first and
+last image can be more easily compressed (i.e are less complex) compared to the
+image in the middle.&lt;/p&gt;
+&lt;h1 id=&#34;where-does-software-fit-into-this&#34;&gt;Where Does Software Fit Into This? &lt;a href=&#34;#where-does-software-fit-into-this&#34; class=&#34;hash&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;Let&amp;rsquo;s start by quantifying where software is today in its business lifecycle /
+entropy curve.&lt;/p&gt;
+&lt;center&gt;&lt;img src =/images/software_today.png width=&#34;550&#34; height=&#34;400&#34;/&gt;&lt;/center&gt;
+&lt;p&gt;As in the graph above, I think we are around (X,Y) today.&lt;/p&gt;
+&lt;p&gt;Why?&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Software is still custom-made / productised. SaaS &amp;ldquo;exploded&amp;rdquo; but hasn&amp;rsquo;t permeated all
 industries. Digital modernisation efforts continue to be in higher
 demand than available supply, indicating superlinear business growth or relative
-convexity.&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>Software complexity is close to peaking. This one is bolstered by the
-cloud driving successful commoditisation of infrastructure. We now have
-the ability to &lt;em>run software&lt;/em> cheaply and easily.&lt;/p>
-&lt;p>What&amp;rsquo;s left is to reduce the complexity of
+convexity &amp;ndash; &lt;em&gt;we are close to the central inflection point&lt;/em&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Software complexity is close to peaking. For starters, the
+cloud has driven the successful commoditisation of infrastructure. We now have
+the ability to &lt;em&gt;run software&lt;/em&gt; cheaply and easily.&lt;/p&gt;
+&lt;p&gt;What&amp;rsquo;s left is to reduce the complexity of
 the specification of software (language and layers of
-abstraction) that runs on said infrastructure. &lt;em>Prediction&lt;/em>: LLMs are statistical
-program compression tools [12] and will do exactly this.&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;h1 id="tech-debt-as-complexity">Tech Debt as Complexity &lt;a href="#tech-debt-as-complexity" class="hash">#&lt;/a>&lt;/h1>
-&lt;p>The simplest description of tech debt that I&amp;rsquo;ve been able to come up with has
-two major manifestations.&lt;/p>
-&lt;h3 id="complexity-via-obscurity">Complexity via obscurity &lt;a href="#complexity-via-obscurity" class="hash">#&lt;/a>&lt;/h3>
-&lt;p>Poorly designed software abstractions (obscurity) generates more complexity - &amp;ldquo;garbage in, garbage
-out&amp;rdquo;.&lt;/p>
-&lt;p>Technological modernisation is about iteration speed to a desired solution - and
-debt is precisely the maintenance-related roadblocks in the way of doing so /
-resistance to change.&lt;/p>
-&lt;p>The core issue with &amp;ldquo;obscure&amp;rdquo; abstractions is that they are uncompressed representations of state. That is, they encode more than they should.
+abstraction) that runs on said infrastructure. &lt;em&gt;Prediction&lt;/em&gt;: LLMs are statistical
+program compression tools [12] and will do exactly this.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;tech-debt-as-complexity&#34;&gt;Tech Debt as Complexity &lt;a href=&#34;#tech-debt-as-complexity&#34; class=&#34;hash&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;For a particular business, technological modernisation is largely bottlenecked by iteration speed to a desired solution.
+I view tech debt as the maintenance and complexity related resistance to change that
+causes this bottleneck.&lt;/p&gt;
+&lt;p&gt;To be clear, every problem that software solves has some theoretical baseline level of
+&amp;ldquo;complexity&amp;rdquo; needed to meet its specification. Technical debt is simply the add-on
+difference in complexity between the ideal and real world solutions.&lt;/p&gt;
+&lt;p&gt;So what causes complexity? The sources of complexity that I&amp;rsquo;ve found to
+be the most concise yet accurate are below [7]:&lt;/p&gt;
+&lt;h3 id=&#34;complexity-via-obscurity&#34;&gt;Complexity via obscurity &lt;a href=&#34;#complexity-via-obscurity&#34; class=&#34;hash&#34;&gt;#&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Poorly designed software abstractions (obscurity) generate more complexity - &amp;ldquo;garbage in, garbage
+out&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;The core issue with &amp;ldquo;obscure&amp;rdquo; abstractions is that they are uncompressed representations of state.
 Their interfaces are inherently complex, where they should instead be
-simple and hide deep complexity [6] (example - [11])&lt;/p>
-&lt;p>This results in programs that can have far more states than they should
-(Property 1). Changing them means dealing with far more of these state transitions than you should!&lt;/p>
-&lt;h3 id="complexity-via-dense-dependency-graphs">Complexity via dense dependency graphs &lt;a href="#complexity-via-dense-dependency-graphs" class="hash">#&lt;/a>&lt;/h3>
-&lt;p>Software that depends on A LOT of other software is more prone to bugs,
-vulnerabilities, maintenance overhead, and change friction. This kind of
+simple and hide deep complexity [11].&lt;/p&gt;
+&lt;p&gt;Often times, obscurity appears due to constraints imposed on systems (&amp;ldquo;make this
+code accept XYZ data format&amp;rdquo;). Local
+optimisations lead to global API changes that introduce obscurity and state bloat
+[17]. Refactors / complexity regulation measures don&amp;rsquo;t fit into deadlines and this bloat
+almost always compounds (Property 1).&lt;/p&gt;
+&lt;h3 id=&#34;complexity-via-dense-dependency-graphs&#34;&gt;Complexity via dense dependency graphs &lt;a href=&#34;#complexity-via-dense-dependency-graphs&#34; class=&#34;hash&#34;&gt;#&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Software that depends on A LOT of other software is more prone to bugs,
+vulnerabilities and maintenance overhead. This kind of
 technical debt introduces some obscurity but also &amp;ldquo;tail-risk&amp;rdquo; around software (Property
-2).&lt;/p>
-&lt;p>The number of failures due to weaknesses
+2).&lt;/p&gt;
+&lt;p&gt;The number of failures due to weaknesses
 in the open source parts of a software supply chain increased by 650% between
-2020 and 2021 [8]. At the same time, OSS adoption grows 70% YoY [9], bringing with it
-increasingly public vulnerabilities like in &lt;code>log4j&lt;/code>, &lt;code>xz&lt;/code>, &lt;code>OpenSSH&lt;/code> etc.&lt;/p>
-&lt;p>What the entropy formula doesn&amp;rsquo;t quite capture is how this &amp;ldquo;tail-risk&amp;rdquo; can very
-often manifest as massively high-impact Black Swan events.&lt;/p>
-&lt;p>Massive cybercrimes affecting data
+2020 and 2021 [8]. At the same time, OSS adoption has been growing 70% YoY [9], bringing with it
+increasingly public vulnerabilities like in &lt;code&gt;log4j&lt;/code&gt;, &lt;code&gt;xz&lt;/code&gt;, &lt;code&gt;OpenSSH&lt;/code&gt; etc.&lt;/p&gt;
+&lt;p&gt;Dependencies can also reflect a level of &amp;ldquo;obscurity&amp;rdquo; in software that may not
+justify their added risk. Leftpad is a great example here! [18]&lt;/p&gt;
+&lt;p&gt;What isn&amp;rsquo;t captured by mere probabilities is how this &amp;ldquo;tail-risk&amp;rdquo; can
+manifest as devastatingly high-impact Black Swan events [14]: massive cybercrimes affecting data
 protection and financial security. Software outage affecting the
-global economy. We&amp;rsquo;ve all seen them play out.&lt;/p>
-&lt;h1 id="conclusion">Conclusion &lt;a href="#conclusion" class="hash">#&lt;/a>&lt;/h1>
-&lt;center>&lt;img src =/images/complexity_entropy.png width="550" height="400"/>&lt;/center>
-&lt;p>If complexity is a differential snapshot of entropy in time, cumulative tech debt
-is precisely the integral over all the complexity built up in software today.&lt;/p>
-&lt;p>Further, given we are at the peak of complexity, we are at the peak of tech debt. &lt;strong>It must go down&lt;/strong>.&lt;/p>
-&lt;p>Economically, McKinsey estimates that tech debt accounts for 40% of IT balance
+global economy. We&amp;rsquo;ve all seen them play out.&lt;/p&gt;
+&lt;h1 id=&#34;conclusion&#34;&gt;Conclusion &lt;a href=&#34;#conclusion&#34; class=&#34;hash&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;
+&lt;center&gt;&lt;img src =/images/complexity_entropy.png width=&#34;550&#34; height=&#34;400&#34;/&gt;&lt;/center&gt;
+&lt;p&gt;To recap, entropy in software tracks the expansion of software with time and complexity
+is the derivative of entropy. Due to the S-curve shape of entropy
+and thus &amp;ldquo;normal&amp;rdquo; shape of its derivative, &amp;ldquo;complexity begets
+complexity&amp;rdquo; until a certain point in time, after which complexity reduces.&lt;/p&gt;
+&lt;p&gt;I argue that due to market conditions: namely the state of SaaS as a product /
+custom-made offering and the commoditisation of infrastructure (cloud) that we are at the middle of the S-curve. i.e we are at the &lt;strong&gt;peak
+of software complexity / tech debt growth&lt;/strong&gt;. Intuitively, in the business “experimental -&amp;gt; custom -&amp;gt; product -&amp;gt; commodity” lifecycle,
+software is at the custom/product intersection, which is somewhere in the middle.&lt;/p&gt;
+&lt;p&gt;While the &lt;em&gt;total amount&lt;/em&gt; of code in the world will keep growing, in order to sustain healthy
+growth, demand for &amp;ldquo;software regulators&amp;rdquo; will rise to address growing
+maintenance and lifecycle management costs. In order to get from product to
+commodity and therefore fully permeate society, operating software needs to be
+far simpler and
+cheaper.&lt;/p&gt;
+&lt;p&gt;Economically, McKinsey estimates that tech debt accounts for 40% of IT balance
 sheets and up to 50% of developer time [13]. It shows up as a vicious cycle that
 organisations increasingly have a harder time escaping from (remember:
-complexity begets complexity).&lt;/p>
-&lt;center>&lt;img src =/images/complexity_cycle.svgz width="550" height="400"/>&lt;/center>
-&lt;p>A report on software quality in 2022 attaches a $1.5 trillion price tag
-to technical debt [8] in the form of poor quality and overly complex software. However, if you interchange loosely with &amp;ldquo;technological opportunity cost&amp;rdquo;, the reality is of-course far
-higher.&lt;/p>
-&lt;p>The total technological debt includes entirely &amp;ldquo;untapped&amp;rdquo; digital transformation in industries + the canononical &amp;ldquo;poorly tapped&amp;rdquo; form of tech debt.&lt;/p>
-&lt;p>A lot of words to say: there&amp;rsquo;s a whole lot left to do here.&lt;/p>
-&lt;h1 id="bonus-the-solution">Bonus: The Solution &lt;a href="#bonus-the-solution" class="hash">#&lt;/a>&lt;/h1>
-&lt;p>I&amp;rsquo;ve spent a lot of words talking about a problem and tying it to other
-problems. What does taming complexity look like? How do we roll the ball down
-the peak of the hill?&lt;/p>
-&lt;p>At the risk of being tongue-in-cheek,
+complexity begets complexity).&lt;/p&gt;
+&lt;center&gt;&lt;img src =/images/complexity_cycle.svgz width=&#34;550&#34; height=&#34;400&#34;/&gt;&lt;/center&gt;
+&lt;p&gt;A report on software quality in 2022 attaches a $2.4 trillion price tag
+to technical debt in the form of poor quality and overly complex software [8].
+However, if you interchange loosely with &amp;ldquo;technological opportunity cost&amp;rdquo;, the
+real business value is of-course far
+higher:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The total technological debt includes entirely &amp;ldquo;untapped&amp;rdquo; digital
+transformation in industries (??T) + the canononical &amp;ldquo;poorly tapped&amp;rdquo; form of
+tech debt (2.4T).&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;A lot of words to say: there&amp;rsquo;s a whole lot left to do here.&lt;/p&gt;
+&lt;h1 id=&#34;footnotes-and-references&#34;&gt;Footnotes and References &lt;a href=&#34;#footnotes-and-references&#34; class=&#34;hash&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;[1] &lt;a href=&#34;https://x.com/elonmusk/status/1090689205586472960&#34;&gt;https://x.com/elonmusk/status/1090689205586472960&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;[2] &lt;a href=&#34;https://en.wikipedia.org/wiki/Entropy_as_an_arrow_of_time&#34;&gt;https://en.wikipedia.org/wiki/Entropy_as_an_arrow_of_time&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;[3] &lt;a href=&#34;https://pillowlab.princeton.edu/teaching/statneuro2018/slides/notes08_infotheory.pdf&#34;&gt;https://pillowlab.princeton.edu/teaching/statneuro2018/slides/notes08_infotheory.pdf&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;[4] &lt;a href=&#34;https://arxiv.org/abs/2410.10844&#34;&gt;https://arxiv.org/abs/2410.10844&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;[5] &lt;a href=&#34;http://www.growth-dynamics.com/articles/Forecasting_Complexity.pdf&#34;&gt;http://www.growth-dynamics.com/articles/Forecasting_Complexity.pdf&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;[6] &lt;a href=&#34;https://arxiv.org/abs/1405.6903&#34;&gt;https://arxiv.org/abs/1405.6903&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;[7] &lt;a href=&#34;https://books.google.com/books/about/A_Philosophy_of_Software_Design.html?id=hkfEzgEACAAJ&amp;amp;source=kp_book_description&#34;&gt;https://books.google.com/books/about/A_Philosophy_of_Software_Design.html?id=hkfEzgEACAAJ&amp;amp;source=kp_book_description&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;[8] &lt;a href=&#34;https://www.it-cisq.org/wp-content/uploads/sites/6/2022/11/CPSQ-Report-Nov-22-2.pdf&#34;&gt;https://www.it-cisq.org/wp-content/uploads/sites/6/2022/11/CPSQ-Report-Nov-22-2.pdf&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;[9] &lt;a href=&#34;https://www.sonatype.com/blog/the-scale-of-open-source-growth-challenges-and-key-insights&#34;&gt;https://www.sonatype.com/blog/the-scale-of-open-source-growth-challenges-and-key-insights&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;[10] &lt;a href=&#34;https://en.wikipedia.org/wiki/Lindy_effect&#34;&gt;https://en.wikipedia.org/wiki/Lindy_effect&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;[11] &lt;a href=&#34;https://en.wikipedia.org/wiki/Everything_is_a_file&#34;&gt;https://en.wikipedia.org/wiki/Everything_is_a_file&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;[12] &lt;a href=&#34;https://arxiv.org/abs/2309.10668&#34;&gt;https://arxiv.org/abs/2309.10668&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;[13] &lt;a href=&#34;https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/breaking-technical-debts-vicious-cycle-to-modernize-your-business&#34;&gt;https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/breaking-technical-debts-vicious-cycle-to-modernize-your-business&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;[14] &lt;a href=&#34;https://en.wikipedia.org/wiki/Black_swan_theory&#34;&gt;https://en.wikipedia.org/wiki/Black_swan_theory&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;[15] Theodore Modis presents an excellent information-theoretic analysis of the relation between complexity
+and entropy: his claim held true over a 20 year prediction (2002-2022) [4] (&lt;em&gt;a Lindy trend&lt;/em&gt; [10]).&lt;/p&gt;
+&lt;p&gt;[16] &lt;a href=&#34;https://arxiv.org/pdf/1412.7647&#34;&gt;https://arxiv.org/pdf/1412.7647&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;[17] &lt;a href=&#34;https://www.hillelwayne.com/post/complexity-constraints/&#34;&gt;https://www.hillelwayne.com/post/complexity-constraints/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;[18] &lt;a href=&#34;https://en.wikipedia.org/wiki/Npm_left-pad_incident&#34;&gt;https://en.wikipedia.org/wiki/Npm_left-pad_incident&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;appendix-three-hard-problems&#34;&gt;Appendix: Three Hard Problems &lt;a href=&#34;#appendix-three-hard-problems&#34; class=&#34;hash&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;I&amp;rsquo;ve spent a lot of words talking about a problem and tying it to theory and predictions. What does taming complexity look like? How do we roll the ball down
+the peak of the hill?&lt;/p&gt;
+&lt;p&gt;At the risk of being tongue-in-cheek,
 I&amp;rsquo;ll start by saying I think the solution
-will involve solving the &amp;ldquo;three hardest problems&amp;rdquo; in computer science.&lt;/p>
-&lt;h3 id="naming">Naming &lt;a href="#naming" class="hash">#&lt;/a>&lt;/h3>
-&lt;p>Naming standards solve the literal naming problem. Today, standards
+will involve solving the &amp;ldquo;three hardest problems&amp;rdquo; in computer science.&lt;/p&gt;
+&lt;h3 id=&#34;naming&#34;&gt;Naming &lt;a href=&#34;#naming&#34; class=&#34;hash&#34;&gt;#&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Naming standards solve the literal naming problem. Today, standards
 work - they just suffer from enforcement and distribution problems. Because of this, the shapes of
 software abstractions haven&amp;rsquo;t been globally standardised. It&amp;rsquo;s a problem famous
-enough to warrant its own &lt;a href="https://xkcd.com/927/">obligatory XKCD&lt;/a>.&lt;/p>
-&lt;p>Because of where we are on the software S-curve, I suspect the move from product to commodity will
+enough to warrant its own &lt;a href=&#34;https://xkcd.com/927/&#34;&gt;obligatory XKCD&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Because of where we are on the software S-curve, I suspect the move from product to commodity will
 entail hiding the naming problem with higher-order abstractions. As people move
-up an abstraction layer, user-defined names will simply matter less.&lt;/p>
-&lt;h3 id="caching">Caching &lt;a href="#caching" class="hash">#&lt;/a>&lt;/h3>
-&lt;p>What&amp;rsquo;s hard about caching isn&amp;rsquo;t maintaining caching
+up an abstraction layer, user-defined names will simply matter less.&lt;/p&gt;
+&lt;h3 id=&#34;caching&#34;&gt;Caching &lt;a href=&#34;#caching&#34; class=&#34;hash&#34;&gt;#&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;What&amp;rsquo;s hard about caching isn&amp;rsquo;t maintaining caching
 infrastructure, but rather defining the correct cache key and invalidation
 policy. This isn&amp;rsquo;t impossible - it again just requires precise and
 well-defined behaviour. The CPU caches are a great success story here - they
-just needed maturity in the CPU/memory interface.&lt;/p>
-&lt;ul>
-&lt;li>With cacheability, you get reproducibility, determinism, and more general
+just needed maturity in the CPU/memory interface.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;With cacheability, you get reproducibility, determinism, and more general
 fungibility of building blocks. With fungibility of building blocks - you
-get commodity-like properties!&lt;/li>
-&lt;li>Declarative specifications of components are closely tied to cacheability -
+get commodity-like properties!&lt;/li&gt;
+&lt;li&gt;Declarative specifications of components are closely tied to cacheability -
 a statement which traces the entire history of software infrastructure
-growth and commoditisation (Kubernetes, Docker, Terraform, Nix, Bazel etc).&lt;/li>
-&lt;/ul>
-&lt;h3 id="off-by-one-errors">Off by one errors &lt;a href="#off-by-one-errors" class="hash">#&lt;/a>&lt;/h3>
-&lt;p>These simply represent human hallucinations. Execution
-driven feedback. i.e unit test cases encapsulating abstractions &amp;ldquo;solve&amp;rdquo; this well.&lt;/p>
-&lt;h3 id="prove-it">Prove it? &lt;a href="#prove-it" class="hash">#&lt;/a>&lt;/h3>
-&lt;p>I won&amp;rsquo;t elaborate too much on &amp;ldquo;solutions&amp;rdquo; since I have various
-hypotheses-in-testing that need iteration (as opposed to more ideation).&lt;/p>
-&lt;p>Reach out to me if these ideas sound interesting to you, and let&amp;rsquo;s iterate together!&lt;/p>
-&lt;h1 id="footnotes-and-references">Footnotes and references &lt;a href="#footnotes-and-references" class="hash">#&lt;/a>&lt;/h1>
-&lt;p>[1] &lt;a href="https://x.com/elonmusk/status/1090689205586472960">https://x.com/elonmusk/status/1090689205586472960&lt;/a>&lt;/p>
-&lt;p>[2] &lt;a href="https://en.wikipedia.org/wiki/Entropy_as_an_arrow_of_time">https://en.wikipedia.org/wiki/Entropy_as_an_arrow_of_time&lt;/a>&lt;/p>
-&lt;p>[3] &lt;a href="https://pillowlab.princeton.edu/teaching/statneuro2018/slides/notes08_infotheory.pdf">https://pillowlab.princeton.edu/teaching/statneuro2018/slides/notes08_infotheory.pdf&lt;/a>&lt;/p>
-&lt;p>[4] &lt;a href="https://arxiv.org/abs/2410.10844">https://arxiv.org/abs/2410.10844&lt;/a>&lt;/p>
-&lt;p>[5] &lt;a href="http://www.growth-dynamics.com/articles/Forecasting_Complexity.pdf">http://www.growth-dynamics.com/articles/Forecasting_Complexity.pdf&lt;/a>&lt;/p>
-&lt;p>[6] &lt;a href="https://arxiv.org/abs/1405.6903">https://arxiv.org/abs/1405.6903&lt;/a>&lt;/p>
-&lt;p>[7] &lt;a href="https://books.google.com/books/about/A_Philosophy_of_Software_Design.html?id=hkfEzgEACAAJ&amp;amp;source=kp_book_description">https://books.google.com/books/about/A_Philosophy_of_Software_Design.html?id=hkfEzgEACAAJ&amp;amp;source=kp_book_description&lt;/a>&lt;/p>
-&lt;p>[8] &lt;a href="https://www.it-cisq.org/wp-content/uploads/sites/6/2022/11/CPSQ-Report-Nov-22-2.pdf">https://www.it-cisq.org/wp-content/uploads/sites/6/2022/11/CPSQ-Report-Nov-22-2.pdf&lt;/a>&lt;/p>
-&lt;p>[9] &lt;a href="https://www.sonatype.com/blog/the-scale-of-open-source-growth-challenges-and-key-insights">https://www.sonatype.com/blog/the-scale-of-open-source-growth-challenges-and-key-insights&lt;/a>&lt;/p>
-&lt;p>[10] &lt;a href="https://en.wikipedia.org/wiki/Lindy_effect">https://en.wikipedia.org/wiki/Lindy_effect&lt;/a>&lt;/p>
-&lt;p>[11] &lt;a href="https://en.wikipedia.org/wiki/Everything_is_a_file">https://en.wikipedia.org/wiki/Everything_is_a_file&lt;/a>&lt;/p>
-&lt;p>[12] &lt;a href="https://arxiv.org/abs/2309.10668">https://arxiv.org/abs/2309.10668&lt;/a>&lt;/p>
-&lt;p>[13] &lt;a href="https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/breaking-technical-debts-vicious-cycle-to-modernize-your-business">https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/breaking-technical-debts-vicious-cycle-to-modernize-your-business&lt;/a>&lt;/p></description><author>ronalds.vilcins@gmail.com (Ronalds Vilcins)</author><guid>https://grohan.co/2024/12/27/entropy/</guid><pubDate>Fri, 27 Dec 2024 00:00:00 +0000</pubDate></item><item><title>Halfway There Pt. 2</title><link>https://grohan.co/2024/07/08/alltheway/</link><description>&lt;p>Writing this blog post marks the first time I&amp;rsquo;ve opened up Emacs in a long
-time. It feels fitting that an end of college post is where I start - but be
-warned there&amp;rsquo;s a lot of excessively massaged thought about to spill out in the form
-of rusty writing.&lt;/p>
-&lt;h1 id="college-is-primarily-a-social-experience">College is primarily a social experience &lt;a href="#college-is-primarily-a-social-experience" class="hash">#&lt;/a>&lt;/h1>
-&lt;p>Here&amp;rsquo;s a few interesting phenomenon I observed about myself:&lt;/p>
-&lt;ul>
-&lt;li>I&amp;rsquo;m the weighted average of my closest friends. My interests, sense of humour,
-lifestyle, and views are strongly all influenced by the company I keep - whether
-I like it or not.&lt;/li>
-&lt;li>The marginal value add of &lt;em>any&lt;/em> of my friends has been far greater
-than that of any class I have ever taken.&lt;/li>
-&lt;li>The marginal value add of ~10 people I met in college has been about 80% the value
-add of college itself.&lt;/li>
-&lt;/ul>
-&lt;p>An older person recently remarked to me that his college message group is the
-most active group he&amp;rsquo;s a part of. College friendships are sticky!&lt;/p>
-&lt;p>Why? Incentives are pure in college. People aren&amp;rsquo;t looking to just shake your hand,
-sign a paper, and make some money. Everyone&amp;rsquo;s thrown into a
-chaotic, mixed bag environment; most are simply trying to survive - and so they&amp;rsquo;re
-just looking for companionship.&lt;/p>
-&lt;ul>
-&lt;li>&lt;input disabled="" type="checkbox"> This works, because in college:&lt;/li>
-&lt;/ul>
-&lt;ul>
-&lt;li>you&amp;rsquo;re the freest you ever will be&lt;/li>
-&lt;li>you&amp;rsquo;re the most likely to have a fresh start&lt;/li>
-&lt;li>you&amp;rsquo;re the most likely to meet your lifelong
-friends (and partner!)&lt;/li>
-&lt;/ul>
-&lt;p>Your brain is simply the most plastic it will ever be. And forming long lasting social
-relationships is highly contingent on this plasticity.&lt;/p>
-&lt;p>So, how would you maximise your dwindling years of heightened neuroplasticity? I like to think
-the answer is working backward - find the &amp;lsquo;average&amp;rsquo; you want to be, and then find company that
-averages out to that value.&lt;/p>
-&lt;h1 id="chores-and-bores">Chores and bores &lt;a href="#chores-and-bores" class="hash">#&lt;/a>&lt;/h1>
-&lt;p>Years spent playing videogames has got me obsessing over optimising
-things, which these days mostly manifests in nitpicking over how I spend my time.&lt;/p>
-&lt;p>Simply put I believe it&amp;rsquo;s significantly more valuable to maximise on a select
-few axes in life that provide outsized returns on time investment - activities where
-the graph of return on time spent kind of looks like this:&lt;/p>
-&lt;img src =/images/time_return.png width="600" height="500"/>
-&lt;p>So, maximising a few daily priorities is optimial, and diversifying your time portfolio is decidedly not.&lt;/p>
-&lt;p>Notably, the minimisation comes in from the observation that time spent on
-everything that does not scale superlinearly should be minimized! The return on
-investment for e.g. cleaning your room for 10 hours is marginally more than just
-10 minutes.&lt;/p>
-&lt;p>But as I&amp;rsquo;ve recently found out this definition misses some subtlety associated
-with &amp;ldquo;the real world&amp;rdquo;.&lt;/p>
-&lt;p>Layer 8 OSI.&lt;/p>
-&lt;p>Outsized returns&lt;/p>
-&lt;p>Balance&lt;/p>
-&lt;p>Explosion Theory. What the fuck is this explosion theory?&lt;/p></description><author>ronalds.vilcins@gmail.com (Ronalds Vilcins)</author><guid>https://grohan.co/2024/07/08/alltheway/</guid><pubDate>Mon, 08 Jul 2024 00:00:00 +0000</pubDate></item><item><title>Factorials &amp; Fun with Vim</title><link>https://grohan.co/2023/08/10/vim/</link><description>&lt;p>I recently hit a somewhat important milestone in my life: one year as a Vim
+growth and commoditisation (Kubernetes, Docker, Terraform, Nix, Bazel etc).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;off-by-one-errors&#34;&gt;Off by one errors &lt;a href=&#34;#off-by-one-errors&#34; class=&#34;hash&#34;&gt;#&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;These simply represent human hallucinations. Execution
+driven feedback. i.e unit test cases encapsulating abstractions &amp;ldquo;solve&amp;rdquo; this well.&lt;/p&gt;
+&lt;h3 id=&#34;prove-it&#34;&gt;Prove it? &lt;a href=&#34;#prove-it&#34; class=&#34;hash&#34;&gt;#&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;I won&amp;rsquo;t elaborate too much on &amp;ldquo;solutions&amp;rdquo; since I have various
+hypotheses-in-testing that need iteration (as opposed to more ideation).&lt;/p&gt;
+&lt;p&gt;If you made it this far, clearly some of this was interesting to you. Let&amp;rsquo;s chat! &lt;a href=&#34;mailto:rohangupta883@gmail.com&#34;&gt;Email&lt;/a&gt; &lt;a href=&#34;https://x.com/rohangupta_&#34;&gt;X&lt;/a&gt;&lt;/p&gt;
+</description>
+      <author>ronalds.vilcins@gmail.com (Ronalds Vilcins)</author>
+      <guid>https://grohan.co/2024/12/27/entropy/</guid>
+      <pubDate>Fri, 27 Dec 2024 00:00:00 +0000</pubDate>
+    </item>
+    
+    <item>
+      <title>Factorials &amp; Fun with Vim</title>
+      <link>https://grohan.co/2023/08/10/vim/</link>
+      <description>&lt;p&gt;I recently hit a somewhat important milestone in my life: one year as a Vim
 user. Despite its steep learning curve, I used to think that mastering Vim
 was mostly about habit formation. I swore by the
 cheatsheets and believed I would be golden. After all, a
-text editor couldn&amp;rsquo;t be too terribly complex, right?&lt;/p>
-&lt;p>However, I soon realised how &lt;em>little&lt;/em> I knew about Vim and how much there
+text editor couldn&amp;rsquo;t be too terribly complex, right?&lt;/p&gt;
+&lt;p&gt;However, I soon realised how &lt;em&gt;little&lt;/em&gt; I knew about Vim and how much there
 really was to know! In writing this post, I&amp;rsquo;d like to demonstrate (by
 way of example) some of
 the features of Vim that I found interesting; this is by no means a
 comprehensive guide to Vim&amp;rsquo;s capabilities (I would be lying if I said I knew half of what Vim
-has to offer), but perhaps a newfound &lt;a href="https://xkcd.com/378/">taste of power&lt;/a>
-for the green, fresh-off-VS Code individual looking to dabble with the dark arts.&lt;/p>
-&lt;h1 id="computing-factorials">Computing Factorials &lt;a href="#computing-factorials" class="hash">#&lt;/a>&lt;/h1>
-&lt;p>This post has a simple goal: computing the factorial. A classic exercise for any
+has to offer), but perhaps a newfound &lt;a href=&#34;https://xkcd.com/378/&#34;&gt;taste of power&lt;/a&gt;
+for the green, fresh-off-VS Code individual looking to dabble with the dark arts.&lt;/p&gt;
+&lt;h1 id=&#34;computing-factorials&#34;&gt;Computing Factorials &lt;a href=&#34;#computing-factorials&#34; class=&#34;hash&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;This post has a simple goal: computing the factorial. A classic exercise for any
 new programmer &amp;ndash; simple to understand, but broad in terms of concepts covered.
-More formally, we&amp;rsquo;ll define our problem as writing a Vim routine that takes an input (ex. 5!) and spits out the factorial (120 in our example).&lt;/p>
-&lt;p>As a preface, I&amp;rsquo;ll be referencing a variety of Vim features in this post, but I&amp;rsquo;m explicitly choosing not to explain their usage in detail. Instead, I&amp;rsquo;ve tried to link resources that explain syntax and functionality better than I can. This is not a tutorial as much as it is a showcase.&lt;/p>
-&lt;h2 id="state-transitions-and-math">State Transitions and Math &lt;a href="#state-transitions-and-math" class="hash">#&lt;/a>&lt;/h2>
-&lt;p>To break our problem down a bit, we need a way to multiply (and decrement) numbers in Vim, store the results somewhere, and then repeat that process N times. Sounds simple enough?&lt;/p>
-&lt;p>Thankfully, we don&amp;rsquo;t have to implement multiplication from scratch. Vim&amp;rsquo;s got us covered here with the &lt;a href="https://stackoverflow.com/questions/7027741/what-is-the-purpose-of-the-expression-register">expression register&lt;/a>, noted by &amp;ldquo;=&amp;rdquo;. You can access this in insert mode using &lt;code>&amp;lt;C-r&amp;gt;=&lt;/code> and enter any expression you&amp;rsquo;d like. The expression register is clever enough to do basic math operations (addition, subtraction, multiplication, division), but not the factorial &amp;ndash; unfortunately
-our life isn&amp;rsquo;t &lt;em>that&lt;/em> easy.&lt;/p>
-&lt;p>As an example, you could enter insert mode and input &lt;code>&amp;lt;C-r&amp;gt;=10*7&lt;/code> and the text under your cursor will be filled with 70, neat enough for simple calculations on the fly.&lt;/p>
-&lt;p>So we&amp;rsquo;ve got a way to multiply numbers, now we need to do this recursively as
+More formally, we&amp;rsquo;ll define our problem as writing a Vim routine that takes an input (ex. 5!) and spits out the factorial (120 in our example).&lt;/p&gt;
+&lt;p&gt;As a preface, I&amp;rsquo;ll be referencing a variety of Vim features in this post, but I&amp;rsquo;m explicitly choosing not to explain their usage in detail. Instead, I&amp;rsquo;ve tried to link resources that explain syntax and functionality better than I can. This is not a tutorial as much as it is a showcase.&lt;/p&gt;
+&lt;h2 id=&#34;state-transitions-and-math&#34;&gt;State Transitions and Math &lt;a href=&#34;#state-transitions-and-math&#34; class=&#34;hash&#34;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;To break our problem down a bit, we need a way to multiply (and decrement) numbers in Vim, store the results somewhere, and then repeat that process N times. Sounds simple enough?&lt;/p&gt;
+&lt;p&gt;Thankfully, we don&amp;rsquo;t have to implement multiplication from scratch. Vim&amp;rsquo;s got us covered here with the &lt;a href=&#34;https://stackoverflow.com/questions/7027741/what-is-the-purpose-of-the-expression-register&#34;&gt;expression register&lt;/a&gt;, noted by &amp;ldquo;=&amp;rdquo;. You can access this in insert mode using &lt;code&gt;&amp;lt;C-r&amp;gt;=&lt;/code&gt; and enter any expression you&amp;rsquo;d like. The expression register is clever enough to do basic math operations (addition, subtraction, multiplication, division), but not the factorial &amp;ndash; unfortunately
+our life isn&amp;rsquo;t &lt;em&gt;that&lt;/em&gt; easy.&lt;/p&gt;
+&lt;p&gt;As an example, you could enter insert mode and input &lt;code&gt;&amp;lt;C-r&amp;gt;=10*7&lt;/code&gt; and the text under your cursor will be filled with 70, neat enough for simple calculations on the fly.&lt;/p&gt;
+&lt;p&gt;So we&amp;rsquo;ve got a way to multiply numbers, now we need to do this recursively as
 well as store intermediate state somewhere. Let&amp;rsquo;s tackle the state problem
 first; for the sake of demonstration, we&amp;rsquo;ll do the most naive thing I can think
-of to store our intermediate state: write to text.&lt;/p>
-&lt;p>Consider a program with the following states&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>7!
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>6!7
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>5!42
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>4!210
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>5040
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>The contents after the ! store the intermediate state of the program, while leaving the contents before valid for recursion. We now effectively have program memory equal to the size of the text buffer we&amp;rsquo;re working with!&lt;/p>
-&lt;p>With our states defined, we&amp;rsquo;ve now got to think about how exactly we transition between these states. This is where we can introduce the Vim &lt;a href="https://vim.fandom.com/wiki/Search_and_replace">substitute&lt;/a> command, which matches against patterns and replaces them according to a set of rules.&lt;/p>
-&lt;p>The command below matches on a number &lt;code>a&lt;/code> followed by ! and replaces it with &lt;code>(a-1)!a&lt;/code>. This is our base case for the recursion. We use the &lt;code>.&lt;/code> operator to concatenate our expressions (using the expression register) together. We&amp;rsquo;re also able to use &lt;code>submatch(0)&lt;/code> which simply matches against everything captured.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>:s/\d\+!/\=submatch(0) - 1 . &amp;#34;!&amp;#34; . submatch(0)/
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Next, we need our &amp;ldquo;recursive case&amp;rdquo;, matching on &lt;code>a!b&lt;/code> and replacing with &lt;code>a-1!b*a&lt;/code>. Note the introduction of capturing groups below! Previously, we only matched on one set of characters but now we have 2 distinct operations, which is also why we use indices 1 and 2 for &lt;code>submatch&lt;/code>.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>:s/\(\d\+\)!\(\d\+\)/\=submatch(1) - 1 . &amp;#34;!&amp;#34; . submatch(1) \* submatch(2)/
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Fantastic! This will take 6!7 and map it to 5!42, and so on.&lt;/p>
-&lt;h2 id="orchestration">Orchestration &lt;a href="#orchestration" class="hash">#&lt;/a>&lt;/h2>
-&lt;p>We&amp;rsquo;ve got all the state transformations we need now, but we still need a way to somehow orchestrate them together in a single command. This includes finding a way to programmatically recurse on our substitution expression a variable number of times. Sounds like a lot, but Vim&amp;rsquo;s again got us covered with an idiomatic tool: &lt;a href="https://vim.fandom.com/wiki/Macros">the macro&lt;/a>, which is essentially a way to record sequences of edits and apply them in one shot.&lt;/p>
-&lt;p>Our script now looks like this (we record the macro in the &lt;code>@b&lt;/code> register):&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>V
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>:s/\d\+!/\=submatch(0) - 1 . &amp;#34;!&amp;#34; . submatch(0)/
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>qb
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>V
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>:s/\(\d\+\)!\(\d\+\)/\=submatch(1) - 1 . &amp;#34;!&amp;#34; . submatch(1) \* submatch(2)/
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>q
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Nearly done, now all we need is a way to find the number of times to execute the macro. Until now, we&amp;rsquo;ve been on a purist edit-only streak, but let&amp;rsquo;s instead introduce some &lt;em>real&lt;/em> programming concepts (variables!?).&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>let i = matchstr(getline(&amp;#39;.&amp;#39;), &amp;#39;\d\+&amp;#39;)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>execute &amp;#34;normal! &amp;#34; . i . &amp;#34;@b&amp;#34;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>These two lines will execute our macro &lt;code>i&lt;/code> times, where &lt;code>i&lt;/code> is simply the value of the number we want to compute the factorial of.&lt;/p>
-&lt;p>Finally, this will leave us with 1!5040 (in the case of 7!). We need to perform just a bit of cleanup, since we have some extra information in the line (corresponding to our state), which we can do with the following substitution logic:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>:s/.\*!\(\d\+\)/\1/
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>or alternatively, using &lt;a href="https://vim.fandom.com/wiki/Power_of_g">globals&lt;/a> (note the use of the Vim exclusive look-ahead &lt;code>\ze&lt;/code>)&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>:g/.\*!\ze/normal! df!
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>And that&amp;rsquo;s it! Combining all of these expressions together gives us a general factorial machine.&lt;/p>
-&lt;p>&lt;strong>Note&lt;/strong>: I&amp;rsquo;m certainly aware of neater/shorter/better ways to do the same thing
+of to store our intermediate state: write to text.&lt;/p&gt;
+&lt;p&gt;Consider a program with the following states&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;7!
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;6!7
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;5!42
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;4!210
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;5040
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The contents after the ! store the intermediate state of the program, while leaving the contents before valid for recursion. We now effectively have program memory equal to the size of the text buffer we&amp;rsquo;re working with!&lt;/p&gt;
+&lt;p&gt;With our states defined, we&amp;rsquo;ve now got to think about how exactly we transition between these states. This is where we can introduce the Vim &lt;a href=&#34;https://vim.fandom.com/wiki/Search_and_replace&#34;&gt;substitute&lt;/a&gt; command, which matches against patterns and replaces them according to a set of rules.&lt;/p&gt;
+&lt;p&gt;The command below matches on a number &lt;code&gt;a&lt;/code&gt; followed by ! and replaces it with &lt;code&gt;(a-1)!a&lt;/code&gt;. This is our base case for the recursion. We use the &lt;code&gt;.&lt;/code&gt; operator to concatenate our expressions (using the expression register) together. We&amp;rsquo;re also able to use &lt;code&gt;submatch(0)&lt;/code&gt; which simply matches against everything captured.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;:s/\d\+!/\=submatch(0) - 1 . &amp;#34;!&amp;#34; . submatch(0)/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Next, we need our &amp;ldquo;recursive case&amp;rdquo;, matching on &lt;code&gt;a!b&lt;/code&gt; and replacing with &lt;code&gt;a-1!b*a&lt;/code&gt;. Note the introduction of capturing groups below! Previously, we only matched on one set of characters but now we have 2 distinct operations, which is also why we use indices 1 and 2 for &lt;code&gt;submatch&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;:s/\(\d\+\)!\(\d\+\)/\=submatch(1) - 1 . &amp;#34;!&amp;#34; . submatch(1) \* submatch(2)/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Fantastic! This will take 6!7 and map it to 5!42, and so on.&lt;/p&gt;
+&lt;h2 id=&#34;orchestration&#34;&gt;Orchestration &lt;a href=&#34;#orchestration&#34; class=&#34;hash&#34;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;We&amp;rsquo;ve got all the state transformations we need now, but we still need a way to somehow orchestrate them together in a single command. This includes finding a way to programmatically recurse on our substitution expression a variable number of times. Sounds like a lot, but Vim&amp;rsquo;s again got us covered with an idiomatic tool: &lt;a href=&#34;https://vim.fandom.com/wiki/Macros&#34;&gt;the macro&lt;/a&gt;, which is essentially a way to record sequences of edits and apply them in one shot.&lt;/p&gt;
+&lt;p&gt;Our script now looks like this (we record the macro in the &lt;code&gt;@b&lt;/code&gt; register):&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;V
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;:s/\d\+!/\=submatch(0) - 1 . &amp;#34;!&amp;#34; . submatch(0)/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;qb
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;V
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;:s/\(\d\+\)!\(\d\+\)/\=submatch(1) - 1 . &amp;#34;!&amp;#34; . submatch(1) \* submatch(2)/
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;q
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Nearly done, now all we need is a way to find the number of times to execute the macro. Until now, we&amp;rsquo;ve been on a purist edit-only streak, but let&amp;rsquo;s instead introduce some &lt;em&gt;real&lt;/em&gt; programming concepts (variables!?).&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;let i = matchstr(getline(&amp;#39;.&amp;#39;), &amp;#39;\d\+&amp;#39;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;execute &amp;#34;normal! &amp;#34; . i . &amp;#34;@b&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;These two lines will execute our macro &lt;code&gt;i&lt;/code&gt; times, where &lt;code&gt;i&lt;/code&gt; is simply the value of the number we want to compute the factorial of.&lt;/p&gt;
+&lt;p&gt;Finally, this will leave us with 1!5040 (in the case of 7!). We need to perform just a bit of cleanup, since we have some extra information in the line (corresponding to our state), which we can do with the following substitution logic:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;:s/.\*!\(\d\+\)/\1/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;or alternatively, using &lt;a href=&#34;https://vim.fandom.com/wiki/Power_of_g&#34;&gt;globals&lt;/a&gt; (note the use of the Vim exclusive look-ahead &lt;code&gt;\ze&lt;/code&gt;)&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;:g/.\*!\ze/normal! df!
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;And that&amp;rsquo;s it! Combining all of these expressions together gives us a general factorial machine.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: I&amp;rsquo;m certainly aware of neater/shorter/better ways to do the same thing
 but I wanted to go through as many different &amp;ldquo;Vim trix&amp;rdquo; as I could in a post. If
-you&amp;rsquo;re looking to optimise for neatness and flex your Vim muscles, you might want to check out &lt;a href="https://vimgolf.com">Vim Golf&lt;/a>. I&amp;rsquo;m convinced some of the folks on there are not human.&lt;/p>
-&lt;h2 id="means-to-an-end">Means to an End &lt;a href="#means-to-an-end" class="hash">#&lt;/a>&lt;/h2>
-&lt;p>The purpose of this post is not to encourage the reader to leave
+you&amp;rsquo;re looking to optimise for neatness and flex your Vim muscles, you might want to check out &lt;a href=&#34;https://vimgolf.com&#34;&gt;Vim Golf&lt;/a&gt;. I&amp;rsquo;m convinced some of the folks on there are not human.&lt;/p&gt;
+&lt;h2 id=&#34;means-to-an-end&#34;&gt;Means to an End &lt;a href=&#34;#means-to-an-end&#34; class=&#34;hash&#34;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;The purpose of this post is not to encourage the reader to leave
 their trusted calculator behind in favour of Vim, but instead to view a
-multi-stage programming problem under the lens of powerful, expressive edits.&lt;/p>
-&lt;p>Vim, like many other programming tools, is primarily a means to an end. It
+multi-stage programming problem under the lens of powerful, expressive edits.&lt;/p&gt;
+&lt;p&gt;Vim, like many other programming tools, is primarily a means to an end. It
 simply happens to be powerful enough to do almost anything under the sun (if you are determined and/or
-crazy enough).&lt;/p>
-&lt;p>What&amp;rsquo;s also remarkable to me is how Vim (circa 1991) has squarely stood its ground in the everchanging landscape of software development tools. Perhaps this is a testament to the timeless quality of design
+crazy enough).&lt;/p&gt;
+&lt;p&gt;What&amp;rsquo;s also remarkable to me is how Vim (circa 1991) has squarely stood its ground in the everchanging landscape of software development tools. Perhaps this is a testament to the timeless quality of design
 decisions made &amp;ndash; a seemingly rare feat in the fast-paced modern world of
 software. There&amp;rsquo;s a long way to go before I consider myself an expert at Vim, and I&amp;rsquo;m not
 sure if there truly is an end in sight; but perhaps that&amp;rsquo;s what makes it a fun
-tool to use?&lt;/p>
-&lt;p>&lt;em>P.S.&lt;/em>: I write fondly about Vim but I should mention that I&amp;rsquo;m actually
-an Emacs user. Plot twist, I know. My editor of choice is &lt;a href="https://github.com/doomemacs/doomemacs">Doom Emacs&lt;/a> which
+tool to use?&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;P.S.&lt;/em&gt;: I write fondly about Vim but I should mention that I&amp;rsquo;m actually
+an Emacs user. Plot twist, I know. My editor of choice is &lt;a href=&#34;https://github.com/doomemacs/doomemacs&#34;&gt;Doom Emacs&lt;/a&gt; which
 is a smooth, Space-centric Emacs config with Vim emulation. Why fight over
-Emacs vs Vim when you can have both?&lt;/p>
-&lt;h2 id="further-reading">Further Reading &lt;a href="#further-reading" class="hash">#&lt;/a>&lt;/h2>
-&lt;p>I realise as I write this post that a lot of what I&amp;rsquo;ve written about involves Vim regex.
-Here&amp;rsquo;s an &lt;a href="https://dev.to/iggredible/learning-vim-regex-26ep">article&lt;/a> I found
-online that does a good job explaining it.&lt;/p>
-&lt;p>I&amp;rsquo;m often reminded of &lt;a href="https://stackoverflow.com/questions/1218390/what-is-your-most-productive-shortcut-with-vim/1220118#1220118">this legendary
-answer&lt;/a>
+Emacs vs Vim when you can have both?&lt;/p&gt;
+&lt;h2 id=&#34;further-reading&#34;&gt;Further Reading &lt;a href=&#34;#further-reading&#34; class=&#34;hash&#34;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I realise as I write this post that a lot of what I&amp;rsquo;ve written about involves Vim regex.
+Here&amp;rsquo;s an &lt;a href=&#34;https://dev.to/iggredible/learning-vim-regex-26ep&#34;&gt;article&lt;/a&gt; I found
+online that does a good job explaining it.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;m often reminded of &lt;a href=&#34;https://stackoverflow.com/questions/1218390/what-is-your-most-productive-shortcut-with-vim/1220118#1220118&#34;&gt;this legendary
+answer&lt;/a&gt;
 which captures the essence of what I think makes Vim so enduringly good:
-powerful expressivity combined with a simplistic grammar.&lt;/p>
-&lt;p>Lastly, here is a &lt;a href="https://j11g.com/2023/08/07/the-legacy-of-bram-moolenaar/">well-written epitaph&lt;/a> to Bram Moolenar (the creator of Vim).&lt;/p></description><author>ronalds.vilcins@gmail.com (Ronalds Vilcins)</author><guid>https://grohan.co/2023/08/10/vim/</guid><pubDate>Thu, 10 Aug 2023 00:00:00 +0000</pubDate></item><item><title>Halfway There</title><link>https://grohan.co/2022/06/15/halfway/</link><description>&lt;p>College. Times of fun, frolic, and of course, learning. For a couple days now,
+powerful expressivity combined with a simplistic grammar.&lt;/p&gt;
+&lt;p&gt;Lastly, here is a &lt;a href=&#34;https://j11g.com/2023/08/07/the-legacy-of-bram-moolenaar/&#34;&gt;well-written epitaph&lt;/a&gt; to Bram Moolenar (the creator of Vim).&lt;/p&gt;
+</description>
+      <author>ronalds.vilcins@gmail.com (Ronalds Vilcins)</author>
+      <guid>https://grohan.co/2023/08/10/vim/</guid>
+      <pubDate>Thu, 10 Aug 2023 00:00:00 +0000</pubDate>
+    </item>
+    
+    <item>
+      <title>Halfway There</title>
+      <link>https://grohan.co/2022/06/15/halfway/</link>
+      <description>&lt;p&gt;College. Times of fun, frolic, and of course, learning. For a couple days now,
 I&amp;rsquo;ve been thinking about the past 2 years of my life, focusing on the most
 meaningful aspects. I needed a place to write my reflections down, so
 I thought perhaps this would make for a fitting first blog post. So here&amp;rsquo;s a
 couple shoddily jotted down thoughts on what I think have been my most
-significant takeaways from school, so far.&lt;/p>
-&lt;h1 id="school-still-sucks-but-less">School still sucks, but less &lt;a href="#school-still-sucks-but-less" class="hash">#&lt;/a>&lt;/h1>
-&lt;p>I used to absolutely despise highschool. Part of it was because I was a lazy
+significant takeaways from school, so far.&lt;/p&gt;
+&lt;h1 id=&#34;school-still-sucks-but-less&#34;&gt;School still sucks, but less &lt;a href=&#34;#school-still-sucks-but-less&#34; class=&#34;hash&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;I used to absolutely despise highschool. Part of it was because I was a lazy
 slob who wanted to play RuneScape every waking hour but mostly because I didn&amp;rsquo;t
 like what I was meant to do in school in order to do well. For example, the
 Computer Science curriculum tested us on some pretty jank stuff. We&amp;rsquo;re talking
 definitions, case studies, and the most basic OOP. I&amp;rsquo;d spend hours the morning
 of the exam rote learning the names of 7 layers of the OSI model, but not what
-they &lt;em>actually&lt;/em> were useful for.&lt;/p>
-&lt;p>When I got to college, I was hoping that I would be, for the most part, doing
+they &lt;em&gt;actually&lt;/em&gt; were useful for.&lt;/p&gt;
+&lt;p&gt;When I got to college, I was hoping that I would be, for the most part, doing
 things that I enjoyed, and those things would directly correlate to how well I
 was doing. This turned out to be initially true! I felt pretty academically
 satisfied after my first year of school, but (to my unfortunate realization) it
@@ -334,97 +373,105 @@ do they teach you real CS fundamentals, but they also have fun, knowledgeable
 folks on staff and run a great curriculum that kept me engaged with the
 material. (aside: I was pleasantly surprised to learn early freshman year that
 CIS 1xx staff are pretty tight-knit. They even do BYOs &amp;ndash; I know, not what you&amp;rsquo;d
-think when I mention CS course staff)&lt;/p>
-&lt;p>As I progressed to some of the upper division classes, I was still learning
+think when I mention CS course staff)&lt;/p&gt;
+&lt;p&gt;As I progressed to some of the upper division classes, I was still learning
 interesting things, but it felt like I was increasingly falling into the habit
-of autodidactism. For example, I took &lt;strong>CIS 521: Artificial Intelligence&lt;/strong>
+of autodidactism. For example, I took &lt;strong&gt;CIS 521: Artificial Intelligence&lt;/strong&gt;
 sophomore fall. The class was, by all metrics, good, but there was no sense of
-community or engagement as in the intro classes. Crucially, it &lt;em>could be done
-async and had annoying assignments&lt;/em>. The in-person equivalent just didn&amp;rsquo;t seem
+community or engagement as in the intro classes. Crucially, it &lt;em&gt;could be done
+async and had annoying assignments&lt;/em&gt;. The in-person equivalent just didn&amp;rsquo;t seem
 valuable enough to go to. I could just Google any questions I had and, well,
 kind of figure things out as I go. This left me thinking &amp;ndash; if I really cared
 about the material, I could have just as easily put my head down and grinded out
 the class (which was basically a bunch of videos) in a couple weeks, skipping
 over the poorly designed bits. I ended up attending zero (0) live lectures for
-the class &amp;ndash; I don&amp;rsquo;t even know what room it was in.&lt;/p>
-&lt;p>Is that the way I like learning? I&amp;rsquo;m not sure. But one thing is for sure: it&amp;rsquo;s
+the class &amp;ndash; I don&amp;rsquo;t even know what room it was in.&lt;/p&gt;
+&lt;p&gt;Is that the way I like learning? I&amp;rsquo;m not sure. But one thing is for sure: it&amp;rsquo;s
 convenient. Since Fall 2021, I&amp;rsquo;ve been going to almost no classes, because it is
 simply more convenient to learn material at home, at my own pace. There&amp;rsquo;s
 probably some joke out there about 1.5x lectures being the new norm, but at this
-point it&amp;rsquo;s reality. I have been &lt;em>living&lt;/em> on 1.5x and lecture notes.&lt;/p>
-&lt;p>While the convenience is certainly nice, it&amp;rsquo;s unfulfilling. I had hoped college
+point it&amp;rsquo;s reality. I have been &lt;em&gt;living&lt;/em&gt; on 1.5x and lecture notes.&lt;/p&gt;
+&lt;p&gt;While the convenience is certainly nice, it&amp;rsquo;s unfulfilling. I had hoped college
 would be more of the interactive, community-oriented experience I had in my
 intro classes. For the few upper division classes that do offer this, great. But
 for the others, if someone were to download the Canvas page and send it over to
 me to cherry-pick modules, I think I&amp;rsquo;d have a better time than having to go
 through administrative nonsense, annoying homeworks, and even more annoying
-exams &amp;ndash; I&amp;rsquo;m taking most of this upper level stuff for fun anyways.&lt;/p>
-&lt;p>For the most part, school isn&amp;rsquo;t the one &amp;ldquo;teaching&amp;rdquo; me, I&amp;rsquo;m learning things
+exams &amp;ndash; I&amp;rsquo;m taking most of this upper level stuff for fun anyways.&lt;/p&gt;
+&lt;p&gt;For the most part, school isn&amp;rsquo;t the one &amp;ldquo;teaching&amp;rdquo; me, I&amp;rsquo;m learning things
 myself. But with the added overhead of whatever the course staff decides is
 going to make up my grade. Let me do this stuff on my own, or run classes better
-and make people want to show up!&lt;/p>
-&lt;!--- markdown auto fill mode --->
-&lt;h1 id="i-actually-like-what-i-_do_-now">I actually like what I &lt;em>do&lt;/em> now &lt;a href="#i-actually-like-what-i-_do_-now" class="hash">#&lt;/a>&lt;/h1>
-&lt;p>I don&amp;rsquo;t like the question: what are your hobbies? A hobby sounds far too casual
-for me. I&amp;rsquo;m the type of person who finds one thing and then &lt;em>does&lt;/em> it
+and make people want to show up!&lt;/p&gt;
+&lt;!--- markdown auto fill mode ---&gt;
+&lt;h1 id=&#34;i-actually-like-what-i-_do_-now&#34;&gt;I actually like what I &lt;em&gt;do&lt;/em&gt; now &lt;a href=&#34;#i-actually-like-what-i-_do_-now&#34; class=&#34;hash&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;I don&amp;rsquo;t like the question: what are your hobbies? A hobby sounds far too casual
+for me. I&amp;rsquo;m the type of person who finds one thing and then &lt;em&gt;does&lt;/em&gt; it
 obsessively. In highschool, I played a lot of RuneScape. Like a lot. ~300 full
 days worth of RuneScape. You can do the math yourself, but that&amp;rsquo;s a large number
 of hours. (fun fact: I only told my mother this number after I got
-into college, she still wasn&amp;rsquo;t amused). RuneScape was, truly, what I &lt;em>did&lt;/em> &amp;ndash; the thing
+into college, she still wasn&amp;rsquo;t amused). RuneScape was, truly, what I &lt;em&gt;did&lt;/em&gt; &amp;ndash; the thing
 I would think about on the hour long bus ride back from school, and often sneak
-late at night to do instead of whatever homework I had due.&lt;/p>
-&lt;p>But it wasn&amp;rsquo;t the most practical or interesting (to most people). Indeed, it&amp;rsquo;s
+late at night to do instead of whatever homework I had due.&lt;/p&gt;
+&lt;p&gt;But it wasn&amp;rsquo;t the most practical or interesting (to most people). Indeed, it&amp;rsquo;s
 pretty difficult to sit down at dinner with someone and explain why a game
 that&amp;rsquo;s older than I am and not very well known was so captivating to me. So,
-well, if someone asked me my hobbies were or what I &lt;em>did&lt;/em>, I&amp;rsquo;d look them in the
+well, if someone asked me my hobbies were or what I &lt;em&gt;did&lt;/em&gt;, I&amp;rsquo;d look them in the
 eye, lie through my teeth, and say that I was into Computer Science. But, at
-the time (in highschool) that wasn&amp;rsquo;t really true.&lt;/p>
-&lt;p>For context, my first legitimate introduction to real-world programming was the summer
+the time (in highschool) that wasn&amp;rsquo;t really true.&lt;/p&gt;
+&lt;p&gt;For context, my first legitimate introduction to real-world programming was the summer
 after sophomore year. I was unquestioningly forced to go make use of myself at
 my mother&amp;rsquo;s hospital&amp;rsquo;s IT department, where I was tasked with building some
 nonsense webapp using everyone&amp;rsquo;s favourite web framework: Django. I didn&amp;rsquo;t know
 the first thing about web programming so I began prowling through Django
 documentation. I didn&amp;rsquo;t really understand everything, but I understood enough to
 combine with code from GitHub and StackOverFlow and piece together something
-that just about worked.&lt;/p>
-&lt;p>The problem was: I didn&amp;rsquo;t really &lt;em>care&lt;/em> about understanding more, or learning
-about the things I was working with. For example, I didn&amp;rsquo;t know what &lt;code>HTTP&lt;/code> was,
-just that you could do a bunch of operations with it, like &lt;code>GET&lt;/code> and &lt;code>POST&lt;/code>, and
+that just about worked.&lt;/p&gt;
+&lt;p&gt;The problem was: I didn&amp;rsquo;t really &lt;em&gt;care&lt;/em&gt; about understanding more, or learning
+about the things I was working with. For example, I didn&amp;rsquo;t know what &lt;code&gt;HTTP&lt;/code&gt; was,
+just that you could do a bunch of operations with it, like &lt;code&gt;GET&lt;/code&gt; and &lt;code&gt;POST&lt;/code&gt;, and
 those operations did exactly what you&amp;rsquo;d think they did. Instead, I wanted to
 play RuneScape, or laze around, or watch some show, or eat Indian McDonald&amp;rsquo;s
-&lt;a href="https://mcdonaldsblog.in/wp-content/uploads/2016/11/mexican-fries.jpg">Mexican Cheesy
-Fries&lt;/a> (I
+&lt;a href=&#34;https://mcdonaldsblog.in/wp-content/uploads/2016/11/mexican-fries.jpg&#34;&gt;Mexican Cheesy
+Fries&lt;/a&gt; (I
 miss this a lot). Coding was alright, I could do it if I was really asked to,
-and I wasn&amp;rsquo;t terrible at it, but it didn&amp;rsquo;t really make me tick.&lt;/p>
-&lt;p>Flash-forward to freshman fall at Penn. I come in as a Cognitive Science major.
+and I wasn&amp;rsquo;t terrible at it, but it didn&amp;rsquo;t really make me tick.&lt;/p&gt;
+&lt;p&gt;Flash-forward to freshman fall at Penn. I come in as a Cognitive Science major.
 I mean, brains seemed cool. I half-assed a Coursera course on ML sometime senior
 year of highschool, so AI also seemed cool. I&amp;rsquo;d also worked with computers. It
 seemed natural to study Cognitive Science, but I wasn&amp;rsquo;t the guy with a plan. On
-a whim, I saw that &lt;a href="https://pennlabs.org">Penn Labs&lt;/a> used Django, and it seemed
+a whim, I saw that &lt;a href=&#34;https://pennlabs.org&#34;&gt;Penn Labs&lt;/a&gt; used Django, and it seemed
 somewhat interesting, so I thought I&amp;rsquo;d give it a shot. By some miracle, things
 work out and I get in. In a week&amp;rsquo;s time, I realize that I&amp;rsquo;ve been lying to
-myself.&lt;/p>
-&lt;p>Everyone at the club seemed so genuinely passionate about computers, it was nuts
+myself.&lt;/p&gt;
+&lt;p&gt;Everyone at the club seemed so genuinely passionate about computers, it was nuts
 &amp;ndash; they actually cared about how things worked. The folks I worked with actually knew
-what &lt;code>HTTP&lt;/code> was, and that was the least of the things they knew about. Strange
-words like &lt;code>DevOps, Docker, Kubernetes&lt;/code> would float around in Slack, and I&amp;rsquo;d
+what &lt;code&gt;HTTP&lt;/code&gt; was, and that was the least of the things they knew about. Strange
+words like &lt;code&gt;DevOps, Docker, Kubernetes&lt;/code&gt; would float around in Slack, and I&amp;rsquo;d
 have no idea what they meant. Debugging wasn&amp;rsquo;t just Googling and copypasting on
 loop, but actually trying things meaningfully. I felt pretty out of place &amp;ndash; a
-small fish in a big pond &amp;ndash; but I liked it!&lt;/p>
-&lt;p>Not only was I learning a lot, but the enthusiasm for programming was rubbing
+small fish in a big pond &amp;ndash; but I liked it!&lt;/p&gt;
+&lt;p&gt;Not only was I learning a lot, but the enthusiasm for programming was rubbing
 off on me. Experiencing this alongside the intro CS classes I talked about
 above, I actually began to enjoy computer science. I found myself Googling
 random things about Django in my free time, searching up about tools like
-&lt;code>pipenv&lt;/code>, and doing things that the younger me would never have done. I was
-experiencing a shift in the thing I &lt;em>did&lt;/em>: from RuneScape to coding.&lt;/p>
-&lt;p>Things end up panning out after: I transfer to &lt;a href="https://www.nets.upenn.edu/">NETS&lt;/a>, get
+&lt;code&gt;pipenv&lt;/code&gt;, and doing things that the younger me would never have done. I was
+experiencing a shift in the thing I &lt;em&gt;did&lt;/em&gt;: from RuneScape to coding.&lt;/p&gt;
+&lt;p&gt;Things end up panning out after: I transfer to &lt;a href=&#34;https://www.nets.upenn.edu/&#34;&gt;NETS&lt;/a&gt;, get
 more involved with Labs, learn about those strange words I mentioned above through
-&lt;a href="https://cis188.org/">CIS 188&lt;/a>, and generally immerse myself in the programming
+&lt;a href=&#34;https://cis188.org/&#34;&gt;CIS 188&lt;/a&gt;, and generally immerse myself in the programming
 world. However, looking back, it&amp;rsquo;s funny how things work out sometimes &amp;ndash; I&amp;rsquo;ve often reflected on the fact
 that the 10 person IT department in a hospital in Bangalore, India just happened
 to use Django as their backend, which is perhaps the only reason I thought I&amp;rsquo;d
-have a shot at Penn Labs, and consequently end up growing as much as I did.&lt;/p>
-&lt;p>To conclude, I&amp;rsquo;d like to note that the title is a little misleading, I&amp;rsquo;ve always
-liked what I &lt;strong>really&lt;/strong> did, but I definitely did fake it for a bit. Now, when
+have a shot at Penn Labs, and consequently end up growing as much as I did.&lt;/p&gt;
+&lt;p&gt;To conclude, I&amp;rsquo;d like to note that the title is a little misleading, I&amp;rsquo;ve always
+liked what I &lt;strong&gt;really&lt;/strong&gt; did, but I definitely did fake it for a bit. Now, when
 I&amp;rsquo;m at a dinner, and I&amp;rsquo;m prompted about my hobbies, it&amp;rsquo;s a little more
-gratifying to say that I like programming &amp;ndash; because I know it is for real.&lt;/p></description><author>ronalds.vilcins@gmail.com (Ronalds Vilcins)</author><guid>https://grohan.co/2022/06/15/halfway/</guid><pubDate>Wed, 15 Jun 2022 00:00:00 +0000</pubDate></item></channel></rss>
+gratifying to say that I like programming &amp;ndash; because I know it is for real.&lt;/p&gt;
+</description>
+      <author>ronalds.vilcins@gmail.com (Ronalds Vilcins)</author>
+      <guid>https://grohan.co/2022/06/15/halfway/</guid>
+      <pubDate>Wed, 15 Jun 2022 00:00:00 +0000</pubDate>
+    </item>
+    
+  </channel>
+</rss>
