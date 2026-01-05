@@ -1,4 +1,4 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Rohan Gupta</title><description>Rohan Gupta's personal website</description><link>https://grohan.co</link><language>en</language><copyright>Copyright 2025, Ronalds Vilcins</copyright><lastBuildDate>Tue, 25 Nov 2025 00:00:00 +0000</lastBuildDate><generator>Hugo - gohugo.io</generator><docs>http://cyber.harvard.edu/rss/rss.html</docs><atom:link href="https://ronaldsvilcins.com/atom.xml" rel="self" type="application/atom+xml"/><item><title>Compressed Filesystems á la Language Models</title><link>https://grohan.co/2025/11/25/llmfuse/</link><description>&lt;p>Every systems engineer at some point in their journey yearns to write
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Rohan Gupta</title><description>Rohan Gupta's personal website</description><link>https://grohan.co</link><language>en</language><copyright>Copyright 2026, Ronalds Vilcins</copyright><lastBuildDate>Tue, 25 Nov 2025 00:00:00 +0000</lastBuildDate><generator>Hugo - gohugo.io</generator><docs>http://cyber.harvard.edu/rss/rss.html</docs><atom:link href="https://ronaldsvilcins.com/atom.xml" rel="self" type="application/atom+xml"/><item><title>Compressed Filesystems á la Language Models</title><link>https://grohan.co/2025/11/25/llmfuse/</link><description>&lt;p>Every systems engineer at some point in their journey yearns to write
 a filesystem. This sounds daunting at first - and writing a battle-tested filesystem &lt;em>is&lt;/em> hard - but the minimal surface area for a &amp;ldquo;working&amp;rdquo; FS is surprisingly small, simple, and in-distribution for coding agents.&lt;/p>
 &lt;p>In fact, one of my smoke tests for new coding models is seeing how good of
 a filesystem they can one-shot! At some point, I had quite a few filesystems lying around - and coding models were getting pretty good - which made me wonder if the models were intelligent enough to actually model the filesystem engine itself?&lt;/p>
@@ -260,7 +260,30 @@ everything needed to reconstruct the filesystem.&lt;/p>
 &lt;h2 id="compression-as-a-metric">Compression as a metric &lt;a href="#compression-as-a-metric" class="hash">#&lt;/a>&lt;/h2>
 &lt;p>It&amp;rsquo;s equally interesting to think about compression as a metric. An angle I&amp;rsquo;d
 considered is doing some kind of RL on the arithmetic coded compression number itself.&lt;/p>
-&lt;p>Is that simply equivalent to the pre-training objective (due to the prediction-compression duality)? Or does the &amp;ldquo;sequence-level&amp;rdquo; objective add something more&amp;hellip; interesting to the mix. Please reach out if you have thoughts!&lt;/p></description><author>ronalds.vilcins@gmail.com (Ronalds Vilcins)</author><guid>https://grohan.co/2025/11/25/llmfuse/</guid><pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate></item><item><title>Technical Debt is Entropy In Software</title><link>https://grohan.co/2024/12/27/entropy/</link><description>&lt;h1 id="entropy">Entropy &lt;a href="#entropy" class="hash">#&lt;/a>&lt;/h1>
+&lt;p>&lt;del>Is that simply equivalent to the pre-training objective (due to the prediction-compression duality)? Or does the &amp;ldquo;sequence-level&amp;rdquo; objective add something more&amp;hellip; interesting to the mix. Please reach out if you have thoughts!&lt;/del>&lt;/p>
+&lt;p>&lt;strong>EDIT:&lt;/strong>&lt;/p>
+&lt;p>As it turns out - it is indeed equivalent to the pre-training objective!&lt;/p>
+&lt;p>&lt;strong>Pre-training&lt;/strong> aims to maximize the probability of training data. For a sequence \(x = (x_1, x_2, \ldots, x_T)\), we decompose via the chain rule:&lt;/p>
+&lt;div>
+$$P(x) = \prod_{t=1}^{T} P(x_t \mid x_{&lt; t})$$
+&lt;/div>
+&lt;p>Taking logarithms (for numerical stability and to convert products to sums):&lt;/p>
+&lt;div>
+$$\log P(x) = \sum_{t=1}^{T} \log P(x_t \mid x_{&lt; t})$$
+&lt;/div>
+&lt;p>Maximizing log-probability is equivalent to minimizing its negative — the &lt;strong>negative log-likelihood&lt;/strong>:&lt;/p>
+&lt;div>
+$$\mathcal{L}_{\text{NLL}}(\theta) = -\sum_{t=1}^{T} \log P_\theta(x_t \mid x_{&lt; t})$$
+&lt;/div>
+&lt;p>&lt;strong>Arithmetic coding&lt;/strong> maps the entire sequence \(x\) to an interval on \([0,1]\) of width equal to its joint probability \(P(x)\). To uniquely specify a point within an interval of width \(P(x)\), we require \(-\log_2 P(x)\) bits.&lt;/p>
+&lt;p>Expanding this using the chain rule from above gives us the sum:&lt;/p>
+&lt;p>$$L_{\text{compressed}}(x) = -\log_2 P(x) = -\log_2 \prod_{t=1}^{T} P_\theta(x_t \mid x_{&amp;lt; t}) = -\sum_{t=1}^{T} \log_2 P_\theta(x_t \mid x_{&amp;lt; t})$$&lt;/p>
+&lt;p>These differ only by logarithm base. Since \(\log_2 P = \frac{\ln P}{\ln 2}\), and \(\frac{1}{\ln 2} \approx 1.44\) is a positive constant:&lt;/p>
+&lt;div>
+$$\arg\min_\theta \mathcal{L}_{\text{NLL}} = \arg\min_\theta L_{\text{compressed}}$$
+&lt;/div>
+&lt;p>The same \(\theta^*\) minimizes both. \(\square\)&lt;/p>
+&lt;p>Beyond resolving the RL question, there&amp;rsquo;s something quietly beautiful about this framing. &amp;ldquo;minimize negative log-likelihood&amp;rdquo; and &amp;ldquo;minimize cross-entropy&amp;rdquo; are abstractions that require complex statistical machinery to parse (to grok the &amp;ldquo;pre-training objective&amp;rdquo;). But compression is simple, and simple is better than complex.&lt;/p></description><author>ronalds.vilcins@gmail.com (Ronalds Vilcins)</author><guid>https://grohan.co/2025/11/25/llmfuse/</guid><pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate></item><item><title>Technical Debt is Entropy In Software</title><link>https://grohan.co/2024/12/27/entropy/</link><description>&lt;h1 id="entropy">Entropy &lt;a href="#entropy" class="hash">#&lt;/a>&lt;/h1>
 &lt;p>Entropy is the ultimate boss battle [1]. As the reason why ice melts, why tires
 burst, and why ink diffuses &amp;ndash; thermodynamic entropy is a fact of the
 physical world, sharply following the arrow of time [2].&lt;/p>
