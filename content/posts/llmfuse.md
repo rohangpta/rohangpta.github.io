@@ -280,4 +280,42 @@ everything needed to reconstruct the filesystem.
 It's equally interesting to think about compression as a metric. An angle I'd
 considered is doing some kind of RL on the arithmetic coded compression number itself.
 
-Is that simply equivalent to the pre-training objective (due to the prediction-compression duality)? Or does the "sequence-level" objective add something more... interesting to the mix. Please reach out if you have thoughts!
+~~Is that simply equivalent to the pre-training objective (due to the prediction-compression duality)? Or does the "sequence-level" objective add something more... interesting to the mix. Please reach out if you have thoughts!~~
+
+**EDIT:**
+
+As it turns out - it is indeed equivalent to the pre-training objective!
+
+**Pre-training** aims to maximize the probability of training data. For a sequence \\(x = (x_1, x_2, \ldots, x_T)\\), we decompose via the chain rule:
+
+<div>
+$$P(x) = \prod_{t=1}^{T} P(x_t \mid x_{< t})$$
+</div>
+
+Taking logarithms (for numerical stability and to convert products to sums):
+
+<div>
+$$\log P(x) = \sum_{t=1}^{T} \log P(x_t \mid x_{< t})$$
+</div>
+
+Maximizing log-probability is equivalent to minimizing its negative — the **negative log-likelihood**:
+
+<div>
+$$\mathcal{L}_{\text{NLL}}(\theta) = -\sum_{t=1}^{T} \log P_\theta(x_t \mid x_{< t})$$
+</div>
+
+**Arithmetic coding** maps the entire sequence \\(x\\) to an interval on \\([0,1]\\) of width equal to its joint probability \\(P(x)\\). To uniquely specify a point within an interval of width \\(P(x)\\), we require \\(-\log_2 P(x)\\) bits.
+
+Expanding this using the chain rule from above gives us the sum:
+
+$$L_{\text{compressed}}(x) = -\log_2 P(x) = -\log_2 \prod_{t=1}^{T} P_\theta(x_t \mid x_{< t}) = -\sum_{t=1}^{T} \log_2 P_\theta(x_t \mid x_{< t})$$
+
+These differ only by logarithm base. Since \\(\log_2 P = \frac{\ln P}{\ln 2}\\), and \\(\frac{1}{\ln 2} \approx 1.44\\) is a positive constant:
+
+<div>
+$$\arg\min_\theta \mathcal{L}_{\text{NLL}} = \arg\min_\theta L_{\text{compressed}}$$
+</div>
+
+The same \\(\theta^*\\) minimizes both. \\(\square\\)
+
+Beyond resolving the RL question, there's something quietly beautiful about this framing. In my view, viewing the pre-training objective as compression is a simple way to "grok" the math. 
