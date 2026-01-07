@@ -17,7 +17,7 @@ physical world, sharply following the arrow of time [2].
 
 The Second Law of Thermodynamics states
 
-> A system's entropy will either increase or remain the same over time, unless outside energy is added
+> For an isolated system, entropy will either increase or remain the same over time; decreases require exporting entropy to the environment.
 
 There's something about inevitability that I think is fascinating, especially
 when you can see it unfold in front of you -- my
@@ -32,13 +32,13 @@ This picture displays the three stages of entropy:
 - **Expansion**: when the ink diffuses through water
 - **Maturity**: when the ink and water have fully merged
 
-So, how does entropy grow? Academics and practicioners alike believe that
+So, how does entropy grow? Academics and practitioners alike believe that
 entropy follows an S-curve [4], with its three stages likened to those of ink diffusing in water.
 
 <center><img src =/images/scurve.png width="550" height="400"/> </center>
 
 This is strikingly similar to the business lifecycle curve above! Indeed, prior
-art agrees that **business and technology lifecycles are overlayed entropy curves**
+art agrees that **business and technology lifecycles are overlaid entropy curves**
 [5]. 
 
 
@@ -70,8 +70,9 @@ more entropy than one with 4 sides.
 
 2. **Property 2.** Higher entropy is correlated with a higher presence of tail events.
   Gaussians and exponentials are maximum entropy distributions (under
-  certain statistical conditions [3]). Both exhibit fat tail properties
-  empirically [16].
+  certain statistical conditions [3]), but they are light-tailed.
+  Many real-world systems are heavier-tailed (Taleb-style), so tail risk
+  is larger than Gaussian intuition suggests [16].
   
 ### Complexity
 
@@ -195,7 +196,7 @@ and thus "normal" shape of its derivative, "complexity begets
 complexity" until a certain point in time, after which complexity reduces.
 
 I argue that due to market conditions: namely the state of SaaS as a product /
-custom-made offering and the commoditisation of infrastructure (cloud) that we are at the middle of the S-curve. i.e we are at the **peak
+custom-made offering and the commoditisation of infrastructure (cloud) that we are at the middle of the S-curve. i.e., we are at the **peak
 of software complexity / tech debt growth**. Intuitively, in the business “experimental -> custom -> product -> commodity” lifecycle,
 software is at the custom/product intersection, which is somewhere in the middle.
 
@@ -216,11 +217,11 @@ complexity begets complexity).
 A report on software quality in 2022 attaches a $2.4 trillion price tag
 to technical debt in the form of poor quality and overly complex software [8].
 However, if you interchange loosely with "technological opportunity cost", the
-real business value is of-course far
+real business value is of course far
 higher:
 
 > The total technological debt includes entirely "untapped" digital
-> transformation in industries (??T) + the canononical "poorly tapped" form of
+> transformation in industries (??T) + the canonical "poorly tapped" form of
 > tech debt (2.4T).
 
 A lot of words to say: there's a whole lot left to do here.
@@ -314,8 +315,6 @@ I won't elaborate too much on "solutions" since I have various
 hypotheses-in-testing that need iteration (as opposed to more ideation).
 
 If you made it this far, clearly some of this was interesting to you. Let's chat! [Email](mailto:rohangupta883@gmail.com) [X](https://x.com/rohangupta_)
-
-
 
 
 
