@@ -1,4 +1,138 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Rohan Gupta</title><description>Rohan Gupta's personal website</description><link>https://grohan.co</link><language>en</language><copyright>Copyright 2026, Ronalds Vilcins</copyright><lastBuildDate>Tue, 25 Nov 2025 00:00:00 +0000</lastBuildDate><generator>Hugo - gohugo.io</generator><docs>http://cyber.harvard.edu/rss/rss.html</docs><atom:link href="https://ronaldsvilcins.com/atom.xml" rel="self" type="application/atom+xml"/><item><title>Compressed Filesystems á la Language Models</title><link>https://grohan.co/2025/11/25/llmfuse/</link><description>&lt;p>Every systems engineer at some point in their journey yearns to write
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Rohan Gupta</title><description>Rohan Gupta's personal website</description><link>https://grohan.co</link><language>en</language><copyright>Copyright 2026, Ronalds Vilcins</copyright><lastBuildDate>Tue, 10 Feb 2026 00:00:00 +0000</lastBuildDate><generator>Hugo - gohugo.io</generator><docs>http://cyber.harvard.edu/rss/rss.html</docs><atom:link href="https://ronaldsvilcins.com/atom.xml" rel="self" type="application/atom+xml"/><item><title>Reverse Engineering Claude's Token Counter</title><link>https://grohan.co/2026/02/10/ctoc/</link><description>&lt;p>Claude 3+ doesn&amp;rsquo;t ship with an open tokenizer.&lt;/p>
+&lt;p>If you&amp;rsquo;re building coding agents, that&amp;rsquo;s a practical problem. You either call Anthropic&amp;rsquo;s &lt;a href="https://docs.anthropic.com/en/api/messages-count-tokens">&lt;code>count_tokens&lt;/code>&lt;/a> for everything (slow, online, awkward) or use a proxy estimator (&lt;code>tiktoken&lt;/code>, &lt;code>wc -c // {3,4}&lt;/code>) and accept large systematic error - up to 20–50% for Claude models. As agents increasingly self-manage context, they need a fast, local way to see token usage across a directory — &lt;a href="https://github.com/AlDanial/cloc">&lt;code>cloc&lt;/code>&lt;/a> (count lines of code), but for tokens.&lt;/p>
+&lt;p>So I reverse-engineered a large chunk of Claude&amp;rsquo;s vocabulary from the &lt;code>count_tokens&lt;/code> API and built &lt;a href="https://github.com/rohangpta/ctoc/tree/main">&lt;code>ctoc&lt;/code>&lt;/a>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-fallback" data-lang="fallback">&lt;span style="display:flex;">&lt;span>➜ ctoc git:(main) bazel-bin/ctoc --by-file .
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>--------------------------------------------------------------------------------
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>File Ext tokens
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>--------------------------------------------------------------------------------
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./MODULE.bazel.lock .lock 22,906
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./ctoc.cc .cc 4,870
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./REPORT.md .md 4,290
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./gen_vocab.py .py 962
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./README.md .md 473
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./BUILD.bazel .bazel 246
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./MODULE.bazel .bazel 153
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./020020-huh-isk .dat 22
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>--------------------------------------------------------------------------------
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>SUM (8 files) 33,922
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>--------------------------------------------------------------------------------
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>ctoc&lt;/code> is an offline estimator of Claude 4.x&amp;rsquo;s &lt;code>count_tokens()&lt;/code> API that lands at ~96% accuracy. It&amp;rsquo;s backed by a 36,495-token verified vocabulary (greedy tokenizer), and the code/vocabulary are &lt;a href="https://github.com/rohangpta/ctoc/tree/main">open source&lt;/a>.&lt;/p>
+&lt;h2 id="a-primer-on-bpe-tokenization">A primer on BPE tokenization &lt;a href="#a-primer-on-bpe-tokenization" class="hash">#&lt;/a>&lt;/h2>
+&lt;p>Tokenizers these days mostly use the &lt;a href="https://en.wikipedia.org/wiki/Byte-pair_encoding">BPE algorithm&lt;/a>. BPE is &amp;ldquo;trained&amp;rdquo; by using a fixed/private corpus of data to create a table of merge rules of frequent tokens.&lt;/p>
+&lt;p>Say the merge table (in priority order) is:&lt;/p>
+&lt;ol>
+&lt;li>t + h → th&lt;/li>
+&lt;li>th + e → the&lt;/li>
+&lt;li>i + s → is&lt;/li>
+&lt;/ol>
+&lt;p>Tokenizing the input &amp;ldquo;this&amp;rdquo;:&lt;/p>
+&lt;ul>
+&lt;li>Start: [t, h, i, s]&lt;/li>
+&lt;li>Rule 1: [th, i, s] — merged t+h&lt;/li>
+&lt;li>Rule 2: no &amp;ldquo;th&amp;rdquo;+&amp;ldquo;e&amp;rdquo; pair — skip&lt;/li>
+&lt;li>Rule 3: [th, is] — merged i+s&lt;/li>
+&lt;li>Done: [&amp;ldquo;th&amp;rdquo;, &amp;ldquo;is&amp;rdquo;]&lt;/li>
+&lt;/ul>
+&lt;p>That&amp;rsquo;s a toy intuition, not a full encoder spec: practical BPE implementations track merge priorities over adjacent pairs as well.&lt;/p>
+&lt;p>Now I&amp;rsquo;m not &lt;em>certain&lt;/em> Anthropic uses BPE, but given that most of the industry has converged on it, it&amp;rsquo;s a reasonable bet.&lt;/p>
+&lt;p>This means that without this &amp;ldquo;merge table&amp;rdquo; or private corpus we can&amp;rsquo;t &lt;em>exactly&lt;/em> re-create the tokenization.&lt;/p>
+&lt;p>But if we can recover the vocabulary, we don&amp;rsquo;t need the merge table — a greedy longest-match over the known tokens should approximate BPE&amp;rsquo;s token counts closely enough.&lt;/p>
+&lt;h2 id="probing-count_tokens-to-identify-vocabulary">Probing count_tokens to identify vocabulary &lt;a href="#probing-count_tokens-to-identify-vocabulary" class="hash">#&lt;/a>&lt;/h2>
+&lt;p>We need to do two things to reverse engineer Claude&amp;rsquo;s vocabulary: verify whether a candidate string is a single token, and decompose longer strings to extract tokens we haven&amp;rsquo;t seen yet.&lt;/p>
+&lt;h3 id="single-token-verification">Single-token verification &lt;a href="#single-token-verification" class="hash">#&lt;/a>&lt;/h3>
+&lt;p>The naive check — send a candidate to &lt;code>count_tokens&lt;/code>, see if you get 1 — doesn&amp;rsquo;t work because the API wraps inputs in chat framing. Raw counts include a roughly constant overhead that varies by the type of the first character (7, 8, 9+ for letters, digits, Unicode respectively - what&amp;rsquo;s going on here, Anthropic?).&lt;/p>
+&lt;p>Sandwich counting fixes this: wrap every probe between markers that we know are single tokens, and subtract the known baseline.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&lt;span style="font-weight:bold">def&lt;/span> count_tokens(text: str) -&amp;gt; int:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> marker = &lt;span style="font-style:italic">&amp;#34;&lt;/span>&lt;span style="font-weight:bold;font-style:italic">\u00A7&lt;/span>&lt;span style="font-style:italic">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> base = raw_count(marker + marker)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="font-weight:bold">return&lt;/span> raw_count(marker + text + marker) - base
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>With this, &lt;code>count_tokens(candidate) == 1&lt;/code> reliably tells us whether a candidate is a single token.&lt;/p>
+&lt;h3 id="decomposing-strings-into-tokens">Decomposing strings into tokens &lt;a href="#decomposing-strings-into-tokens" class="hash">#&lt;/a>&lt;/h3>
+&lt;p>Verification handles candidates we already suspect are single tokens. But when we encounter a longer string - from a dataset, from another tokenizer&amp;rsquo;s vocab - we need a way to extract the individual tokens inside it.&lt;/p>
+&lt;p>The approach: scan for a position &lt;code>i&lt;/code> where &lt;code>count(s[:i]) == 1&lt;/code> or &lt;code>count(s[i:]) == 1&lt;/code>. That peels off one confirmed token from either end. Recurse on the remainder until the string is fully decomposed (or you hit a chunk that can&amp;rsquo;t be broken down further).&lt;/p>
+&lt;p>So we have the machinery: sandwich counting to verify single tokens, iterative peeling to decompose arbitrary strings. But decompose &lt;em>what&lt;/em>?&lt;/p>
+&lt;p>Brute-forcing all possible byte strings of length 1-64 is astronomically large, and our decomposition is linear per string, so even clever generation strategies hit the API wall fast (2000/min rate limit). Early experiments with generated data and public datasets proved to be intractable very quickly, though we did pull out a few confirmed tokens as proof of life.&lt;/p>
+&lt;h3 id="cross-tokenizer-mining">Cross-tokenizer mining &lt;a href="#cross-tokenizer-mining" class="hash">#&lt;/a>&lt;/h3>
+&lt;p>I needed a way to narrow the search space to something that would run in days instead of centuries.&lt;/p>
+&lt;p>After some back-and-forth with Claude, I arrived on cross-tokenizer mining: decode vocab items from existing BPE tokenizers (tiktoken, HuggingFace models), test each against Claude with sandwich counting, keep only single-token hits.&lt;/p>
+&lt;p>Tokenizers trained on overlapping internet/programming corpora converge on many of the same subwords. This isn&amp;rsquo;t surprising if you think about it from a compression angle, and the Anthropic-specific tokens are likely not dominant in the distribution.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Source&lt;/th>
+&lt;th>Vocab size&lt;/th>
+&lt;th>Hit rate&lt;/th>
+&lt;th>New tokens found&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>tiktoken cl100k_base (GPT-4)&lt;/td>
+&lt;td>100K&lt;/td>
+&lt;td>~46%&lt;/td>
+&lt;td>~29,000&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>tiktoken o200k_base (GPT-4o)&lt;/td>
+&lt;td>200K&lt;/td>
+&lt;td>~15%&lt;/td>
+&lt;td>~4,000&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>11 HuggingFace US + China models&lt;/td>
+&lt;td>150-250K each&lt;/td>
+&lt;td>2-74%&lt;/td>
+&lt;td>~3,800&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>Sorting multilingual candidates by cross-tokenizer frequency (tokens appearing in more tokenizers checked first) gave a 74% hit rate on the first 1,000 candidates, declining to ~2% by 20K.&lt;/p>
+&lt;h3 id="long-tail">Long tail &lt;a href="#long-tail" class="hash">#&lt;/a>&lt;/h3>
+&lt;p>The long-tail vocabulary recoveries here were interesting:&lt;/p>
+&lt;ul>
+&lt;li>Re-checking all digit-starting candidates recovered ~1,006 tokens — almost all 3-digit numbers (&lt;code>916&lt;/code>, &lt;code>030&lt;/code>, &lt;code>271&lt;/code>) are single tokens.&lt;/li>
+&lt;li>BPE creates single tokens for specific lengths of repeated characters (&lt;code>=&lt;/code>, &lt;code>-&lt;/code>, etc.) up to length 64 with non-monotonic patterns: &lt;code>&amp;quot;=&amp;quot; * 7&lt;/code> is 2 tokens but &lt;code>&amp;quot;=&amp;quot; * 8&lt;/code> is 1 (likely a BPE merge-order artifact — these lengths matter for markdown fences and separator lines). Space sequences 1-16, tab sequences 1-4, and newline variants are each single tokens - critical for code indentation accuracy (and token efficiency!)&lt;/li>
+&lt;/ul>
+&lt;h2 id="results">Results &lt;a href="#results" class="hash">#&lt;/a>&lt;/h2>
+&lt;p>The full extraction took 3 days and ~277K API calls.&lt;/p>
+&lt;h3 id="estimator-quality-greedy-longest-match">Estimator quality (greedy longest-match) &lt;a href="#estimator-quality-greedy-longest-match" class="hash">#&lt;/a>&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Corpus&lt;/th>
+&lt;th style="text-align:right">Efficiency ratio (&lt;code>API tokens / greedy tokens&lt;/code>)&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Python source (9 files)&lt;/td>
+&lt;td style="text-align:right">96.1%&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Mixed code + docs (9 files)&lt;/td>
+&lt;td style="text-align:right">95.1%&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>English prose (5 samples)&lt;/td>
+&lt;td style="text-align:right">99.2%&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>Per-file variance is low: individual files land within ~2% of their corpus mean, and the estimator consistently over-segments (predicts more tokens than API), which is desirable for conservative context budgeting (read the Appendix to understand &lt;em>why&lt;/em> we get this close).&lt;/p>
+&lt;h3 id="conclusion">Conclusion &lt;a href="#conclusion" class="hash">#&lt;/a>&lt;/h3>
+&lt;p>The final outcome of this project - &lt;code>ctoc&lt;/code> - is deliberately boring software that just runs a greedy tokenization algorithm on top of our discovered vocabulary. Unknown bytes fall back to 1 token. Fast enough to run as a preflight check in local workflows, or for a coding agent to run as a subprocess.&lt;/p>
+&lt;p>If you care about exact counts for billing-critical paths, use Anthropic&amp;rsquo;s API. If you care about fast, parallelizable, local (self)context management, this could be good enough (and certainly has scope to close the 3-4% gap).&lt;/p>
+&lt;p>As always, this depends on current (tested with Claude 4.x) API behavior and can drift if Anthropic changes tokenizer internals.&lt;/p>
+&lt;hr>
+&lt;h2 id="appendix">Appendix &lt;a href="#appendix" class="hash">#&lt;/a>&lt;/h2>
+&lt;h3 id="why-does-greedy-tokenization-do-well">Why does greedy tokenization do well? &lt;a href="#why-does-greedy-tokenization-do-well" class="hash">#&lt;/a>&lt;/h3>
+&lt;p>What turned out to be empirically true but not obvious - greedy longest-match and BPE merge-order produce &lt;em>different segmentations&lt;/em>. Why do the token &lt;em>counts&lt;/em> nearly converge?&lt;/p>
+&lt;p>There&amp;rsquo;s a reasonable theoretical picture:&lt;/p>
+&lt;p>BPE vocabularies are built for greedy compression. &lt;a href="https://aclanthology.org/2023.findings-acl.38/">Zouhar et al. (2023)&lt;/a> formalise BPE training as greedy submodular maximisation of a compression utility. The vocabulary is constructed bottom-up: every multi-character token was formed by merging two shorter tokens that are also in the vocabulary. This hierarchical structure means the longest token at any position tends to be the one BPE would also select.&lt;/p>
+&lt;p>Byte-level completeness prevents dead ends. BPE vocabularies always include single-byte fallback tokens, so a left-to-right greedy pass can never paint itself into a corner. This eliminates the primary failure mode of greedy algorithms on arbitrary dictionaries.&lt;/p>
+&lt;p>BPE training also has an implicit left-to-right bias. &lt;a href="https://aclanthology.org/2025.emnlp-main.1775/">Sawada &amp;amp; Goyal (2025)&lt;/a> evaluate merge-list-free left-to-right greedy encoding and find it is often comparable to standard merge-based tokenization, with improvements on some tasks and modest degradations on others.&lt;/p>
+&lt;p>And where greedy and BPE do disagree, the result is typically a rearrangement of boundaries, not a net increase in tokens. &lt;code>['hell', 'ooo']&lt;/code> vs &lt;code>['hello', 'oo']&lt;/code> — different boundaries, same count.&lt;/p>
+&lt;p>The upshot: for BPE-family tokenizers with byte fallback, greedy and merge-order counting often converge closely in practice when vocabulary coverage is high. The 4-5% gap in &lt;code>ctoc&lt;/code> is plausibly missing tokens forcing over-segmentation. If the vocabulary were complete, greedy counting would likely be even closer to API counts.&lt;/p></description><author>ronalds.vilcins@gmail.com (Ronalds Vilcins)</author><guid>https://grohan.co/2026/02/10/ctoc/</guid><pubDate>Tue, 10 Feb 2026 00:00:00 +0000</pubDate></item><item><title>Compressed Filesystems á la Language Models</title><link>https://grohan.co/2025/11/25/llmfuse/</link><description>&lt;p>Every systems engineer at some point in their journey yearns to write
 a filesystem. This sounds daunting at first - and writing a battle-tested filesystem &lt;em>is&lt;/em> hard - but the minimal surface area for a &amp;ldquo;working&amp;rdquo; FS is surprisingly small, simple, and in-distribution for coding agents.&lt;/p>
 &lt;p>In fact, one of my smoke tests for new coding models is seeing how good of
 a filesystem they can one-shot! At some point, I had quite a few filesystems lying around - and coding models were getting pretty good - which made me wonder if the models were intelligent enough to actually model the filesystem engine itself?&lt;/p>
