@@ -4,46 +4,38 @@ description: "How I reverse-engineered a large Claude vocabulary from count_toke
 date: 2026-02-10
 tags:
   - coding agents
+  - nlp
 draft: false
 params:
   math: true
 ---
 
-Claude 3+ doesn't ship with a public tokenizer.
+Claude 3+ doesn't ship with an open tokenizer.
 
-If you're building coding agents, that's a practical problem. You either call Anthropic's [`count_tokens`](https://docs.anthropic.com/en/api/messages-count-tokens) for everything (slow, online, awkward) or use a proxy estimator (`tiktoken`, `wc -c // {3,4}`) and accept large systematic error - up to 20 to 50% for Claude models.
+If you're building coding agents, that's a practical problem. You either call Anthropic's [`count_tokens`](https://docs.anthropic.com/en/api/messages-count-tokens) for everything (slow, online, awkward) or use a proxy estimator (`tiktoken`, `wc -c // {3,4}`) and accept large systematic error - up to 20–50% for Claude models. As agents increasingly self-manage context, they need a fast, local way to see token usage across a directory — [`cloc`](https://github.com/AlDanial/cloc) (count lines of code), but for tokens.
 
-`count_tokens` is a decent solution that facilitates context compaction, but we're increasingly entering a world where coding agents need to actively self-manage context and avoid triggering the high-variance/hacky compaction process.
+So I reverse-engineered a large chunk of Claude's vocabulary from the `count_tokens` API and built [`ctoc`](https://github.com/rohangpta/ctoc/tree/main):
 
-We're already starting to see this with recent models' awareness of their own context and tendency to truncate commands with `head` / `tail`. And as we start parallelizing across the agent axis, I don't see `count_tokens` scaling well to support demand.
-
-So I thought - wouldn't it be great if we could give the agent a simple, local tool to see the token usage of a whole directory? Similar to how we humans do `cloc` to see file sizes, but in the token world.
 
 ```
-➜  eval git:(main) cloc . --by-file                                                                                                                                    +
-       6 text files.
-       6 unique files.
-      19 files ignored.
-
-github.com/AlDanial/cloc v 2.08  T=0.01 s (493.3 files/s, 117415.2 lines/s)
+➜  ctoc git:(main) bazel-bin/ctoc --by-file .
 --------------------------------------------------------------------------------
-File                                         blank        comment           code
+File                                Ext                tokens
 --------------------------------------------------------------------------------
-./results/hhiksu22.json                          0              0            820
-./runner.py                                     34             12            184
-./postprocess.py                                31             10            108
-./modal_eval.py                                 17              8             91
+./MODULE.bazel.lock                 .lock              22,906
+./ctoc.cc                           .cc                 4,870
+./REPORT.md                         .md                 4,290
+./gen_vocab.py                      .py                   962
+./README.md                         .md                   473
+./BUILD.bazel                       .bazel                246
+./MODULE.bazel                      .bazel                153
+./020020-huh-isk                    .dat                   22
 --------------------------------------------------------------------------------
-SUM:                                           111             43           1274
+SUM (8 files)                                          33,922
 --------------------------------------------------------------------------------
-
 ```
 
-So over what ended up being a 3-day experiment I reverse-engineered a large chunk of Claude's vocabulary from the `count_tokens` API and built `ctoc`: `cloc`, but token-aware.
-
-`ctoc` is a greedy offline estimator of Claude 4.x's `count_tokens()` API that lands at around 96% accuracy.
-
-It is backed by a 36,495-token verified vocabulary, and the code/vocabulary are [open source](https://github.com/rohangpta/ctoc/tree/main) as a self-contained executable.
+`ctoc` is an offline estimator of Claude 4.x's `count_tokens()` API that lands at ~96% accuracy. It's backed by a 36,495-token verified vocabulary (greedy tokenizer), and the code/vocabulary are [open source](https://github.com/rohangpta/ctoc/tree/main).
 
 ## A primer on BPE tokenization
 
@@ -63,26 +55,23 @@ Tokenizing the input "this":
 - Rule 3: [th, is]         — merged i+s
 - Done:   ["th", "is"]
 
-You scan through the rules in order, applying each one everywhere it matches,
-until no more rules apply.
+That's a toy intuition, not a full encoder spec: practical BPE implementations track merge priorities over adjacent pairs as well.
 
-Now we're not *certain* Anthropic uses BPE, but given that most of the industry has converged on it, it's a reasonable bet.
+Now I'm not *certain* Anthropic uses BPE, but given that most of the industry has converged on it, it's a reasonable bet.
 
 This means that without this "merge table" or private corpus we can't *exactly* re-create the tokenization.
 
-But if we can identify the total vocabulary of this tokenizer, can we re-create a good enough estimator using another algorithm that approximates BPE?
+But if we can recover the vocabulary, we don't need the merge table — a greedy longest-match over the known tokens should approximate BPE's token counts closely enough.
 
 ## Probing count_tokens to identify vocabulary
 
-The `count_tokens` API has an interesting property that makes all of this tractable:
+We need to do two things to reverse engineer Claude's vocabulary: verify whether a candidate string is a single token, and decompose longer strings to extract tokens we haven't seen yet.
 
-> For a string `s`, if there exists a split `i` where either `count(s[:i]) == 1` or `count(s[i:]) == 1` (using the normalized count defined below), then that split isolates a real single token on one side.
+### Single-token verification
 
-So instead of trying to recover the full boundary structure of `s`, we use split checks as a decomposition trick to peel out confirmed single-token chunks.
+The naive check — send a candidate to `count_tokens`, see if you get 1 — doesn't work because the API wraps inputs in chat framing. Raw counts include a roughly constant overhead that varies by the type of the first character (7, 8, 9+ for letters, digits, Unicode respectively - what's going on here, Anthropic?).
 
-The core issues that we ran into here are:
-
-- API counts are not just `len(tokenizer(text))`. They include a roughly constant overhead that depends on the starting token. Single-char probes starting with letters, digits, and some Unicode classes had different effective overheads (7, 8, 9+ respectively - what's going on here, Anthropic?). The fix here was sandwich counting (defined below): wrap every probe between marker tokens that we knew to be singular.
+Sandwich counting fixes this: wrap every probe between markers that we know are single tokens, and subtract the known baseline.
 
 ```python
 def count_tokens(text: str) -> int:
@@ -91,7 +80,17 @@ def count_tokens(text: str) -> int:
     return raw_count(marker + text + marker) - base
 ```
 
-- Brute-force over all possible byte strings is exponential. The search space for tokens of length 1-64 over 256 byte values is astronomical. Furthermore, our probing strategy was linear in the size of the string. Early experiments with generated data or public datasets proved to be intractable very quickly, but we did find a few "definite" tokens, showing some signs of life in this approach.
+With this, `count_tokens(candidate) == 1` reliably tells us whether a candidate is a single token.
+
+### Decomposing strings into tokens
+
+Verification handles candidates we already suspect are single tokens. But when we encounter a longer string - from a dataset, from another tokenizer's vocab - we need a way to extract the individual tokens inside it.
+
+The approach: scan for a position `i` where `count(s[:i]) == 1` or `count(s[i:]) == 1`. That peels off one confirmed token from either end. Recurse on the remainder until the string is fully decomposed (or you hit a chunk that can't be broken down further).
+
+So we have the machinery: sandwich counting to verify single tokens, iterative peeling to decompose arbitrary strings. But decompose *what*?
+
+Brute-forcing all possible byte strings of length 1-64 is astronomically large, and our decomposition is linear per string, so even clever generation strategies hit the API wall fast (2000/min rate limit). Early experiments with generated data and public datasets proved to be intractable very quickly, though we did pull out a few confirmed tokens as proof of life.
 
 ### Cross-tokenizer mining
 
@@ -111,45 +110,38 @@ Sorting multilingual candidates by cross-tokenizer frequency (tokens appearing i
 
 ### Long tail
 
-This points to a broader hypothesis: some tokenizers may allocate more vocabulary capacity to code-heavy substrings; validating that directly would be its own experiment.
+The long-tail vocabulary recoveries here were interesting:
 
-The long-tail recoveries here are directionally consistent with that.
-
-Lower-yield but still meaningful. After fixing the baseline bug, re-checking all digit-starting candidates recovered ~1,006 tokens — almost all 3-digit numbers (`916`, `030`, `271`) are single tokens.
-
-BPE creates single tokens for specific lengths of repeated characters (`=`, `-`, etc.) up to length 64 with non-monotonic patterns: `"=" * 7` is 2 tokens but `"=" * 8` is 1. Space sequences 1-16, tab sequences 1-4, and newline variants are each single tokens — critical for code indentation accuracy.
-
-This matters more than it sounds: in code, whitespace is structure. We verified single-token runs for spaces (1-16), tabs (1-4), and common newline variants, which directly improves estimation on indented code.
+- Re-checking all digit-starting candidates recovered ~1,006 tokens — almost all 3-digit numbers (`916`, `030`, `271`) are single tokens.
+- BPE creates single tokens for specific lengths of repeated characters (`=`, `-`, etc.) up to length 64 with non-monotonic patterns: `"=" * 7` is 2 tokens but `"=" * 8` is 1 (likely a BPE merge-order artifact — these lengths matter for markdown fences and separator lines). Space sequences 1-16, tab sequences 1-4, and newline variants are each single tokens - critical for code indentation accuracy (and token efficiency!)
 
 ## Results
+
+The full extraction took 3 days and ~277K API calls.
 
 ### Estimator quality (greedy longest-match)
 
 | Corpus | Efficiency ratio (`API tokens / greedy tokens`) |
 |---|---:|
-| Python source | 96.1% |
-| Mixed code + docs | 95.1% |
-| English prose | 99.2% |
+| Python source (9 files)| 96.1% |
+| Mixed code + docs (9 files)| 95.1% |
+| English prose (5 samples) | 99.2% |
 
-Measured on Python source (9 files), mixed code + docs (9 files), and English prose (5 samples).
+Per-file variance is low: individual files land within ~2% of their corpus mean, and the estimator consistently over-segments (predicts more tokens than API), which is desirable for conservative context budgeting (read the Appendix to understand *why* we get this close).
 
-Greedy usually over-segments slightly (i.e., predicts more tokens than API), which is desirable for conservative context budgeting.
+### Conclusion
 
-### Conclusion - ctoc
+The final outcome of this project - `ctoc` - is deliberately boring software that just runs a greedy tokenization algorithm on top of our discovered vocabulary. Unknown bytes fall back to 1 token. Fast enough to run as a preflight check in local workflows, or for a coding agent to run as a subprocess.
 
-The outcome of this project was `ctoc`.
+If you care about exact counts for billing-critical paths, use Anthropic's API. If you care about fast, parallelizable, local (self)context management, this could be good enough (and certainly has scope to close the 3-4% gap).
 
-`ctoc` is deliberately boring: embed the verified vocab into a C++ binary at build time, build a trie, run greedy longest-match over file bytes, and aggregate by extension or file. Unknown bytes fall back to 1 token. Fast enough to run as a preflight check in local workflows, or for a coding agent to run as a subprocess.
-
-TL;DR: If you care about exact counts for billing-critical paths, use Anthropic's API. If you care about fast, parallelizable, local (self)context management, this could be good enough.
-
-As always, this depends on current API behavior and can drift if Anthropic changes tokenizer internals.
+As always, this depends on current (tested with Claude 4.x) API behavior and can drift if Anthropic changes tokenizer internals.
 
 ---
 
 ## Appendix
 
-### Why does greedy do well?
+### Why does greedy tokenization do well?
 
 What turned out to be empirically true but not obvious - greedy longest-match and BPE merge-order produce *different segmentations*. Why do the token *counts* nearly converge?
 
@@ -163,4 +155,4 @@ BPE training also has an implicit left-to-right bias. [Sawada & Goyal (2025)](ht
 
 And where greedy and BPE do disagree, the result is typically a rearrangement of boundaries, not a net increase in tokens. `['hell', 'ooo']` vs `['hello', 'oo']` — different boundaries, same count.
 
-The upshot: when you have the complete vocabulary, greedy and merge-order counting converge regardless of the tokenisation algorithm. The 4-5% gap in `ctoc` is missing tokens forcing over-segmentation. If the vocabulary were complete, greedy counting would likely be 99%+ accurate.
+The upshot: for BPE-family tokenizers with byte fallback, greedy and merge-order counting often converge closely in practice when vocabulary coverage is high. The 4-5% gap in `ctoc` is plausibly missing tokens forcing over-segmentation. If the vocabulary were complete, greedy counting would likely be even closer to API counts.
