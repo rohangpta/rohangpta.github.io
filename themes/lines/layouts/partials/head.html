@@ -32,10 +32,10 @@
     href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII="
   />
   {{ $styles := resources.Get "scss/styles.scss" | toCSS (dict "outputStyle"
-  "compressed") | minify }} {{ if .Site.GoogleAnalytics }}
+  "compressed") | minify }} {{ if site.Config.Services.GoogleAnalytics.ID }}
   <script
     async
-    src="https://www.googletagmanager.com/gtag/js?id={{ .Site.GoogleAnalytics }}"
+    src="https://www.googletagmanager.com/gtag/js?id={{ site.Config.Services.GoogleAnalytics.ID }}"
   ></script>
 
   <script
@@ -63,7 +63,7 @@
     }
     gtag("js", new Date());
 
-    gtag("config", "{{ .Site.GoogleAnalytics }}");
+    gtag("config", "{{ site.Config.Services.GoogleAnalytics.ID }}");
   </script>
   {{ end }}
   <style>
@@ -82,7 +82,7 @@
       "license": "{{ .Site.Params.Copyright }}"
     }
   </script>
-  {{ else if .IsPage }} {{ $author := or (.Params.author) (.Site.Author.name) }}
+  {{ else if .IsPage }} {{ $author := or (.Params.author) (.Site.Params.author) }}
   {{ $org_name := .Site.Title }}
   <script type="application/ld+json">
     {
