@@ -13,14 +13,14 @@ draft: false
 
 Hi, I'm Rohan Gupta and I live in New York.
 
-I enjoy thinking about systems, programming languages, complexity, and game theory.
-
 I'm most excited by the next decade of software abundance. 
+
+Previously, I worked on agentic systems and developer / research platforms at [Citadel Securities](https://www.citadelsecurities.com/), [Five Rings](https://fiverings.com/), [Stripe](https://stripe.com/) and [Penn Labs](https://pennlabs.org/) ([Penn Clubs](https://pennclubs.com/)).
 
  </div>
 </div>
 
-A running collection of things I keep coming back to.
+I enjoy thinking about systems, programming languages, complexity, and game theory. Here's some of my favorites:
 
 - [No Silver Bullet](https://www.cs.unc.edu/techreports/86-020.pdf) — "Automatic programming is simply a euphemism for a higher level language." Fred Brooks, 1986
 - [Hyrum's Law](https://www.hyrumslaw.com/)
