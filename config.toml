@@ -79,7 +79,7 @@ googleAnalytics = "G-QPHTPNYLXE"
   [[menu.main]]
     identifier = "index"
     name       = "Index"
-    url        = "/index"
+    url        = "/index/"
     weight     = -15
 
 [markup]
