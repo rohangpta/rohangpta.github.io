@@ -76,6 +76,12 @@ googleAnalytics = "G-QPHTPNYLXE"
     url        = "/projects"
     weight     = -10
 
+  [[menu.main]]
+    identifier = "index"
+    name       = "Index"
+    url        = "/index"
+    weight     = -15
+
 [markup]
   [markup.goldmark]
     [markup.goldmark.extensions]
