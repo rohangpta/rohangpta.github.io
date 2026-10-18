@@ -34,7 +34,7 @@ googleAnalytics = ""
   description = "hello"
   author = "Rohan Gupta"
   copyright = "2323"
-  logo = "images/rohan.jpg"
+  logo = "about/img/rohan.jpg"
 
 [frontmatter]
   date  = [":filename", ":default"]

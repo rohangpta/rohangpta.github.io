@@ -20,7 +20,8 @@ googleAnalytics = "G-QPHTPNYLXE"
   description = "Rohan Gupta's personal website"
   author = "Rohan Gupta"
   copyright = "Rohan Gupta"
-  logo = "images/rohan.jpg"
+  logo = "about/img/rohan.jpg"
+  images = ["about/img/rohan.jpg"]
   math = true
 
 [frontmatter]
@@ -28,7 +29,7 @@ googleAnalytics = "G-QPHTPNYLXE"
   author = ""
   github = ""
   facebook = ""
-  og_image = "images/rohan.jpg"
+  og_image = "about/img/rohan.jpg"
   sitename = ""
   twitter = ""
 

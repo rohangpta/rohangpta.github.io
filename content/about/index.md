@@ -1,6 +1,11 @@
 ---
 title: "About"
 draft: false
+profile: true
+profile_same_as:
+  - https://github.com/rohangpta
+  - https://x.com/rohangupta_
+  - https://www.linkedin.com/in/rohan-gupta2/
 ---
 
 <!--- markdown auto fill mode --->
