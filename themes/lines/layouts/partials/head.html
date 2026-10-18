@@ -82,6 +82,21 @@
       "license": "{{ .Site.Params.Copyright }}"
     }
   </script>
+  {{ else if .Params.profile }}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfilePage",
+      "mainEntity": {
+        "@type": "Person",
+        "@id": {{ printf "%s#person" .Permalink | jsonify | safeJS }},
+        "name": {{ .Site.Params.author | jsonify | safeJS }},
+        "url": {{ .Permalink | jsonify | safeJS }},
+        "image": {{ .Site.Params.logo | absURL | jsonify | safeJS }},
+        "sameAs": {{ .Params.profile_same_as | jsonify | safeJS }}
+      }
+    }
+  </script>
   {{ else if .IsPage }} {{ $author := or (.Params.author) (.Site.Params.author) }}
   {{ $org_name := .Site.Title }}
   <script type="application/ld+json">
